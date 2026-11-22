@@ -13,6 +13,8 @@ import {
 
 export type TrackId = 'design-ui' | 'ai-agents' | 'dev-tools';
 export type Pricing = 'open-source' | 'free' | 'freemium' | 'paid';
+/** UI-only compound filter: resources whose price is explicitly free or open source. */
+export type PricingFilter = Pricing | 'free-open-source';
 export type PricingValue = Pricing | null;
 export type SortId = 'relevance' | 'featured' | 'az' | 'opensource';
 
@@ -91,6 +93,10 @@ const PRICING_VALUES: Pricing[] = ['open-source', 'free', 'freemium', 'paid'];
 
 export function isPricing(value: unknown): value is Pricing {
   return typeof value === 'string' && (PRICING_VALUES as string[]).includes(value);
+}
+
+export function isPricingFilter(value: unknown): value is PricingFilter {
+  return isPricing(value) || value === 'free-open-source';
 }
 
 /** Some upstream catalogs wrap links in Markdown; unwrap without altering the target. */
@@ -202,7 +208,7 @@ export interface SearchOptions {
   query?: string;
   track?: TrackId;
   category?: Category;
-  pricing?: Pricing;
+  pricing?: PricingFilter;
   type?: string;
   agentReady?: boolean;
   favoritesOnly?: boolean;
@@ -290,7 +296,9 @@ export function searchCatalog(items: CatalogResource[], options: SearchOptions =
   let result = items.filter((r) => {
     if (track && r.track !== track) return false;
     if (category && r.category !== category) return false;
-    if (pricing && r.pricing !== pricing) return false;
+    if (pricing === 'free-open-source') {
+      if (r.pricing !== 'free' && r.pricing !== 'open-source') return false;
+    } else if (pricing && r.pricing !== pricing) return false;
     if (type && r.resourceType !== type) return false;
     if (agentReady === true && r.agentConsumable !== true) return false;
     if (favoritesOnly && !favoriteIds?.has(r.id)) return false;

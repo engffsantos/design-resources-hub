@@ -114,6 +114,28 @@ describe('A2A JSON-RPC handler', () => {
     expect(database).toHaveLength(8);
   });
 
+  it('accepts the documented spaced filter syntax as well as the compact form', async () => {
+    const run = async (query: string) => dataOf(await handleA2ARequest(rpc(query)) as JsonRpcTestResponse) as Array<{
+      id: string;
+      category: string;
+      pricing: string | null;
+      tags: string[];
+    }>;
+
+    const spaced = await run('pricing: open-source track: ai-agents limit: 2');
+    expect(spaced).toHaveLength(2);
+    expect(spaced.every((r) => r.pricing === 'open-source' && r.category !== 'dev-tools')).toBe(true);
+
+    const compact = await run('pricing:open-source track:ai-agents limit:2');
+    expect(compact.map((r) => r.id)).toEqual(spaced.map((r) => r.id));
+
+    const reactSpaced = await run('react limit: 2');
+    expect(reactSpaced).toHaveLength(2);
+    const freeMcpSpaced = await run('free-mcp limit: 2');
+    expect(freeMcpSpaced).toHaveLength(2);
+    expect(freeMcpSpaced.every((r) => r.tags.includes('free-mcp'))).toBe(true);
+  });
+
   it('returns declared provenance and preserves unknown pricing in details', async () => {
     const unknownResource = catalogResources.find((r) => r.pricing === null);
     expect(unknownResource).toBeDefined();
@@ -173,6 +195,7 @@ describe('A2A serverless bundle (production-equivalent)', () => {
       'list_categories',
       'filter_by_category: mcp-protocols',
       'search_resources: free-mcp',
+      'pricing: open-source track: ai-agents limit: 2',
       `get_resource_details: ${catalogResources[0].id}`,
     ];
     for (const query of queries) {

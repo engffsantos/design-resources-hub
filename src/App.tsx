@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react';
+import { ActiveFilterChips } from '@/components/ActiveFilterChips';
 import { CategoryFilter, type CategoryOption } from '@/components/CategoryFilter';
 import { FilterPanel } from '@/components/FilterPanel';
 import { Footer } from '@/components/Footer';
@@ -21,13 +22,14 @@ import {
   catalogCategories,
   catalogResources,
   computeStats,
+  EDITORIAL_IDS,
   getEditorialResources,
   searchCatalog,
   TRACKS,
   type CatalogResource,
 } from '@/lib/catalog';
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 24;
 
 export function App() {
   const { t } = useI18n();
@@ -40,7 +42,22 @@ export function App() {
   const stats = useMemo(() => computeStats(catalogResources), []);
   const favoriteIds = useMemo(() => new Set(favorites), [favorites]);
 
-  const results = useMemo(() => searchCatalog(catalogResources, {
+  const hasActiveFilters = filters.q.trim() !== '' || filters.track !== 'all' ||
+    filters.category !== 'all' || filters.pricing !== '' || filters.type !== '' ||
+    filters.agentReady || filters.favoritesOnly;
+
+  // The editorial shortlist owns these nine IDs on the home view; keep them out
+  // of the paginated grid so no resource is rendered twice.
+  const showEditorial = !hasActiveFilters;
+  const catalogBase = useMemo(
+    () => (showEditorial
+      ? catalogResources.filter((resource) => !EDITORIAL_IDS.includes(resource.id))
+      : catalogResources),
+    [showEditorial],
+  );
+  const editorialTotal = useMemo(() => getEditorialResources().length, []);
+
+  const results = useMemo(() => searchCatalog(catalogBase, {
     query: deferredQuery,
     track: filters.track === 'all' ? undefined : filters.track,
     category: filters.category === 'all' ? undefined : filters.category,
@@ -51,7 +68,7 @@ export function App() {
     favoriteIds,
     sort: filters.sort,
   }), [
-    deferredQuery, filters.track, filters.category, filters.pricing,
+    catalogBase, deferredQuery, filters.track, filters.category, filters.pricing,
     filters.type, filters.agentReady, filters.favoritesOnly, filters.sort, favoriteIds,
   ]);
 
@@ -67,13 +84,9 @@ export function App() {
     [results, page],
   );
 
-  const hasActiveFilters = filters.q.trim() !== '' || filters.track !== 'all' ||
-    filters.category !== 'all' || filters.pricing !== '' || filters.type !== '' ||
-    filters.agentReady || filters.favoritesOnly;
-
   const editorialResources = useMemo(
-    () => (!hasActiveFilters && page === 1 ? getEditorialResources() : []),
-    [hasActiveFilters, page],
+    () => (showEditorial && page === 1 ? getEditorialResources() : []),
+    [showEditorial, page],
   );
 
   const categoriesInTrack = useMemo<CategoryOption[]>(() => {
@@ -121,12 +134,12 @@ export function App() {
         >
           <div className="mb-10 text-center">
             <h1 id="hero-title" className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Strata <span className="text-primary">—</span> Design & Agent Index
+              {t.heroTitle}
             </h1>
             <p className="mx-auto mt-4 max-w-3xl text-lg text-muted-foreground">{t.tagline}</p>
           </div>
 
-          <StatsBar stats={stats} filteredCount={results.length} />
+          <StatsBar stats={stats} filteredCount={results.length + (showEditorial ? editorialTotal : 0)} />
         </motion.section>
 
         <section className="mx-auto mt-8 max-w-7xl space-y-6 px-4 sm:px-6 lg:px-8" aria-label={t.filtersTitle}>
@@ -156,6 +169,8 @@ export function App() {
             onChange={updateFilters}
             onReset={reset}
           />
+
+          <ActiveFilterChips filters={filters} onChange={updateFilters} />
         </section>
 
         <section

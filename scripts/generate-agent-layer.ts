@@ -8,6 +8,7 @@
  * category or replaced by generic placeholders.
  */
 
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -45,6 +46,25 @@ function getSiteUrl(): string {
   return u.startsWith('http') ? u : 'https://' + u;
 }
 
+/**
+ * Reproducible build time: an explicit SOURCE_DATE_EPOCH wins, otherwise the
+ * commit that last changed the canonical data file. Never the wall clock.
+ */
+function getUpdatedAt(): string {
+  const epoch = process.env.SOURCE_DATE_EPOCH;
+  if (epoch && /^\d+$/.test(epoch)) return new Date(Number(epoch) * 1000).toISOString();
+  try {
+    const committed = execFileSync(
+      'git', ['log', '-1', '--format=%cI', '--', 'src/data/resources.ts'],
+      { cwd: projectRoot, encoding: 'utf-8', stdio: ['ignore', 'pipe', 'ignore'] },
+    ).trim();
+    if (committed) return new Date(committed).toISOString();
+  } catch {
+    // Deploy builds may not ship .git; a fixed epoch keeps output byte-stable.
+  }
+  return new Date(0).toISOString();
+}
+
 function display(value: string | null | undefined, fallback = 'Not specified'): string {
   return value && value.trim() ? value : fallback;
 }
@@ -73,7 +93,7 @@ function main() {
     archetypeTags.map((tag) => [tag, normalizedResources.filter((r) => r.tags.includes(tag)).length]),
   );
   const siteUrl = getSiteUrl();
-  const updatedAt = new Date().toISOString();
+  const updatedAt = getUpdatedAt();
 
   const categoriesByConsumable = (value: boolean | undefined) =>
     categorySummaries.filter((c) => normalizedResources.some(

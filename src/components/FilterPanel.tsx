@@ -1,8 +1,8 @@
 'use client';
 
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import type { CatalogFilters } from '@/hooks/useCatalogUrlState';
-import { isPricing, type Pricing, type SortId } from '@/lib/catalog';
+import { isPricingFilter, type PricingFilter, type SortId } from '@/lib/catalog';
 import { useI18n } from '@/context/I18nContext';
 import { cn } from '@/lib/utils';
 
@@ -23,14 +23,16 @@ export function FilterPanel({ filters, resourceTypes, favoritesCount, onChange, 
   const sortId = useId();
   const agentId = useId();
   const favoritesId = useId();
+  const [controlsOpen, setControlsOpen] = useState(false);
 
-  const priceOptions: Array<Pricing | ''> = ['', 'open-source', 'free', 'freemium', 'paid'];
+  const priceOptions: Array<PricingFilter | ''> = ['', 'open-source', 'free', 'free-open-source', 'freemium', 'paid'];
   const sortOptions: SortId[] = ['relevance', 'featured', 'az', 'opensource'];
 
-  const priceLabel = (price: Pricing | '') => {
+  const priceLabel = (price: PricingFilter | '') => {
     if (price === '') return t.allPrices;
     if (price === 'open-source') return t.openSource;
     if (price === 'free') return t.free;
+    if (price === 'free-open-source') return t.freeOpenSource;
     if (price === 'freemium') return t.freemium;
     return t.paid;
   };
@@ -48,12 +50,26 @@ export function FilterPanel({ filters, resourceTypes, favoritesCount, onChange, 
         <h2 id="filters-heading" className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
           {t.filtersTitle}
         </h2>
-        <button type="button" onClick={onReset} className="rounded text-sm text-primary hover:underline">
-          {t.clearAllFilters}
-        </button>
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            aria-expanded={controlsOpen}
+            aria-controls="filter-controls"
+            onClick={() => setControlsOpen((current) => !current)}
+            className="rounded-md border border-input bg-card px-2 py-1 text-sm sm:hidden"
+          >
+            {t.filtersTitle}
+          </button>
+          <button type="button" onClick={onReset} className="rounded text-sm text-primary hover:underline">
+            {t.clearAllFilters}
+          </button>
+        </div>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <div
+        id="filter-controls"
+        className={cn('gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-5', controlsOpen ? 'grid' : 'hidden')}
+      >
         <div>
           <label className="mb-1 block text-xs text-muted-foreground" htmlFor={priceId}>{t.price}</label>
           <select
@@ -62,7 +78,7 @@ export function FilterPanel({ filters, resourceTypes, favoritesCount, onChange, 
             value={filters.pricing}
             onChange={(event) => {
               const value = event.target.value;
-              onChange({ pricing: isPricing(value) ? value : '' });
+              onChange({ pricing: isPricingFilter(value) ? value : '' });
             }}
           >
             {priceOptions.map((price) => (

@@ -9,9 +9,9 @@ describe('Strata App', () => {
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Strata');
     expect(screen.getByText('Seleção editorial')).toBeInTheDocument();
-    expect(screen.getAllByRole('article')).toHaveLength(21); // 9 editorial + 12 first page
+    expect(screen.getAllByRole('article')).toHaveLength(33); // 9 editorial + 24 first page
     expect(screen.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'track-tab-all');
-    expect(screen.getByRole('button', { name: /página 19 de 19/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /página 9 de 9/i })).toBeInTheDocument();
   });
 
   it('keeps search state shareable in the URL', async () => {
@@ -28,7 +28,7 @@ describe('Strata App', () => {
 
   it('switches tracks, narrows categories and resets pagination', () => {
     renderWithProviders(<App />);
-    fireEvent.click(screen.getByRole('button', { name: /página 2 de 19/i }));
+    fireEvent.click(screen.getByRole('button', { name: /página 2 de 9/i }));
     expect(window.location.search).toContain('page=2');
 
     fireEvent.click(screen.getByRole('tab', { name: /IA & Agentes/i }));

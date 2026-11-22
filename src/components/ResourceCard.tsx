@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Heart, Info, Star } from 'lucide-react';
+import { Bot, ExternalLink, Heart, Info, Star } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import type { CatalogResource, Pricing } from '@/lib/catalog';
@@ -69,12 +69,43 @@ export function ResourceCard({
                 {t.featured}
               </Badge>
             )}
+            {resource.agentConsumable === true && (
+              <Badge variant="success" className="gap-1">
+                <Bot className="h-3 w-3" aria-hidden="true" />
+                {t.agentReady}
+              </Badge>
+            )}
           </div>
 
           <h3 id={titleId} className="text-lg font-semibold leading-snug text-foreground">
             {resource.name}
           </h3>
           <p className="mt-2 flex-1 text-sm text-muted-foreground">{resource.description}</p>
+
+          {resource.whenToUse && (
+            <div className="mt-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t.whenToUse}</p>
+              <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{resource.whenToUse}</p>
+            </div>
+          )}
+
+          {resource.stack && resource.stack.length > 0 && (
+            <div className="mt-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t.stack}</p>
+              <ul className="mt-1 flex flex-wrap gap-1" aria-label={t.stack}>
+                {resource.stack.slice(0, 3).map((item) => (
+                  <li key={item} className="rounded bg-muted px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
+                    {item}
+                  </li>
+                ))}
+                {resource.stack.length > 3 && (
+                  <li className="rounded bg-muted px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
+                    +{resource.stack.length - 3}
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
 
           {resource.tags.length > 0 && (
             <ul className="mt-4 flex flex-wrap gap-1.5" aria-label={t.tags}>

@@ -2,9 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Category } from '@/data/resources';
 import {
   catalogCategories,
-  isPricing,
+  isPricingFilter,
   TRACKS,
-  type Pricing,
+  type PricingFilter,
   type SortId,
   type TrackId,
 } from '@/lib/catalog';
@@ -13,7 +13,7 @@ export interface CatalogFilters {
   q: string;
   track: TrackId | 'all';
   category: Category | 'all';
-  pricing: Pricing | '';
+  pricing: PricingFilter | '';
   type: string;
   sort: SortId;
   agentReady: boolean;
@@ -43,7 +43,7 @@ function normalize(value: CatalogFilters): CatalogFilters {
     q: typeof value.q === 'string' ? value.q.slice(0, 200) : '',
     track: TRACK_IDS.has(value.track) ? value.track : 'all',
     category: CATEGORY_IDS.has(value.category) ? value.category : 'all',
-    pricing: value.pricing === '' || isPricing(value.pricing) ? value.pricing : '',
+    pricing: value.pricing === '' || isPricingFilter(value.pricing) ? value.pricing : '',
     type: typeof value.type === 'string' ? value.type.slice(0, 80) : '',
     sort: SORT_IDS.has(value.sort) ? value.sort : 'relevance',
     agentReady: value.agentReady === true,
@@ -64,7 +64,7 @@ function parseSearch(search: string): CatalogFilters {
     q: params.get('q') ?? '',
     track: TRACK_IDS.has(rawTrack) ? (rawTrack as TrackId) : 'all',
     category: CATEGORY_IDS.has(rawCategory) ? (rawCategory as Category) : 'all',
-    pricing: isPricing(rawPricing) ? rawPricing : '',
+    pricing: isPricingFilter(rawPricing) ? rawPricing : '',
     type: params.get('type') ?? '',
     sort: SORT_IDS.has(rawSort) ? (rawSort as SortId) : 'relevance',
     agentReady: params.get('agent') === '1',
@@ -73,8 +73,12 @@ function parseSearch(search: string): CatalogFilters {
   });
 }
 
-function serialize(value: CatalogFilters): string {
-  const params = new URLSearchParams();
+const FILTER_KEYS = ['q', 'track', 'category', 'pricing', 'type', 'sort', 'agent', 'favorites', 'page'];
+
+function serialize(value: CatalogFilters, currentSearch = ''): string {
+  // Keep unrelated parameters (notably ?lang=) intact when rewriting the URL.
+  const params = new URLSearchParams(currentSearch);
+  for (const key of FILTER_KEYS) params.delete(key);
   if (value.q) params.set('q', value.q);
   if (value.track !== 'all') params.set('track', value.track);
   if (value.category !== 'all') params.set('category', value.category);
@@ -111,7 +115,7 @@ export function useCatalogUrlState() {
     });
     filtersRef.current = next;
     setFilters(next);
-    const query = serialize(next);
+    const query = serialize(next, window.location.search);
     const url = `${window.location.pathname}${query ? `?${query}` : ''}`;
     window.history.replaceState(window.history.state, '', url);
   }, []);
