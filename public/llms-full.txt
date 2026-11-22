@@ -1,0 +1,708 @@
+# Design Resources Hub - Catálogo Completo
+
+Total de recursos: 84
+Categorias: 10
+Gerado em build-time a partir de src/data/resources.ts
+
+
+## AI Prompts (10)
+
+- **getlayers.ai**
+  - URL: https://getlayers.ai
+  - ID: getlayers
+  - Categoria: AI Prompts
+  - Tags: prompts, 3d, gradients, claude, ai
+  - Destacado: Sim
+  - Descrição: 50+ website prompts, 300+ 3D scenes, 1000+ interactive gradients, 100+ backgrounds, motion sections. Paste into Claude and ship.
+
+- **sceneai.art**
+  - URL: https://sceneai.art
+  - ID: sceneai
+  - Categoria: AI Prompts
+  - Tags: prompts, ai-art, creators, curated
+  - Destacado: Sim
+  - Descrição: Beautiful AI Prompt Library made for creators. Curated prompts for stunning visual outputs.
+
+- **mahero.supply**
+  - URL: https://mahero.supply
+  - ID: mahero
+  - Categoria: AI Prompts
+  - Tags: prompts, free, backgrounds, motion, gradients
+  - Destacado: Sim
+  - Descrição: 150+ free website prompts with 1,000+ backgrounds, motion sections and gradients. Paste into Claude and ship.
+
+- **modulify.ai**
+  - URL: https://modulify.ai
+  - ID: modulify
+  - Categoria: AI Prompts
+  - Tags: vibecoding, ai, design-to-code, prototyping, production
+  - Destacado: Sim
+  - Descrição: Best vibecoding tool. AI-powered design-to-code platform for rapid prototyping and production-ready websites.
+
+- **modulify.ai/templates**
+  - URL: https://modulify.ai/templates
+  - ID: modulify-templates
+  - Categoria: AI Prompts
+  - Tags: templates, free, vibecoding, starter-kits
+  - Destacado: Sim
+  - Descrição: Free templates from modulify. Ready-to-use website templates for rapid development.
+
+- **motionin.design**
+  - URL: https://motionin.design
+  - ID: motionin
+  - Categoria: AI Prompts
+  - Tags: ai, prompt-to-website, animated, generative, motion
+  - Destacado: Sim
+  - Descrição: 1 prompt, 1 website. AI generates complete animated websites from a single prompt.
+
+- **prettysites.io**
+  - URL: https://prettysites.io
+  - ID: prettysites
+  - Categoria: AI Prompts
+  - Tags: prompts, layouts, animations, website-templates, customizable
+  - Destacado: Sim
+  - Descrição: High-end website prompts, layouts, and animations. Grab a design and customize it.
+
+- **ambientcg.com**
+  - URL: https://ambientcg.com
+  - ID: ambientcg
+  - Categoria: AI Prompts
+  - Tags: 3d, materials, textures, hdri, cc0, free, pbr
+  - Destacado: Sim
+  - Descrição: Lifelike 3D materials, textures, and HDRIs. Free CC0 assets for realistic 3D scenes and web graphics.
+
+- **prompt-motion.com**
+  - URL: https://prompt-motion.com
+  - ID: prompt-motion
+  - Categoria: AI Prompts
+  - Tags: ai, motion, video, prompts, generative, animation
+  - Destacado: Sim
+  - Descrição: Prompt Motion — AI motion videos with their prompts. Generate and explore AI-generated motion content with copyable prompts.
+
+- **promptedsite.com**
+  - URL: https://promptedsite.com
+  - ID: promptedsite
+  - Categoria: AI Prompts
+  - Tags: prompts, direction, frontend, ai, templates
+  - Destacado: Sim
+  - Descrição: Direction for modern frontend. AI-powered website prompts and direction for building modern frontends.
+
+
+## Landing Pages (8)
+
+- **land-book.com**
+  - URL: https://land-book.com
+  - ID: land-book
+  - Categoria: Landing Pages
+  - Tags: landings, inspiration, curated, web-design
+  - Destacado: Sim
+  - Descrição: Landing page inspiration done right. Curated collection of the best landing pages.
+
+- **landdding.com**
+  - URL: https://landdding.com
+  - ID: landdding
+  - Categoria: Landing Pages
+  - Tags: landings, gallery, inspiration, web-design
+  - Destacado: Não
+  - Descrição: Top notch landings. High-quality landing page gallery for inspiration.
+
+- **recent.design**
+  - URL: https://recent.design
+  - ID: recent-design
+  - Categoria: Landing Pages
+  - Tags: gallery, web-design, inspiration, modern
+  - Destacado: Não
+  - Descrição: Cool gallery for web design inspo. Fresh, modern design references.
+
+- **minimal.gallery**
+  - URL: https://minimal.gallery
+  - ID: minimal-gallery
+  - Categoria: Landing Pages
+  - Tags: minimal, clean, gallery, ai-reference, curated, high-end
+  - Destacado: Sim
+  - Descrição: High-end sites to feed your agent. Curated minimal, clean, and sophisticated website gallery for AI reference.
+
+- **siteinspire.com**
+  - URL: https://siteinspire.com
+  - ID: siteinspire
+  - Categoria: Landing Pages
+  - Tags: inspiration, filter, style, type, classic, gallery
+  - Destacado: Sim
+  - Descrição: Sites filtered by style and type. Classic design inspiration gallery with powerful filtering by category, style, and type.
+
+- **httpster.net**
+  - URL: https://httpster.net
+  - ID: httpster
+  - Categoria: Landing Pages
+  - Tags: hand-picked, community, style, submissions, showcase
+  - Destacado: Sim
+  - Descrição: Hand-picked sites, sorted by style. Community-curated website showcase with style-based sorting and submissions.
+
+- **darkmodedesign.com**
+  - URL: https://darkmodedesign.com
+  - ID: darkmodedesign
+  - Categoria: Landing Pages
+  - Tags: dark-mode, dark-ui, gallery, inspiration, patterns
+  - Destacado: Sim
+  - Descrição: Dark mode websites only. Dedicated gallery for dark-mode UI inspiration and patterns.
+
+- **on design**
+  - URL: https://ondesign.com
+  - ID: ondesign
+  - Categoria: Landing Pages
+  - Tags: community, designers, feedback, trends, social, network
+  - Destacado: Sim
+  - Descrição: A designer community worth joining. Community-driven platform for designers to share work, get feedback, and discover trends.
+
+
+## UI Components (9)
+
+- **component.gallery**
+  - URL: https://component.gallery
+  - ID: component-gallery
+  - Categoria: UI Components
+  - Tags: components, examples, react, vue, reference
+  - Destacado: Sim
+  - Descrição: 60 components with 2670 real examples to reuse. Massive component reference.
+
+- **pro.beui.dev**
+  - URL: https://pro.beui.dev
+  - ID: pro-beui
+  - Categoria: UI Components
+  - Tags: premium, animated, components, react, production
+  - Destacado: Sim
+  - Descrição: Premium animated UI components. High-quality, production-ready components.
+
+- **uiarc.dev**
+  - URL: https://uiarc.dev
+  - ID: uiarc
+  - Categoria: UI Components
+  - Tags: react, animated, blocks, components, ui
+  - Destacado: Não
+  - Descrição: Animated React components and UI blocks. Ready-to-use animated components.
+
+- **collectui.com**
+  - URL: https://collectui.com
+  - ID: collectui
+  - Categoria: UI Components
+  - Tags: collection, ui-patterns, design, reference, deep
+  - Destacado: Não
+  - Descrição: A deep UI design collection. Extensive library of UI patterns and designs.
+
+- **iconly.design**
+  - URL: https://iconly.design
+  - ID: iconly
+  - Categoria: UI Components
+  - Tags: icons, icon-sets, design-system, ui, consistent
+  - Destacado: Sim
+  - Descrição: World-class icons. Beautiful, consistent icon sets for modern interfaces.
+
+- **kokonutui.com**
+  - URL: https://kokonutui.com
+  - ID: kokonutui
+  - Categoria: UI Components
+  - Tags: components, interface, design-system, react, vue, ui-kit
+  - Destacado: Sim
+  - Descrição: Interface components and design system. Ready-to-use React/Vue components with consistent design language.
+
+- **hyperui.dev**
+  - URL: https://hyperui.dev
+  - ID: hyperui
+  - Categoria: UI Components
+  - Tags: tailwind, components, product-flow, marketing, ecommerce, free
+  - Destacado: Sim
+  - Descrição: Product flow components and templates. Free Tailwind CSS components for application UI, marketing, and ecommerce.
+
+- **ui.shadcn.com**
+  - URL: https://ui.shadcn.com
+  - ID: ui-shadcn
+  - Categoria: UI Components
+  - Tags: shadcn, radix, tailwind, components, design-system, visual-system
+  - Destacado: Sim
+  - Descrição: Visual system - Beautifully designed components built with Radix UI and Tailwind CSS. Copy-paste, customize, own your components.
+
+- **Beer CSS**
+  - URL: https://github.com/beercss/beercss
+  - ID: beercss
+  - Categoria: UI Components
+  - Tags: css, material-design, framework, lightweight, semantic-html, osrepos
+  - Destacado: Sim
+  - Descrição: Lightweight CSS framework for building Material Design 3 interfaces with semantic HTML. CDN and npm installation. OSRepos: (from CSS topic).
+
+
+## Motion & Animation (8)
+
+- **getlayers.ai/tools/liquid-colour**
+  - URL: https://getlayers.ai/tools/liquid-colour
+  - ID: getlayers-liquid-colour
+  - Categoria: Motion & Animation
+  - Tags: getlayers, liquid, backgrounds, shader, free, browser-tool, motion
+  - Destacado: Sim
+  - Descrição: Moving liquid backgrounds with hand-tuned feel. Tune live in browser, export or copy prompt. Free.
+
+- **getlayers.ai/tools/shader-backgrounds**
+  - URL: https://getlayers.ai/tools/shader-backgrounds
+  - ID: getlayers-shader-backgrounds
+  - Categoria: Motion & Animation
+  - Tags: getlayers, shader, backgrounds, webgl, free, browser-tool, webgl
+  - Destacado: Sim
+  - Descrição: Live shader backdrops, no code required. Interactive browser tool to tune and export shader backgrounds.
+
+- **getlayers.ai/tools/dither-art**
+  - URL: https://getlayers.ai/tools/dither-art
+  - ID: getlayers-dither-art
+  - Categoria: Motion & Animation
+  - Tags: getlayers, dither, retro, pixel-art, free, browser-tool, effects
+  - Destacado: Sim
+  - Descrição: Retro-digital dither look generator. Create dithered images and animations in browser, export or copy prompt.
+
+- **getlayers.ai/tools/image-motion**
+  - URL: https://getlayers.ai/tools/image-motion
+  - ID: getlayers-image-motion
+  - Categoria: Motion & Animation
+  - Tags: getlayers, 3d, image-motion, loop, free, browser-tool, animation
+  - Destacado: Sim
+  - Descrição: Your images in a looping 3D ring. Upload images, tune motion in browser, export animated loops.
+
+- **motion (motiondivision/motion)**
+  - URL: https://github.com/motiondivision/motion
+  - ID: motion-lib-osrepos
+  - Categoria: Motion & Animation
+  - Tags: animation, react, vue, javascript, springs, layout-transitions, scroll, gestures, osrepos
+  - Destacado: Sim
+  - Descrição: Modern animation library for JavaScript, React, and Vue. Shared toolkit for gestures, spring animations, layout transitions, and scroll-linked effects. GPU-accelerated, 31k+ stars. OSRepos: Active, Health 63/100.
+
+- **animate.css**
+  - URL: https://github.com/animate-css/animate.css
+  - ID: animate-css
+  - Categoria: Motion & Animation
+  - Tags: css, animations, keyframes, reduced-motion, osrepos
+  - Destacado: Não
+  - Descrição: CSS library of reusable animations for web interfaces. Add animation classes to elements instead of writing keyframes. Reduced-motion support. OSRepos: Inactive, Health 37/100.
+
+- **motion-primitives**
+  - URL: https://github.com/motion-primitives/motion-primitives
+  - ID: motion-primitives
+  - Categoria: Motion & Animation
+  - Tags: typescript, tailwind, ui-kit, animated-components, motion, osrepos
+  - Destacado: Sim
+  - Descrição: TypeScript UI kit of customizable animated components built with Motion and Tailwind CSS. Polished motion for web interfaces, in beta. OSRepos: Maintained, Health 30/100.
+
+- **ui-layouts.com**
+  - URL: https://ui-layouts.com
+  - ID: ui-layouts
+  - Categoria: Motion & Animation
+  - Tags: motion, layouts, animations, transitions, patterns, ui-patterns
+  - Destacado: Sim
+  - Descrição: Motion layouts and animations. Ready-to-use animated layout patterns and transitions for modern web interfaces.
+
+
+## Micro-interactions (3)
+
+- **getlayers.ai/tools/custom-cursors**
+  - URL: https://getlayers.ai/tools/custom-cursors
+  - ID: getlayers-custom-cursors
+  - Categoria: Micro-interactions
+  - Tags: getlayers, cursors, interactions, css, js, free, browser-tool, micro-interactions
+  - Destacado: Sim
+  - Descrição: Custom cursor effects people notice. Design interactive cursors in browser, export CSS/JS ready to use.
+
+- **microkit.co**
+  - URL: https://microkit.co
+  - ID: microkit
+  - Categoria: Micro-interactions
+  - Tags: micro-interactions, copy-paste, dev-friendly, interactions
+  - Destacado: Sim
+  - Descrição: Library of micro-interactions that devs can copy, adapt, and ship. Practical micro-interactions.
+
+- **bencho.dev**
+  - URL: https://bencho.dev
+  - ID: bencho
+  - Categoria: Micro-interactions
+  - Tags: interactive, components, micro-interactions, ui
+  - Destacado: Não
+  - Descrição: Interactive components and micro-interactions. Beautiful interactive UI elements.
+
+
+## Typography (2)
+
+- **fontinlogo.com**
+  - URL: https://fontinlogo.com
+  - ID: fontinlogo
+  - Categoria: Typography
+  - Tags: fonts, logos, brands, typography, reference
+  - Destacado: Sim
+  - Descrição: The fonts behind famous logos. Discover what typefaces top brands use.
+
+- **fontshare.com**
+  - URL: https://fontshare.com
+  - ID: fontshare
+  - Categoria: Typography
+  - Tags: fonts, free, commercial, typefaces, indian-type-foundry
+  - Destacado: Sim
+  - Descrição: Stunning fonts completely free for commercial projects. High-quality typefaces from Indian Type Foundry.
+
+
+## UX Flows (1)
+
+- **pageflows.com**
+  - URL: https://pageflows.com
+  - ID: pageflows
+  - Categoria: UX Flows
+  - Tags: ux, flows, journeys, products, reference
+  - Destacado: Sim
+  - Descrição: Real UX flows, start to finish. Complete user journey references for popular products.
+
+
+## Libraries & Tools (24)
+
+- **libraries.dev**
+  - URL: https://libraries.dev
+  - ID: libraries-dev
+  - Categoria: Libraries & Tools
+  - Tags: react, libraries, discovery, tools, comparison
+  - Destacado: Sim
+  - Descrição: Discover React libraries and UI tools. Search and compare the best libraries.
+
+- **Remotion**
+  - URL: https://www.remotion.dev
+  - ID: remotion
+  - Categoria: Libraries & Tools
+  - Tags: react, video, ffmpeg, programmatic-video, animation, mp4, webm, prores
+  - Destacado: Sim
+  - Descrição: Make videos programmatically in React. Render MP4s, WebM, ProRes from React components. Frame-accurate, uses FFmpeg, supports audio, sequences, and serverless rendering.
+
+- **Motion Canvas**
+  - URL: https://motioncanvas.io
+  - ID: motion-canvas
+  - Categoria: Libraries & Tools
+  - Tags: typescript, animation, explainer-videos, code-driven, declarative, educational, lezer
+  - Destacado: Sim
+  - Descrição: Code-driven animated explainers. TypeScript library for creating precise, reproducible animations and educational videos. Declarative API, generator functions, audio support, Lezer editor integration.
+
+- **Motion (Framer Motion)**
+  - URL: https://motion.dev
+  - ID: motion-lib
+  - Categoria: Libraries & Tools
+  - Tags: react, animation, springs, layout-transitions, scroll-animations, drag, framer-motion, lightweight
+  - Destacado: Sim
+  - Descrição: Layout transitions and springs. Production-ready animation library for React. Shared layout transitions, spring physics, scroll-linked animations, drag gestures, exit animations. Zero dependencies, 16kb gzipped.
+
+- **ReelMimic**
+  - URL: https://github.com/reelmimic/reelmimic
+  - ID: reelmimic
+  - Categoria: Libraries & Tools
+  - Tags: ai, video, animation, 2d, claude-code, codex, osrepos
+  - Destacado: Sim
+  - Descrição: Turn a reference video and brief into an original 2D animation, planned and produced on your computer with Claude Code or Codex. Review the plan, follow production, comment on finished video in local web app. OSRepos: New, Health 62/100.
+
+- **OpenCreator**
+  - URL: https://github.com/opencreator/opencreator
+  - ID: opencreator
+  - Categoria: Libraries & Tools
+  - Tags: codex, creative-workspace, video, images, voice, translation, desktop-app, osrepos
+  - Destacado: Sim
+  - Descrição: Web and Desktop creative workspace built around OpenAI Codex CLI. Brings Agent conversations and visual tools together for video, images, voice, writing, and translation. OSRepos: Active, Health 57/100.
+
+- **ArcReel**
+  - URL: https://github.com/arcreel/arcreel
+  - ID: arcreel
+  - Categoria: Libraries & Tools
+  - Tags: video, storyboard, script-to-video, ai-assets, capcut, self-hosted, osrepos
+  - Destacado: Sim
+  - Descrição: Self-hosted workspace for turning novels, scripts, or product materials into storyboards and short videos. Organizes AI-generated assets, tracks costs, exports CapCut-compatible workflow. OSRepos: Active, Health 72/100.
+
+- **VidGear**
+  - URL: https://github.com/abhiTronix/vidgear
+  - ID: vidgear
+  - Categoria: Libraries & Tools
+  - Tags: python, video, opencv, ffmpeg, streaming, real-time, osrepos
+  - Destacado: Não
+  - Descrição: Cross-platform Python framework for real-time video capture, processing, encoding, and streaming. Built around OpenCV and FFmpeg with threaded and asyncio APIs. OSRepos: Quiet, Health 40/100.
+
+- **YumCut (app.yumcut.com)**
+  - URL: https://app.yumcut.com
+  - ID: yumcut
+  - Categoria: Libraries & Tools
+  - Tags: ai, video, short-form, vertical, voiceover, captions, osrepos
+  - Destacado: Sim
+  - Descrição: Generate short vertical videos from prompts with script, voiceover, visuals, captions, and export-ready edit. Automate short-form production. OSRepos: Active, Health 21/100.
+
+- **awesome-css-frameworks**
+  - URL: https://github.com/awesome-css-frameworks/awesome-css-frameworks
+  - ID: awesome-css-frameworks
+  - Categoria: Libraries & Tools
+  - Tags: css, frameworks, awesome-list, comparison, osrepos
+  - Destacado: Sim
+  - Descrição: Curated CSS framework directory built around categorized links to projects, documentation, and demos. Compare options from resets to utility-first frameworks. OSRepos: Maintained, Health 37/100.
+
+- **theme.park**
+  - URL: https://github.com/theme-park/theme.park
+  - ID: theme-park
+  - Categoria: Libraries & Tools
+  - Tags: css, themes, self-hosted, docker, consistent-ui, osrepos
+  - Destacado: Sim
+  - Descrição: CSS themes and skins for a wide range of self-hosted web apps. Consistent look across multiple services. OSRepos: Active, Health 52/100.
+
+- **50projects50days**
+  - URL: https://github.com/50projects50days/50projects50days
+  - ID: 50projects50days
+  - Categoria: Libraries & Tools
+  - Tags: html, css, javascript, mini-projects, learning, web-dev, osrepos
+  - Destacado: Sim
+  - Descrição: 51 mini web projects built with HTML, CSS, and JavaScript. Hands-on examples of common interface patterns and small browser apps with live demos. OSRepos: Inactive, Health 32/100.
+
+- **ArcReel**
+  - URL: https://github.com/arcreel/arcreel
+  - ID: arcreel-osrepos
+  - Categoria: Libraries & Tools
+  - Tags: video, storyboard, script-to-video, ai-assets, capcut, self-hosted, osrepos
+  - Destacado: Sim
+  - Descrição: Self-hosted workspace for turning novels, scripts, or product materials into storyboards and short videos. Organizes AI-generated assets, tracks costs, exports CapCut-compatible workflow. OSRepos: Active, Health 72/100.
+
+- **OpenCreator**
+  - URL: https://github.com/opencreator/opencreator
+  - ID: opencreator-osrepos
+  - Categoria: Libraries & Tools
+  - Tags: codex, creative-workspace, video, images, voice, translation, desktop-app, osrepos
+  - Destacado: Sim
+  - Descrição: Web and Desktop creative workspace built around OpenAI Codex CLI. Brings Agent conversations and visual tools together for video, images, voice, writing, and translation. OSRepos: Active, Health 57/100.
+
+- **ReelMimic**
+  - URL: https://github.com/reelmimic/reelmimic
+  - ID: reelmimic-osrepos
+  - Categoria: Libraries & Tools
+  - Tags: ai, video, animation, 2d, claude-code, codex, osrepos
+  - Destacado: Sim
+  - Descrição: Turn a reference video and brief into an original 2D animation, planned and produced with Claude Code or Codex. Review the plan, follow production, comment on finished video in local web app. OSRepos: New, Health 62/100.
+
+- **openidea**
+  - URL: https://github.com/openidea/openidea
+  - ID: openidea
+  - Categoria: Libraries & Tools
+  - Tags: rust, tauri, ide, desktop-app, intellij, cross-platform, osrepos
+  - Destacado: Sim
+  - Descrição: Cross-platform desktop IDE built with Rust core and Tauri, bringing IntelliJ-style workflows to a native app. Editing, code insight, debugging, Git, terminal, database, HTTP tools for 60+ languages. OSRepos: New, Health 76/100.
+
+- **AgentRun**
+  - URL: https://github.com/agentrun/agentrun
+  - ID: agentrun
+  - Categoria: Libraries & Tools
+  - Tags: ai-agents, self-hosted, durable-runtime, workflow-dsl, agent-management, osrepos
+  - Destacado: Sim
+  - Descrição: Self-hostable platform for managing agents, their revisions, and runs on Pi's durable runtime. Workflow DSL with typed decisions and agent tasks. OSRepos: New, Health 42/100.
+
+- **openmotion (nexu-io/openmotion)**
+  - URL: https://github.com/nexu-io/openmotion
+  - ID: findarepo-openmotion
+  - Categoria: Libraries & Tools
+  - Tags: video, motion-graphics, capcut-alternative, brand-kit, typescript, apache-2, findarepo, ai-video
+  - Destacado: Sim
+  - Descrição: Open-source Claude Motion & CapCut alternative. Turn a reference video into editable motion graphics with your brand kit. Export MP4s. TypeScript, 15k stars, +5k/7d, Apache-2.0. Findarepo: #1 AI Video, Active, 710★/day.
+
+- **Orca (stablyai/orca)**
+  - URL: https://github.com/stablyai/orca
+  - ID: findarepo-orca
+  - Categoria: Libraries & Tools
+  - Tags: ai-agents, fleet, claude-code, grok, codex, desktop, mobile, typescript, mit, findarepo
+  - Destacado: Sim
+  - Descrição: Run a fleet of bots with your own subscription (Claude Code, Grok, Agy, Codex). Desktop, mobile, remote. TypeScript, 132k stars, +7.1k/7d, MIT. Findarepo: #2 AI Agents, Active, 1012★/day, 26/26 active weeks.
+
+- **hyperframes (heygen-com/hyperframes)**
+  - URL: https://github.com/heygen-com/hyperframes
+  - ID: findarepo-openmotion-alt
+  - Categoria: Libraries & Tools
+  - Tags: ai-video, html-to-video, ai-agents, render-pipeline, typescript, apache-2, findarepo
+  - Destacado: Sim
+  - Descrição: Write a web page, get a video — HTML becomes rendered video, made for AI agents. TypeScript, 88k stars, +3.5k/7d, Apache-2.0. Findarepo: #2 AI Video, Active, 499★/day, 26/26 active weeks.
+
+- **rea-video (JuneYaooo/rea-video)**
+  - URL: https://github.com/JuneYaooo/rea-video
+  - ID: findarepo-rea-video
+  - Categoria: Libraries & Tools
+  - Tags: python, video-generation, apache-2, findarepo
+  - Destacado: Não
+  - Descrição: Python video generation tool, 12k stars, +3.2k/7d, Apache-2.0. Findarepo: AI Video alternative to openmotion/hyperframes, Occasional.
+
+- **rea (morluto/rea)**
+  - URL: https://github.com/morluto/rea
+  - ID: findarepo-rea
+  - Categoria: Libraries & Tools
+  - Tags: reverse-engineering, agents, native-binaries, developer-tools, typescript, mit, findarepo
+  - Destacado: Sim
+  - Descrição: Reverse engineer anything with agents, from app behavior down to native binaries. TypeScript, 473k stars, +13k/7d, MIT. Findarepo: #1 Developer Tools, Steady, 1793★/day.
+
+- **unslop**
+  - URL: https://github.com/avivgerz-hue/unslop
+  - ID: unslop
+  - Categoria: Libraries & Tools
+  - Tags: design-system, anti-slop, tailwind, mcp, agent-skill, cli, apca, wcag, design-tokens, linear-dark, 72-rules
+  - Destacado: Sim
+  - Descrição: v2.1.2 — 72-rule UI craft engine, APCA contrast math & 10 studio design presets to fix AI slop. Studio-grade UI design systems & Anti-Slop engine for coding agents. 10 design presets (linear-dark, swiss-grid, stripe-minimal, apple-glass, neo-brutalist + 5 new), deterministic audit for cliché gradients, APCA/WCAG contrast, elevation, spacing, radius, typography. MCP server + CLI + Agent Skill for Claude Code, Cursor, Codex, Windsurf. Exports Tailwind v4 tokens.
+
+- **ghost-qa**
+  - URL: https://github.com/avivgerz-hue/ghost-qa
+  - ID: ghost-qa
+  - Categoria: Libraries & Tools
+  - Tags: qa, testing, playwright, headless-browser, mcp, agent-skill, self-healing, ci, automation, 8-traps, tablet
+  - Destacado: Sim
+  - Descrição: v2.1.2 — 8-trap headless Playwright QA across Desktop, Tablet & Mobile. Autonomous headless browser QA & self-healing verification loop. Crawls live app on desktop, tablet & mobile, 8-trap engine (Console, Network, Layout, A11y, Perf, Visual, DOM, Hydration), safety-gated interaction runner. MCP server + CLI + Agent Skill. Self-contained HTML evidence dashboard. Zero config, runs against any localhost.
+
+
+## Security & Auth (1)
+
+- **vibe-shield**
+  - URL: https://github.com/avivgerz-hue/vibe-shield
+  - ID: vibe-shield
+  - Categoria: Security & Auth
+  - Tags: security, sast, secrets, auth, rls, sqli, xss, mcp, agent-skill, ci, sarif, vibefoundry, 92-rules, nextjs, stripe, skill-md
+  - Destacado: Sim
+  - Descrição: v2.1.3 — 92-rule security scanner for Next.js, Supabase RLS, Stripe webhooks & SKILL.md poisoning. Security scanner & MCP guard for AI-generated codebases. 92 detection signatures (secrets, auth, DB/RLS, SQLi, XSS, SSRF, path traversal, agent-skill poisoning, webhook verification). Grades F–A+, SARIF + GitHub annotations, CI gate. Zero deps, offline, scans itself 100/100 A+. MCP server + Agent Skill for Claude Code, Cursor, Codex.
+
+
+## Agent Skills (18)
+
+- **skills (iberick/ui-skills)**
+  - URL: https://github.com/ibelick/ui-skills
+  - ID: skills-agent-ui
+  - Categoria: Agent Skills
+  - Tags: agent-skills, accessibility, layout, typography, color, ui-polish, ui-skills, osrepos
+  - Destacado: Sim
+  - Descrição: Collection of agent skills for improving and building interfaces: accessibility, layout, writing, typography, color, UI polish. Install via skills.sh or Claude Code plugin. OSRepos: New, Health 47/100.
+
+- **web-design (Claude Code skill)**
+  - URL: https://github.com/web-design/web-design
+  - ID: web-design-skill
+  - Categoria: Agent Skills
+  - Tags: agent-skill, claude-code, spec-first, design-md, web-design, osrepos
+  - Destacado: Sim
+  - Descrição: Claude Code skill for designing web pages with spec-first workflow. Turns PRD, reference URL, screenshot, or keywords into editable DESIGN.md before generating code. OSRepos: Quiet, Health 18/100.
+
+- **TAKT**
+  - URL: https://github.com/takt/takt
+  - ID: takts
+  - Categoria: Agent Skills
+  - Tags: typescript, cli, ai-coding, yaml, workflows, worktrees, agent-orchestration, osrepos
+  - Destacado: Sim
+  - Descrição: TypeScript CLI for defining repeatable AI coding workflows in YAML: planning, implementation, review, and fix loops. Runs tasks in isolated worktrees, records logs and reports. OSRepos: Active, Health 63/100.
+
+- **Taste Skill**
+  - URL: https://github.com/Leonxlnx/taste-skill
+  - ID: taste-skill
+  - Categoria: Agent Skills
+  - Tags: agent-skill, design, layout, typography, responsive, browser-check, finish-gate, photographs, shaders, mcp
+  - Destacado: Sim
+  - Descrição: Layout, type & responsive checks. Agent Skill that makes coding agents build professional company websites at figma.com/x.ai level. Deals palettes, Google Fonts pairings, 11 hero layouts, real photographs from vetted library, real brand icons, shader grounds for tech/gaming only. Browser checker across 1440/1024/820/768/390 + finish gate (3 rounds max). Node 22+, Chrome/Edge/Chromium. No API keys, installs nothing. `npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"`
+
+- **shadcn Skill**
+  - URL: https://ui.shadcn.com/docs/skills
+  - ID: shadcn-skill
+  - Categoria: Agent Skills
+  - Tags: agent-skill, shadcn, ui-components, compound-components, design-system, customization
+  - Destacado: Sim
+  - Descrição: Components that fit the project. Official shadcn/ui skill for AI agents. Teaches agents to compose, customize, and extend shadcn/ui components properly — avoiding prop drilling, using compound components, applying the right variants, and respecting the design system. Works with `npx skills add https://ui.shadcn.com/skills/shadcn-ui`
+
+- **Fixing Motion Performance**
+  - URL: https://github.com/ibelick/ui-skills
+  - ID: motion-performance-skill
+  - Categoria: Agent Skills
+  - Tags: agent-skill, motion, animation, performance, jank, compositor, reduced-motion, mcp, ui-skills
+  - Destacado: Sim
+  - Descrição: Audit janky transitions. Part of UI Skills registry (ui-skills.com). Teaches agents to detect and fix animation performance issues: compositor-friendly transforms, will-change misuse, layout thrashing, reduced-motion compliance, long-task blocking, GPU layer explosion. MCP at https://www.ui-skills.com/mcp with tools `list_skills`, `get_skill`. CLI: `npx ui-skills get motion-performance`
+
+- **React Best Practices**
+  - URL: https://github.com/vercel-labs/agent-skills
+  - ID: react-best-practices
+  - Categoria: Agent Skills
+  - Tags: agent-skill, react, nextjs, performance, waterfalls, bundle-size, ssr, vercel, mcp
+  - Destacado: Sim
+  - Descrição: Catch loading waterfalls. Vercel Engineering skill with 40+ rules across 8 categories (Eliminating waterfalls - Critical, Bundle size - Critical, Server-side perf - High, Client-side data fetching - Medium-High, Re-render optimization - Medium, Rendering perf - Medium, JS micro-optimizations - Low-Medium). Part of vercel-labs/agent-skills collection. Install: `npx skills add vercel-labs/agent-skills`
+
+- **Fixing Accessibility**
+  - URL: https://github.com/ibelick/ui-skills
+  - ID: accessibility-skill
+  - Categoria: Agent Skills
+  - Tags: agent-skill, accessibility, a11y, keyboard, focus, forms, aria, semantic-html, reduced-motion, mcp, ui-skills
+  - Destacado: Sim
+  - Descrição: Keyboard, focus & forms. Part of UI Skills registry (ui-skills.com). Teaches agents to audit and fix accessibility: aria-labels, semantic HTML, keyboard handlers, visible focus states, focus-visible patterns, autocomplete/validation/error handling in forms, prefers-reduced-motion for animations. MCP at https://www.ui-skills.com/mcp. CLI: `npx ui-skills get accessibility`
+
+- **AI for UI Skills (Emil Kowalski)**
+  - URL: https://aiforui.dev/skills
+  - ID: aiforui-skills
+  - Categoria: Agent Skills
+  - Tags: agent-skill, animation, springs, flip, scroll-driven, stagger, orchestration, emil-kowalski, aiforui
+  - Destacado: Sim
+  - Descrição: Emil Kowalski's animation skills for AI agents. Teaches agents advanced animation techniques: spring physics, FLIP animations, scroll-driven animations, stagger effects, orchestration, performance budgets. Part of aiforui.dev educational platform.
+
+- **HyperFrames**
+  - URL: https://hyperframes.dev
+  - ID: hyperframes
+  - Categoria: Agent Skills
+  - Tags: agent-skill, video, html, jsx, render-pipeline, mp4, webm, programmatic-video, ai-video
+  - Destacado: Sim
+  - Descrição: Write HTML, render video with agents. Agent-friendly video generation: write declarative HTML/JSX, agents control the render pipeline, output MP4/WebM. Designed for programmatic video creation and AI-driven content pipelines.
+
+- **designbookmark.com/motion**
+  - URL: https://designbookmark.com/motion
+  - ID: designbookmark-motion
+  - Categoria: Agent Skills
+  - Tags: agent-skill, animated-components, framer-motion, css-animations, gsap, copy-paste, claude, codex, designbookmark
+  - Destacado: Sim
+  - Descrição: Animated components for Claude or Codex. Curated collection of copy-paste animated components optimized for AI agents. Includes Framer Motion, CSS animations, and GSAP patterns. Ready for direct use in agent-generated code.
+
+- **Remotion Skills**
+  - URL: https://github.com/remotion/remotion-skills
+  - ID: remotion-skills
+  - Categoria: Agent Skills
+  - Tags: agent-skill, remotion, video, react, ffmpeg, audio-sync, rendering-pipeline, programmatic-video
+  - Destacado: Sim
+  - Descrição: Video generation skills for agents using Remotion. Teaches agents to compose React components into videos, handle audio synchronization, manage rendering pipelines, and optimize for different output formats. Part of Remotion ecosystem.
+
+- **Blender Skills**
+  - URL: https://github.com/blender-skills/blender-skills
+  - ID: blender-skills
+  - Categoria: Agent Skills
+  - Tags: agent-skill, blender, python, geometry-nodes, shaders, rigging, cycles, eevee, usd, gltf, 3d, procedural
+  - Destacado: Sim
+  - Descrição: Blender workflows for agents. Teaches agents to script Blender with Python: procedural modeling, geometry nodes, shader graphs, animation rigging, render pipelines (Cycles/Eevee), USD/GLTF export. Enables AI-driven 3D content creation.
+
+- **Claude-BugHunter (elementalsouls/claude-bughunter)**
+  - URL: https://github.com/elementalsouls/claude-bughunter
+  - ID: findarepo-claude-bughunter
+  - Categoria: Agent Skills
+  - Tags: claude-code, bug-hunting, red-team, security, skills, slash-commands, python, findarepo
+  - Destacado: Sim
+  - Descrição: Claude Code skill bundle for bug hunting and external red-team work. 82 skills, 15 slash commands, 681 disclosed-report patterns. Python, 17k stars, +11k/7d, MIT. Findarepo: Skill of the Day, Active, 1571★/day.
+
+- **t3code (pingdotgg/t3code)**
+  - URL: https://github.com/pingdotgg/t3code
+  - ID: findarepo-t3code
+  - Categoria: Agent Skills
+  - Tags: claude-code, codex, remote-control, agent-orchestration, typescript, mit, findarepo
+  - Destacado: Sim
+  - Descrição: Best way to control Claude Code, Codex and more from any computer or phone. TypeScript, 70k stars, +9.5k/7d, MIT. Findarepo: #2 MCP/Server, Active, 1359★/day, 26/26 active weeks.
+
+- **last30days-skill (mvanhorn/last30days-skill)**
+  - URL: https://github.com/mvanhorn/last30days-skill
+  - ID: findarepo-last30days-skill
+  - Categoria: Agent Skills
+  - Tags: research, reddit, x, youtube, hn, polymarket, python, mit, findarepo
+  - Destacado: Sim
+  - Descrição: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket. Python, 72k stars, +4.6k/7d, MIT. Findarepo: Active, 660★/day, 26/26 active weeks.
+
+- **blender-ai-mcp-addon (bookwjitchieni1986/blender-ai-mcp-addon)**
+  - URL: https://github.com/bookwjitchieni1986/blender-ai-mcp-addon
+  - ID: findarepo-blender-ai-mcp
+  - Categoria: Agent Skills
+  - Tags: blender, mcp, ai-assistant, visual-chat, python, mit, findarepo
+  - Destacado: Sim
+  - Descrição: AI assistant and MCP server for Blender: visual chat, scene tools. Python, 2.7k stars, +818/day (new), MIT. Findarepo: New, 42.8% growth, MCP Server.
+
+- **skills (mvanhorn/last30days-skill alias)**
+  - URL: https://findarepo.com/skills
+  - ID: findarepo-skill
+  - Categoria: Agent Skills
+  - Tags: skills, mcp, plugins, agent-tooling, claude, skillspector, findarepo
+  - Destacado: Sim
+  - Descrição: LLM Skills & MCP Directory — 1.1k Curated Entries. Updated daily from GitHub data with stars, growth, last-commit. Skills, MCP servers, plugins, agent tooling for Claude and other LLMs. Safety note: includes NVIDIA SkillSpector scan command.
+

@@ -1,0 +1,83 @@
+{
+  "name": "Hub de Recursos de Design — Agent",
+  "description": "Catálogo curado de recursos de design e desenvolvimento. Suporta consulta estruturada: listagem de categorias, filtros por categoria, busca por nome/descrição/tags e detalhes de recurso individual.",
+  "url": "https://design-resources-hub.vercel.app/api/a2a",
+  "version": "1.0.0",
+  "provider": {
+    "name": "Design Resources Hub",
+    "url": "https://design-resources-hub.vercel.app"
+  },
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false
+  },
+  "defaultInputModes": [
+    "text/plain",
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "application/json",
+    "text/markdown"
+  ],
+  "authentication": {
+    "type": "none"
+  },
+  "skills": [
+    {
+      "id": "list_categories",
+      "name": "Listar Categorias",
+      "description": "Lista todas as 10 categorias disponíveis com contagem de recursos.",
+      "tags": [
+        "categories",
+        "list",
+        "catalog"
+      ],
+      "examples": [
+        "Quais categorias existem?",
+        "Liste as categorias de recursos."
+      ]
+    },
+    {
+      "id": "filter_by_category",
+      "name": "Filtrar por Categoria",
+      "description": "Retorna recursos de uma ou mais categorias. Aceita nomes com ou sem acentos.",
+      "tags": [
+        "filter",
+        "category",
+        "resources"
+      ],
+      "examples": [
+        "Recursos de prompts de IA",
+        "Mostre componentes de UI"
+      ]
+    },
+    {
+      "id": "search_resources",
+      "name": "Buscar Recursos",
+      "description": "Busca por nome, descrição, categoria ou tags. Suporta filtros combinados.",
+      "tags": [
+        "search",
+        "query",
+        "resources"
+      ],
+      "examples": [
+        "Busque por tailwind",
+        "Recursos de animação com tag motion"
+      ]
+    },
+    {
+      "id": "get_resource_details",
+      "name": "Detalhes do Recurso",
+      "description": "Metadados completos e URL externa validada por ID ou nome.",
+      "tags": [
+        "details",
+        "resource",
+        "metadata"
+      ],
+      "examples": [
+        "Detalhes do getlayers",
+        "Informações sobre sceneai.art"
+      ]
+    }
+  ]
+}

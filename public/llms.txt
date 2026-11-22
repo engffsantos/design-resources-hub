@@ -1,0 +1,45 @@
+# Design Resources Hub
+
+Catálogo curado de recursos de design e desenvolvimento para agentes de IA e desenvolvedores.
+
+## Categorias (10)
+
+- [AI Prompts] (10) resource(s)
+- [Landing Pages] (8) resource(s)
+- [UI Components] (9) resource(s)
+- [Motion & Animation] (8) resource(s)
+- [Micro-interactions] (3) resource(s)
+- [Typography] (2) resource(s)
+- [UX Flows] (1) resource(s)
+- [Libraries & Tools] (24) resource(s)
+- [Security & Auth] (1) resource(s)
+- [Agent Skills] (18) resource(s)
+
+## Como consultar este hub
+
+- Página legível por agentes: /agents
+- Índice completo: /llms-full.txt
+- Agent Card (protocolo A2A): /.well-known/agent.json
+- Endpoint A2A (JSON-RPC 2.0): /api/a2a
+
+## Exemplos de consulta A2A
+
+### Listar categorias
+POST /api/a2a
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"type":"text","text":"list_categories"}]}},"id":1}
+
+### Filtrar por categoria
+POST /api/a2a
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"type":"text","text":"filter_by_category: components"}]}},"id":2}
+
+### Buscar recursos
+POST /api/a2a
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"type":"text","text":"search_resources: tailwind"}]}},"id":3}
+
+### Detalhes de um recurso
+POST /api/a2a
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"type":"text","text":"get_resource_details: getlayers"}]}},"id":4}
+
+## Modo de operação
+
+Somente leitura / consulta estruturada. Não executa ações externas.

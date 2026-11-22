@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /agents
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /.well-known/agent.json
+Allow: /.well-known/agent-card.json
+Allow: /api/a2a
+Disallow: /dist/
+Disallow: /src/
+Disallow: /scripts/
