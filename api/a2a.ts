@@ -157,7 +157,8 @@ function parseSearchInput(input: string): ParsedQuery {
     if (FILTER_BARE.test(token)) {
       const next = tokens[index + 1];
       if (next !== undefined && !FILTER_BARE.test(next) && !FILTER_INLINE.test(next)) {
-        applyFilter(token, next);
+        // Bare keys may carry a trailing ':' or '='; applyFilter expects the bare name.
+        applyFilter(token.replace(/[:=]$/, ''), next);
         index += 1;
         continue;
       }

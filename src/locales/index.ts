@@ -6,6 +6,7 @@ export type Locale = 'pt-BR' | 'en';
  */
 export const ptBR = {
   siteTitle: 'Strata',
+  heroTitle: 'Strata — Índice de Design & Agentes',
   headerTitle: 'Strata — Design & Agent Engineering Index',
   tagline: 'UI, motion, prompts, segurança e skills de agentes com curadoria — navegação rápida para pessoas e descoberta nativa para agentes de IA.',
   footerDescription: 'Recursos de design, bibliotecas de UI, prompts, ferramentas de segurança e skills de agentes para descoberta por humanos e IA.',
@@ -56,10 +57,13 @@ export const ptBR = {
   tracksTitle: 'Trilhas de descoberta',
   trackLabel: 'Trilha',
   filtersTitle: 'Filtros',
+  activeFilters: 'Filtros ativos',
+  removeFilter: 'Remover filtro {{label}}',
   price: 'Preço',
   allPrices: 'Todos os preços',
   openSource: 'Open source',
   free: 'Gratuito',
+  freeOpenSource: 'Grátis & Open source',
   freemium: 'Freemium',
   paid: 'Pago',
   unknownPrice: 'Não informado',
@@ -153,6 +157,7 @@ export type Dictionary = typeof ptBR;
 
 export const en: Dictionary = {
   siteTitle: 'Strata',
+  heroTitle: 'Strata — Design & Agent Index',
   headerTitle: 'Strata — Design & Agent Engineering Index',
   tagline: 'Vetted UI, motion, prompts, security and agent skills — built for fast browsing by humans and native discovery by AI agents.',
   footerDescription: 'Curated design resources, UI libraries, AI prompts, security tools and agent skills for human and machine discovery.',
@@ -203,10 +208,13 @@ export const en: Dictionary = {
   tracksTitle: 'Discovery tracks',
   trackLabel: 'Track',
   filtersTitle: 'Filters',
+  activeFilters: 'Active filters',
+  removeFilter: 'Remove filter {{label}}',
   price: 'Price',
   allPrices: 'All prices',
   openSource: 'Open source',
   free: 'Free',
+  freeOpenSource: 'Free & Open source',
   freemium: 'Freemium',
   paid: 'Paid',
   unknownPrice: 'Not specified',
