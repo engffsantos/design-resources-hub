@@ -47,7 +47,7 @@ export function App() {
               transition={{ duration: prefersReducedMotion ? 0 : 0.5 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-purple-600 bg-clip-text text-transparent"
             >
-              Design Recursos{' '}
+              Strata — Design{' '}
               <span className="relative">
                 Resources
                 <motion.span
@@ -110,7 +110,12 @@ export function App() {
                   </h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {featuredResources.map((resource, index) => (
-                      <ResourceCard key={resource.id} resource={resource} index={index} />
+                      <ResourceCard
+                        key={resource.id}
+                        resource={resource}
+                        index={index}
+                        disableStagger={featuredResources.length > 24}
+                      />
                     ))}
                   </div>
                 </motion.div>
@@ -140,7 +145,12 @@ export function App() {
                 {filteredResources.length > 0 ? (
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {filteredResources.map((resource, index) => (
-                      <ResourceCard key={resource.id} resource={resource} index={index} />
+                      <ResourceCard
+                        key={resource.id}
+                        resource={resource}
+                        index={index}
+                        disableStagger={filteredResources.length > 24}
+                      />
                     ))}
                   </div>
                 ) : (

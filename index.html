@@ -1,20 +1,62 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="text/markdown" href="/llms.txt" />
     <link rel="alternate" type="text/html" href="/agents" />
+    <link rel="alternate" type="application/json" href="/catalog.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Curated collection of the best design resources, UI components, AI prompts, and inspiration for modern web development." />
-    <meta name="theme-color" content="#0ea5e9" />
-    <title>Design Resources Hub — Curated Design & Dev Resources</title>
+    <meta name="description" content="Strata — Curated Design, UI & Agent Engineering Index" />
+    <meta name="theme-color" content="#09090B" />
+    <title>Strata — Curated Design, UI & Agent Engineering Index</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  </head>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Strata",
+  "url": "https://design-resources-hub.vercel.app",
+  "description": "Curated design resources, UI libraries, AI prompt packs, security tools and agent skills for fast human browsing and native AI agent discovery.",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://design-resources-hub.vercel.app/api/a2a?query={search_term_string}",
+      "actionPlatform": [
+        "http://schema.org/DesktopWebPlatform",
+        "http://schema.org/MobileWebPlatform"
+      ]
+    },
+    "query-input": "required name=search_term_string"
+  }
+}</script>
+</head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <!-- AGENT-NOSCRIPT:START -->
+<noscript>
+  <div style="padding:2rem;max-width:800px;margin:0 auto;font-family:system-ui,sans-serif;line-height:1.6">
+    <h1>Strata — Design & Agent Engineering Index</h1>
+    <p>Curated design resources, UI libraries, AI prompt packs, security tools and agent skills.</p>
+    <p><strong>219 resources</strong> across <strong>15 categories</strong>.</p>
+    <h2>Categories</h2>
+    <ul>
+      <li><a href="/agents#cat-ai-prompts">AI Prompts</a> (14)</li><li><a href="/agents#cat-landings">Landing Pages</a> (10)</li><li><a href="/agents#cat-components">UI Components</a> (13)</li><li><a href="/agents#cat-motion">Motion & Animation</a> (11)</li><li><a href="/agents#cat-micro-interactions">Micro-interactions</a> (4)</li><li><a href="/agents#cat-typography">Typography</a> (4)</li><li><a href="/agents#cat-ux-flows">UX Flows</a> (3)</li><li><a href="/agents#cat-libraries">Libraries & Tools</a> (28)</li><li><a href="/agents#cat-security">Security & Auth</a> (5)</li><li><a href="/agents#cat-agent-skills">Agent Skills</a> (22)</li><li><a href="/agents#cat-mcp-protocols">MCP & Protocols</a> (51)</li><li><a href="/agents#cat-agent-infra">Agent SDKs & Evals</a> (7)</li><li><a href="/agents#cat-icons-assets">Icons, Color & Assets</a> (4)</li><li><a href="/agents#cat-design-systems">Design Systems & A11y</a> (3)</li><li><a href="/agents#cat-agent-templates">Agent Templates</a> (40)</li>
+    </ul>
+    <h2>Agent Endpoints</h2>
+    <ul>
+      <li><a href="/.well-known/agent.json">Agent Card (A2A)</a></li>
+      <li><a href="/catalog.json">Catalog JSON (GET)</a></li>
+      <li><a href="/llms.txt">LLMs Index (Markdown)</a></li>
+      <li><a href="/llms-full.txt">LLMs Full (Markdown)</a></li>
+      <li><a href="/agents">Zero-JS Agent Page</a></li>
+    </ul>
+    <p style="color:#666;font-size:0.9rem">Enable JavaScript for the full interactive experience.</p>
+  </div>
+</noscript>
+<!-- AGENT-NOSCRIPT:END -->
   </body>
 </html>

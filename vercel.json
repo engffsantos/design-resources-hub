@@ -10,7 +10,7 @@
       "destination": "/agents/index.html"
     },
     {
-      "source": "/((?!api(?:/|$)|\\.well-known(?:/|$)|agents(?:/|$)|llms\\.txt$|llms-full\\.txt$|robots\\.txt$|assets(?:/|$)|favicon\\.svg$).*)",
+      "source": "/((?!api(?:/|$)|\\.well-known(?:/|$)|agents(?:/|$)|llms\\.txt$|llms-full\\.txt$|catalog\\.json$|robots\\.txt$|assets(?:/|$)|favicon\\.svg$).*)",
       "destination": "/index.html"
     }
   ],
@@ -98,6 +98,23 @@
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
+        }
+      ]
+    },
+    {
+      "source": "/catalog\\\\.json$",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/json; charset=utf-8"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, OPTIONS"
         }
       ]
     },

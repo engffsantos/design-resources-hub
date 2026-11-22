@@ -41,6 +41,12 @@ interface NormalizedResource {
   categoryLabel: string;
   tags: string[];
   featured: boolean;
+  resourceType: string;
+  whenToUse: string;
+  stack: string[];
+  pricing: string;
+  agentConsumable: boolean;
+  repoUrl?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -133,25 +139,90 @@ const dataPath = path.join(projectRoot, 'src/data/resources.ts');
 let resources: NormalizedResource[] = [];
 let categories: Category[] = [];
 
+function enrichResource(r: any, catLabel: string, catDesc: string): NormalizedResource {
+  const url: string = r.url || '';
+  const isGithub = url.includes('github.com/');
+  const repoUrl = (r.repoUrl || (isGithub ? (url.endsWith('/') ? url.slice(0, -1) : url) : undefined)) as string | undefined;
+  const resourceType = (r.resourceType || (r.category === 'agent-skills' ? 'agent-skill' : r.category === 'ai-prompts' ? 'prompt-pack' : r.category === 'security' ? 'tool' : r.category === 'libraries' ? 'library' : ['landings', 'typography', 'motion', 'micro-interactions', 'ux-flows'].includes(r.category) ? 'gallery' : 'docs') as string);
+  const agentConsumable = r.agentConsumable !== undefined ? r.agentConsumable : ['mcp-protocols', 'agent-templates', 'agent-infra', 'agent-skills', 'ai-prompts', 'security', 'libraries', 'components'].includes(r.category);
+  const pricing = (r.pricing || (r.category === 'agent-skills' || r.category === 'ai-prompts' || r.category === 'libraries' ? 'open-source' : 'free') as string);
+  const whenToUse = r.whenToUse || (catLabel ? `Curated ${catLabel.toLowerCase()} resource for design and AI builder workflows.` : `Design resource from the ${catLabel} category.`);
+  const stack = r.stack || ['design', 'engineering'].flatMap(s => [s]);
+  return { id: r.id, name: r.name, url, description: r.description, category: r.category, categoryLabel: catLabel, tags: r.tags || [], featured: r.featured ?? false, resourceType, whenToUse, stack, pricing, agentConsumable, repoUrl };
+}
+
 async function loadCatalog(): Promise<{ resources: NormalizedResource[]; categories: Category[] }> {
   if (resources.length > 0) return { resources, categories };
   const mod = await import('file://' + dataPath);
-  resources = (mod.resources || []).map((r: Resource) => ({
-    id: r.id,
-    name: r.name,
-    url: r.url,
-    description: r.description,
-    category: r.category,
-    categoryLabel: (mod.categories || []).find((c: Category) => c.id === r.category)?.label ?? r.category.replace('-', ' '),
-    tags: r.tags || [],
-    featured: r.featured ?? false,
-  }));
-  categories = mod.categories || [];
+  const catList = mod.categories || [];
+  resources = (mod.resources || []).map((r: any) => {
+    const catInfo = catList.find((c: Category) => c.id === r.category);
+    return enrichResource(r, catInfo?.label ?? r.category, catInfo?.description ?? '');
+  });
+  // Build categories array from distinct categories present in resources
+  const allCategoryIds = [...new Set(resources.map(r => r.category))];
+  categories = allCategoryIds.map(catId => {
+    const catInfo = catList.find((c: Category) => c.id === catId);
+    return { id: catId, label: catInfo?.label ?? catId, icon: catInfo?.icon ?? '', description: catInfo?.description ?? '' };
+  });
   return { resources, categories };
 }
 
 function normalize(text: string): string {
   return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+/** Maps natural-language MCP queries to the canonical subdomain tag. */
+const SEARCH_TAG_ALIASES: Record<string, string> = {
+  'free-mcp': 'free-mcp',
+  'free mcp': 'free-mcp',
+  'mcp free': 'free-mcp',
+  'mcp gratis': 'free-mcp',
+  'mcp gratuito': 'free-mcp',
+  'mcp gratuitos': 'free-mcp',
+  'mcp gratuita': 'free-mcp',
+  'mcp gratuitas': 'free-mcp',
+  'servidores mcp gratis': 'free-mcp',
+  'mcp database': 'mcp-database',
+  'mcp databases': 'mcp-database',
+  'mcp banco de dados': 'mcp-database',
+  'mcp design': 'mcp-design',
+  'mcp cloud': 'mcp-cloud',
+  'mcp nuvem': 'mcp-cloud',
+  'mcp coding': 'mcp-coding',
+  'mcp browser': 'mcp-browser',
+  'mcp automation': 'mcp-automation',
+  'mcp automacao': 'mcp-automation',
+  'mcp proxy': 'mcp-proxy',
+  // Agent templates: canonical tag + archetype + technology aliases
+  'agent-template': 'agent-template',
+  'agent templates': 'agent-template',
+  'template-starter': 'template-starter',
+  'template-research': 'template-research',
+  'template-multi-agent': 'template-multi-agent',
+  'template-coding': 'template-coding',
+  'template-browser': 'template-browser',
+  'template-voice': 'template-voice',
+  'template-ui': 'template-ui',
+  'template-local': 'template-local',
+  ollama: 'ollama',
+  langgraph: 'langgraph',
+  a2a: 'a2a',
+};
+
+const MAX_SEARCH_LIMIT = 60;
+
+/** Extracts the query and an optional `limit` (capped at 60) from a search instruction. */
+function parseSearchInput(text: string): { query: string; limit?: number } {
+  const cleaned = text.replace(/^(?:search_resources|buscar por|buscar|busque)\s*:?\s*/i, '').trim();
+  const limitMatch = cleaned.match(/\b(?:limite|limit)\s*[:=]?\s*(\d{1,3})\b/i);
+  let limit: number | undefined;
+  if (limitMatch) {
+    const parsed = Number(limitMatch[1]);
+    if (Number.isFinite(parsed) && parsed > 0) limit = Math.min(MAX_SEARCH_LIMIT, Math.floor(parsed));
+  }
+  const query = cleaned.replace(/\b(?:limite|limit)\s*[:=]?\s*\d{1,3}\b/i, '').trim();
+  return { query, limit };
 }
 
 function nowISO(): string {
@@ -216,15 +287,45 @@ async function handleListCategories(): Promise<{ markdown: string; data: unknown
     label: c.label,
     count: resources.filter((r: NormalizedResource) => r.category === c.id).length,
   }));
+  const freeMcpCount = resources.filter((r: NormalizedResource) => r.tags.includes('free-mcp')).length;
+  const agentTemplateCount = resources.filter((r: NormalizedResource) => r.tags.includes('agent-template')).length;
+  const archetypeTags = ['template-starter', 'template-research', 'template-multi-agent', 'template-coding', 'template-browser', 'template-voice', 'template-ui', 'template-local'];
   const markdown = `## Categorias Disponíveis (${categories.length})\n\n` +
-    result.map(c => `- **${c.label}** (${c.count} recurso${c.count !== 1 ? 's' : ''})`).join('\n');
-  return { markdown, data: result };
+    result.map(c => `- **${c.label}** (${c.count} recurso${c.count !== 1 ? 's' : ''})`).join('\n') +
+    `\n\n**${freeMcpCount} servidores MCP gratuitos/open-source** estão indexados (tag \`free-mcp\`). ` +
+    `Filtre com \`search_resources: free-mcp\` (até ${MAX_SEARCH_LIMIT} resultados).` +
+    `\n\n**${agentTemplateCount} templates de agentes prontos** estão indexados (tag \`agent-template\`). ` +
+    `Filtre com \`filter_by_category: agent-templates\` ou por arquétipo: \`${archetypeTags.join('`, `')}\`.`;
+  return {
+    markdown,
+    data: {
+      categories: result,
+      freeMcpCount,
+      freeMcpQuery: `search_resources: free-mcp`,
+      agentTemplateCount,
+      agentTemplatesQuery: `filter_by_category: agent-templates`,
+      archetypeTags,
+      maxSearchLimit: MAX_SEARCH_LIMIT,
+    },
+  };
 }
 
 async function handleFilterByCategory(names: string[]): Promise<{ markdown: string; data: unknown }> {
   await loadCatalog();
   const norm = names.map(normalize);
-  const matched = categories.filter((c) => norm.includes(normalize(c.id)) || norm.includes(normalize(c.label)));
+  const aliases: Record<string, string> = {
+    mcp: 'mcp-protocols', a2a: 'mcp-protocols', protocols: 'mcp-protocols', protocolos: 'mcp-protocols', 'llms.txt': 'mcp-protocols',
+    'agent-infra': 'agent-infra', sdks: 'agent-infra', evals: 'agent-infra', frameworks: 'agent-infra', observabilidade: 'agent-infra', sandbox: 'agent-infra',
+    icons: 'icons-assets', icones: 'icons-assets', colors: 'icons-assets', cores: 'icons-assets', svg: 'icons-assets', assets: 'icons-assets',
+    'design-systems': 'design-systems', tokens: 'design-systems', a11y: 'design-systems', acessibilidade: 'design-systems', headless: 'design-systems',
+    'agent-templates': 'agent-templates', templates: 'agent-templates', starters: 'agent-templates', boilerplates: 'agent-templates',
+    modelos: 'agent-templates', exemplos: 'agent-templates', 'voice-agents': 'agent-templates', 'deep-research': 'agent-templates',
+    'rag-templates': 'agent-templates', copilots: 'agent-templates',
+  };
+  const aliasedIds = new Set(norm.map((name) => aliases[name]).filter(Boolean));
+  const matched = categories.filter((c) =>
+    norm.includes(normalize(c.id)) || norm.includes(normalize(c.label)) || aliasedIds.has(c.id),
+  );
   if (matched.length === 0) {
     const available = categories.map(c => c.id).join(', ');
     return { markdown: `❌ Nenhuma categoria correspondente. Disponíveis: ${available}`, data: { error: 'Categoria não encontrada', available } };
@@ -235,15 +336,19 @@ async function handleFilterByCategory(names: string[]): Promise<{ markdown: stri
   return { markdown, data: filtered };
 }
 
-async function handleSearchResources(query: string, limit = 20): Promise<{ markdown: string; data: unknown }> {
+async function handleSearchResources(query: string, limit?: number): Promise<{ markdown: string; data: unknown }> {
   await loadCatalog();
   const q = normalize(query);
   if (!q) return { markdown: '❌ Query de busca não fornecida.', data: { error: 'Query vazia' } };
-  const results = resources.filter((r) =>
-    normalize(r.name).includes(q) || normalize(r.description).includes(q) ||
-    r.tags.some((t) => normalize(t).includes(q)) || normalize(r.category).includes(q)
-  ).slice(0, limit);
+  const aliasTag = SEARCH_TAG_ALIASES[q];
+  const effectiveLimit = Math.min(MAX_SEARCH_LIMIT, Math.max(1, limit ?? (aliasTag === 'free-mcp' ? MAX_SEARCH_LIMIT : 20)));
+  const results = resources.filter((r) => {
+    if (aliasTag) return r.tags.some((t) => normalize(t) === aliasTag);
+    return normalize(r.name).includes(q) || normalize(r.description).includes(q) ||
+      r.tags.some((t) => normalize(t).includes(q)) || normalize(r.category).includes(q);
+  }).slice(0, effectiveLimit);
   const markdown = `## Busca: "${query}" (${results.length} de ${resources.length})\n\n` +
+    (aliasTag ? `> Tag canônica: \`${aliasTag}\` · limite ${effectiveLimit}\n\n` : '') +
     results.map((r) => `- **${r.name}** [${r.category}] - ${r.url}\n  ${r.description}`).join('\n\n');
   return { markdown, data: results };
 }
@@ -299,14 +404,14 @@ async function dispatch(text: string): Promise<{ markdown: string; data: unknown
     lower.startsWith('search_resources') ||
     lower.startsWith('buscar ') ||
     lower.startsWith('busque ') ||
-    lower.includes('buscar por ')
+    lower.includes('buscar por ') ||
+    lower.includes('mcp gratis') || lower.includes('mcp grátis') ||
+    lower.includes('mcp gratuito') || lower.includes('mcp gratuitos') ||
+    lower === 'free-mcp' || lower === 'free mcp' ||
+    lower === 'agent-template' || lower.startsWith('template-')
   ) {
-    let q = '';
-    if (lower.includes(':')) q = text.split(':')[1].trim();
-    else if (lower.startsWith('buscar ')) q = text.slice(7).trim();
-    else if (lower.startsWith('busque ')) q = text.slice(7).trim();
-    else if (lower.includes('buscar por ')) q = text.slice(text.toLowerCase().indexOf('buscar por ') + 11).trim();
-    return handleSearchResources(q);
+    const { query, limit } = parseSearchInput(text);
+    return handleSearchResources(query, limit);
   }
 
   // get_resource_details

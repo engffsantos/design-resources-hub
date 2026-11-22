@@ -1,10 +1,10 @@
 {
-  "name": "Hub de Recursos de Design — Agent",
-  "description": "Catálogo curado de recursos de design e desenvolvimento. Suporta consulta estruturada: listagem de categorias, filtros por categoria, busca por nome/descrição/tags e detalhes de recurso individual.",
+  "name": "Strata — Design & Agent Engineering Index",
+  "description": "Curated design resources, UI libraries, AI prompt packs, security tools and agent skills for fast human browsing and native AI agent discovery.",
   "url": "https://design-resources-hub.vercel.app/api/a2a",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "provider": {
-    "name": "Design Resources Hub",
+    "name": "Strata",
     "url": "https://design-resources-hub.vercel.app"
   },
   "capabilities": {
@@ -25,58 +25,67 @@
   "skills": [
     {
       "id": "list_categories",
-      "name": "Listar Categorias",
-      "description": "Lista todas as 10 categorias disponíveis com contagem de recursos.",
+      "name": "List Categories",
+      "description": "Lists all available design and agent categories with resource counts.",
       "tags": [
         "categories",
         "list",
         "catalog"
       ],
       "examples": [
-        "Quais categorias existem?",
-        "Liste as categorias de recursos."
+        "What categories exist?",
+        "List categories"
       ]
     },
     {
       "id": "filter_by_category",
-      "name": "Filtrar por Categoria",
-      "description": "Retorna recursos de uma ou mais categorias. Aceita nomes com ou sem acentos.",
+      "name": "Filter by Category",
+      "description": "Returns resources for one or more categories, including agent-templates (deployable starter kits).",
       "tags": [
         "filter",
         "category",
-        "resources"
+        "resources",
+        "agent-templates"
       ],
       "examples": [
-        "Recursos de prompts de IA",
-        "Mostre componentes de UI"
+        "Show components for React",
+        "Filter by mcp-protocols",
+        "Filter by agent-infra",
+        "filter_by_category: agent-templates"
       ]
     },
     {
       "id": "search_resources",
-      "name": "Buscar Recursos",
-      "description": "Busca por nome, descrição, categoria ou tags. Suporta filtros combinados.",
+      "name": "Search Resources",
+      "description": "Searches by name, description, tags or category. Supports free-mcp, mcp-{database,design,cloud,coding,browser,automation} and agent-template archetype aliases (template-starter, template-research, template-multi-agent, template-coding, template-browser, template-voice, template-ui, template-local) with a limit of up to 60.",
       "tags": [
         "search",
         "query",
-        "resources"
+        "resources",
+        "free-mcp",
+        "agent-template"
       ],
       "examples": [
-        "Busque por tailwind",
-        "Recursos de animação com tag motion"
+        "Search tailwind",
+        "Find prompt packs",
+        "search_resources: free-mcp",
+        "search_resources: mcp database limit: 60",
+        "search_resources: template-voice",
+        "search_resources: agent-template limit: 60"
       ]
     },
     {
       "id": "get_resource_details",
-      "name": "Detalhes do Recurso",
-      "description": "Metadados completos e URL externa validada por ID ou nome.",
+      "name": "Get Resource Details",
+      "description": "Returns full metadata for one resource by id or name.",
       "tags": [
         "details",
         "resource",
         "metadata"
       ],
       "examples": [
-        "Detalhes do getlayers",
-        "Informações sobre sceneai.art"
+        "Get details for getlayers",
+        "Tell me about sceneai.art"
       ]
     }
   ]

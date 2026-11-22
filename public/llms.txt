@@ -1,45 +1,94 @@
-# Design Resources Hub
+# Strata — Design & Agent Engineering Index
 
-Catálogo curado de recursos de design e desenvolvimento para agentes de IA e desenvolvedores.
+Curated design resources, UI libraries, AI prompt packs, security tools and agent skills for fast human browsing and native AI agent discovery.
 
-## Categorias (10)
+## Free MCP servers
 
-- [AI Prompts] (10) resource(s)
-- [Landing Pages] (8) resource(s)
-- [UI Components] (9) resource(s)
-- [Motion & Animation] (8) resource(s)
-- [Micro-interactions] (3) resource(s)
-- [Typography] (2) resource(s)
-- [UX Flows] (1) resource(s)
-- [Libraries & Tools] (24) resource(s)
-- [Security & Auth] (1) resource(s)
-- [Agent Skills] (23) resource(s)
+**43 free/open-source MCP servers** are indexed with the `free-mcp` tag. Filter them through the A2A endpoint with `search_resources: free-mcp` (add `limit: 60` to retrieve all). Subdomain queries: `mcp database`, `mcp design`, `mcp cloud`, `mcp coding`, `mcp browser`, `mcp automation`, `mcp proxy`.
 
-## Como consultar este hub
+## Agent Templates (priority: directly actionable)
 
-- Página legível por agentes: /agents
-- Índice completo: /llms-full.txt
-- Agent Card (protocolo A2A): /.well-known/agent.json
-- Endpoint A2A (JSON-RPC 2.0): /api/a2a
+**40 deployable agent templates** are indexed with the `agent-template` tag in the `agent-templates` category. Retrieve all with `filter_by_category: agent-templates` or `search_resources: agent-template limit: 60`. Filter precisely by archetype tag: `template-starter` (12), `template-research` (8), `template-multi-agent` (10), `template-coding` (5), `template-browser` (2), `template-voice` (3), `template-ui` (9), `template-local` (7). Aliases for `filter_by_category`: `templates`, `starters`, `boilerplates`, `modelos`, `exemplos`, `voice-agents`, `deep-research`, `rag-templates`, `copilots`.
 
-## Exemplos de consulta A2A
+## Categories (15)
 
-### Listar categorias
+- [AI Prompts] (14) resource(s)
+- [Landing Pages] (10) resource(s)
+- [UI Components] (13) resource(s)
+- [Motion & Animation] (11) resource(s)
+- [Micro-interactions] (4) resource(s)
+- [Typography] (4) resource(s)
+- [UX Flows] (3) resource(s)
+- [Libraries & Tools] (28) resource(s)
+- [Security & Auth] (5) resource(s)
+- [Agent Skills] (22) resource(s)
+- [MCP & Protocols] (51) resource(s)
+- [Agent SDKs & Evals] (7) resource(s)
+- [Icons, Color & Assets] (4) resource(s)
+- [Design Systems & A11y] (3) resource(s)
+- [Agent Templates] (40) resource(s)
+
+## How AI Agents Should Use Strata
+
+### Actionable categories (directly consumable by agents)
+- **MCP & Protocols** (51) — mcp-protocols
+- **Agent Templates** (40) — agent-templates
+- **Agent SDKs & Evals** (7) — agent-infra
+- **Agent Skills** (22) — agent-skills
+- **AI Prompts** (14) — ai-prompts
+- **UI Components** (13) — components
+- **Libraries & Tools** (28) — libraries
+- **Security & Auth** (5) — security
+- **Motion & Animation** (11) — motion
+- **Micro-interactions** (4) — micro-interactions
+- **UX Flows** (3) — ux-flows
+- **Icons, Color & Assets** (4) — icons-assets
+- **Design Systems & A11y** (3) — design-systems
+
+### Visual reference categories (inspiration only)
+- **UI Components** (13) — components
+- **Landing Pages** (10) — landings
+- **Motion & Animation** (11) — motion
+- **Micro-interactions** (4) — micro-interactions
+- **Typography** (4) — typography
+- **UX Flows** (3) — ux-flows
+- **Icons, Color & Assets** (4) — icons-assets
+- **Design Systems & A11y** (3) — design-systems
+
+### Endpoint selection guide
+1. **/llms.txt** — This index (concise, machine-readable)
+2. **/llms-full.txt** — Complete Markdown dump of all 219 resources
+3. **/catalog.json** — Complete JSON via GET (structured, no POST needed)
+4. **/api/a2a** — JSON-RPC 2.0 / A2A for filtered queries (list, filter, search, details)
+
+## A2A Examples
+
+### List categories
 POST /api/a2a
-{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"type":"text","text":"list_categories"}]}},"id":1}
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"kind":"text","text":"list_categories"}]}},"id":1}
 
-### Filtrar por categoria
+### Filter by category
 POST /api/a2a
-{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"type":"text","text":"filter_by_category: components"}]}},"id":2}
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"kind":"text","text":"filter_by_category: components"}]}},"id":2}
 
-### Buscar recursos
+### Filter all agent templates by archetype
 POST /api/a2a
-{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"type":"text","text":"search_resources: tailwind"}]}},"id":3}
-
-### Detalhes de um recurso
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"kind":"text","text":"filter_by_category: agent-templates"}]}},"id":6}
 POST /api/a2a
-{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"type":"text","text":"get_resource_details: getlayers"}]}},"id":4}
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"kind":"text","text":"search_resources: template-voice"}]}},"id":7}
 
-## Modo de operação
+### Search resources
+POST /api/a2a
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"kind":"text","text":"search_resources: tailwind"}]}},"id":3}
 
-Somente leitura / consulta estruturada. Não executa ações externas.
+### Search all free MCP servers
+POST /api/a2a
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"kind":"text","text":"search_resources: free-mcp limit: 60"}]}},"id":5}
+
+### Get resource details
+POST /api/a2a
+{"jsonrpc":"2.0","method":"message/send","params":{"message":{"role":"user","parts":[{"kind":"text","text":"get_resource_details: getlayers"}]}},"id":4}
+
+## Operating mode
+
+Read-only / structured query. No external actions executed.

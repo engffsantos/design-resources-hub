@@ -12,9 +12,10 @@ import { useReducedMotion } from '@/hooks';
 interface ResourceCardProps {
   resource: Resource;
   index: number;
+  disableStagger?: boolean;
 }
 
-export function ResourceCard({ resource, index }: ResourceCardProps) {
+export function ResourceCard({ resource, index, disableStagger = false }: ResourceCardProps) {
   const prefersReducedMotion = useReducedMotion();
 
   const containerVariants = {
@@ -24,7 +25,7 @@ export function ResourceCard({ resource, index }: ResourceCardProps) {
       y: 0,
       transition: {
         duration: prefersReducedMotion ? 0 : 0.5,
-        delay: prefersReducedMotion ? 0 : index * 0.05,
+        delay: prefersReducedMotion || disableStagger ? 0 : index * 0.05,
         ease: 'easeOut',
       },
     },

@@ -52,7 +52,7 @@ export function SearchBar({ value, onChange, placeholder = ptBR.searchPlaceholde
           onBlur={() => setIsFocused(false)}
           placeholder={placeholder}
           className="pl-10 pr-10 bg-white/50 dark:bg-dark-800/50 backdrop-blur-sm border-border/50 focus:border-primary/50 focus:ring-primary/20"
-          aria-label="Buscar recursos"
+          aria-label="Search resources"
           autoComplete="off"
         />
         {localValue && (
@@ -61,7 +61,7 @@ export function SearchBar({ value, onChange, placeholder = ptBR.searchPlaceholde
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="absolute right-3 h-5 w-5 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors rounded"
-            aria-label="Limpar busca"
+            aria-label="Clear search"
           >
             <X className="h-4 w-4" />
           </motion.button>

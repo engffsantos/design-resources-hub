@@ -41,3 +41,6 @@ coverage/
 # Vite
 .vite/
 .vercel
+
+# Agent orchestration artifacts
+.maestri/

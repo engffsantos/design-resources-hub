@@ -48,7 +48,7 @@ export function Header() {
           >
             <Sparkles className="h-8 w-8 text-primary" aria-hidden="true" />
             <span className="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-              Hub de Recursos de Design
+              Strata — Design Resources
             </span>
           </motion.div>
 

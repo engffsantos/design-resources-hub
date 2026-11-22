@@ -8,3 +8,5 @@ Allow: /api/a2a
 Disallow: /dist/
 Disallow: /src/
 Disallow: /scripts/
+
+Allow: /catalog.json
