@@ -1,6 +1,6 @@
 # Design Resources Hub - Catálogo Completo
 
-Total de recursos: 84
+Total de recursos: 89
 Categorias: 10
 Gerado em build-time a partir de src/data/resources.ts
 
@@ -560,7 +560,7 @@ Gerado em build-time a partir de src/data/resources.ts
   - Descrição: v2.1.3 — 92-rule security scanner for Next.js, Supabase RLS, Stripe webhooks & SKILL.md poisoning. Security scanner & MCP guard for AI-generated codebases. 92 detection signatures (secrets, auth, DB/RLS, SQLi, XSS, SSRF, path traversal, agent-skill poisoning, webhook verification). Grades F–A+, SARIF + GitHub annotations, CI gate. Zero deps, offline, scans itself 100/100 A+. MCP server + Agent Skill for Claude Code, Cursor, Codex.
 
 
-## Agent Skills (18)
+## Agent Skills (23)
 
 - **skills (iberick/ui-skills)**
   - URL: https://github.com/ibelick/ui-skills
@@ -665,6 +665,46 @@ Gerado em build-time a partir de src/data/resources.ts
   - Tags: agent-skill, blender, python, geometry-nodes, shaders, rigging, cycles, eevee, usd, gltf, 3d, procedural
   - Destacado: Sim
   - Descrição: Blender workflows for agents. Teaches agents to script Blender with Python: procedural modeling, geometry nodes, shader graphs, animation rigging, render pipelines (Cycles/Eevee), USD/GLTF export. Enables AI-driven 3D content creation.
+
+- **Sprite Stacking**
+  - URL: https://github.com/danielwh2/sprite-stacking
+  - ID: sprite-stacking
+  - Categoria: Agent Skills
+  - Tags: agent-skill, pixel-art, sprite, 3d, fake-3d, games, retro, sprite-stacking
+  - Destacado: Sim
+  - Descrição: Give it four pixel art views and it builds a fake-3D sprite you can spin. Pixel art to 3D sprite conversion for games and interactive UI.
+
+- **NestJS Agent Skills**
+  - URL: https://github.com/nestjs/agent-skills
+  - ID: nestjs-agent-skills
+  - Categoria: Agent Skills
+  - Tags: agent-skill, nestjs, nodejs, backend, api, typescript, official, testing
+  - Destacado: Sim
+  - Descrição: Official NestJS skills that teach Claude the current NestJS APIs plus the mistakes that still pass your tests. Official NestJS agent skills for API development.
+
+- **UI Diff**
+  - URL: https://github.com/imuratalpay/ui-diff
+  - ID: ui-diff
+  - Categoria: Agent Skills
+  - Tags: agent-skill, visual-diff, ui-testing, regression, components, design-system
+  - Destacado: Sim
+  - Descrição: Visual diff tool for UI components. Compare and detect visual regressions in component libraries and design systems.
+
+- **Papercraft**
+  - URL: https://github.com/xikhar/papercraft
+  - ID: papercraft
+  - Categoria: Agent Skills
+  - Tags: agent-skill, papercraft, origami, 3d-to-2d, printable, paper-models, craft
+  - Destacado: Sim
+  - Descrição: Paper craft and origami design tool. Generate printable paper models and 3D paper crafts from 3D models.
+
+- **Skill Audit**
+  - URL: https://github.com/DebugDyanmo/skillaudit
+  - ID: skill-audit
+  - Categoria: Agent Skills
+  - Tags: agent-skill, audit, validation, security, quality, skill-audit, compliance
+  - Destacado: Sim
+  - Descrição: Audit and analyze Claude skills for quality, security, and best practices. Validates skill structure, metadata, and compliance.
 
 - **Claude-BugHunter (elementalsouls/claude-bughunter)**
   - URL: https://github.com/elementalsouls/claude-bughunter
