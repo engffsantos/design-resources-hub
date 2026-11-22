@@ -1,5 +1,6 @@
 // @vitest-environment node
 import { build } from 'esbuild';
+import { readFileSync } from 'node:fs';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -154,6 +155,17 @@ describe('A2A serverless bundle (production-equivalent)', () => {
   it('contains no runtime file:// import of TypeScript source', () => {
     expect(bundle).not.toContain('file://');
     expect(bundle).not.toContain('import(');
+  });
+
+  it('uses explicit .js extensions on relative imports for the Vercel ESM runtime', () => {
+    const sources = ['api/a2a.ts', 'src/lib/catalog.ts'].map((file) =>
+      readFileSync(path.resolve(process.cwd(), file), 'utf-8'),
+    );
+    for (const source of sources) {
+      const imports = source.match(/from\s+['"]\.\.?\/[^'"]+['"]/g) ?? [];
+      expect(imports.length).toBeGreaterThan(0);
+      for (const statement of imports) expect(statement).toMatch(/\.js['"]$/);
+    }
   });
 
   it('answers all four skills from a standalone bundle', async () => {

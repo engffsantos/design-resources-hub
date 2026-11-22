@@ -1,7 +1,7 @@
 {
   "brand": "Strata",
   "version": "1.2.0",
-  "updatedAt": "2026-11-22T21:26:48.204Z",
+  "updatedAt": "2026-11-22T21:48:22.264Z",
   "siteUrl": "https://design-resources-hub.vercel.app",
   "endpoints": {
     "/": "https://design-resources-hub.vercel.app/?q={query}",

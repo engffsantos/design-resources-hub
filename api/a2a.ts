@@ -20,8 +20,8 @@ import {
   type Pricing,
   type SortId,
   type TrackId,
-} from '../src/lib/catalog';
-import type { Category } from '../src/data/resources';
+} from '../src/lib/catalog.js';
+import type { Category } from '../src/data/resources.js';
 
 // ---------------------------------------------------------------------------
 // A2A / JSON-RPC types

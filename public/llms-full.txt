@@ -4,7 +4,7 @@ Total resources: 219
 Categories: 15
 Tracks: 3
 Generated at build-time from src/data/resources.ts
-Updated: 2026-11-22T21:26:48.204Z
+Updated: 2026-11-22T21:48:22.264Z
 
 Metadata rule: declared values are preserved; absent values are printed as "Not specified". No category-based fallback is applied.
 

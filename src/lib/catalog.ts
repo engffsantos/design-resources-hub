@@ -9,7 +9,7 @@ import {
   categories as rawCategories,
   type Category,
   type Resource,
-} from '../data/resources';
+} from '../data/resources.js';
 
 export type TrackId = 'design-ui' | 'ai-agents' | 'dev-tools';
 export type Pricing = 'open-source' | 'free' | 'freemium' | 'paid';
