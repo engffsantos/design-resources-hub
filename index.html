@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -8,31 +8,51 @@
     <link rel="alternate" type="application/json" href="/catalog.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Strata — Curated Design, UI & Agent Engineering Index" />
+    <meta name="color-scheme" content="dark light" />
     <meta name="theme-color" content="#09090B" />
     <title>Strata — Curated Design, UI & Agent Engineering Index</title>
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('strata-theme');
+          var mode = raw ? JSON.parse(raw) : null;
+          var dark = mode === 'dark' || ((mode === 'system' || !mode) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+          document.documentElement.classList.toggle('dark', dark);
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (_error) {
+          /* Theme falls back to the CSS default. */
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <script type="application/ld+json">{
+  <!-- AGENT-JSONLD:START -->
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Strata",
   "url": "https://design-resources-hub.vercel.app",
+  "inLanguage": [
+    "pt-BR",
+    "en"
+  ],
   "description": "Curated design resources, UI libraries, AI prompt packs, security tools and agent skills for fast human browsing and native AI agent discovery.",
   "potentialAction": {
     "@type": "SearchAction",
     "target": {
       "@type": "EntryPoint",
-      "urlTemplate": "https://design-resources-hub.vercel.app/api/a2a?query={search_term_string}",
+      "urlTemplate": "https://design-resources-hub.vercel.app/?q={search_term_string}",
       "actionPlatform": [
-        "http://schema.org/DesktopWebPlatform",
-        "http://schema.org/MobileWebPlatform"
+        "https://schema.org/DesktopWebPlatform",
+        "https://schema.org/MobileWebPlatform"
       ]
     },
     "query-input": "required name=search_term_string"
   }
 }</script>
-</head>
+<!-- AGENT-JSONLD:END -->
+  </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
@@ -41,20 +61,16 @@
   <div style="padding:2rem;max-width:800px;margin:0 auto;font-family:system-ui,sans-serif;line-height:1.6">
     <h1>Strata — Design & Agent Engineering Index</h1>
     <p>Curated design resources, UI libraries, AI prompt packs, security tools and agent skills.</p>
-    <p><strong>219 resources</strong> across <strong>15 categories</strong>.</p>
-    <h2>Categories</h2>
+    <p><strong>219 resources</strong> across <strong>15 categories</strong> in <strong>3 tracks</strong>.</p>
+    <h2>Explore without JavaScript</h2>
     <ul>
-      <li><a href="/agents#cat-ai-prompts">AI Prompts</a> (14)</li><li><a href="/agents#cat-landings">Landing Pages</a> (10)</li><li><a href="/agents#cat-components">UI Components</a> (13)</li><li><a href="/agents#cat-motion">Motion & Animation</a> (11)</li><li><a href="/agents#cat-micro-interactions">Micro-interactions</a> (4)</li><li><a href="/agents#cat-typography">Typography</a> (4)</li><li><a href="/agents#cat-ux-flows">UX Flows</a> (3)</li><li><a href="/agents#cat-libraries">Libraries & Tools</a> (28)</li><li><a href="/agents#cat-security">Security & Auth</a> (5)</li><li><a href="/agents#cat-agent-skills">Agent Skills</a> (22)</li><li><a href="/agents#cat-mcp-protocols">MCP & Protocols</a> (51)</li><li><a href="/agents#cat-agent-infra">Agent SDKs & Evals</a> (7)</li><li><a href="/agents#cat-icons-assets">Icons, Color & Assets</a> (4)</li><li><a href="/agents#cat-design-systems">Design Systems & A11y</a> (3)</li><li><a href="/agents#cat-agent-templates">Agent Templates</a> (40)</li>
+      <li><a href="/agents">Zero-JS agent catalog</a></li>
+      <li><a href="/catalog.json">Structured catalog (JSON)</a></li>
+      <li><a href="/llms.txt">LLMs index (Markdown)</a></li>
+      <li><a href="/llms-full.txt">Complete catalog (Markdown)</a></li>
+      <li><a href="/.well-known/agent.json">A2A agent card</a></li>
     </ul>
-    <h2>Agent Endpoints</h2>
-    <ul>
-      <li><a href="/.well-known/agent.json">Agent Card (A2A)</a></li>
-      <li><a href="/catalog.json">Catalog JSON (GET)</a></li>
-      <li><a href="/llms.txt">LLMs Index (Markdown)</a></li>
-      <li><a href="/llms-full.txt">LLMs Full (Markdown)</a></li>
-      <li><a href="/agents">Zero-JS Agent Page</a></li>
-    </ul>
-    <p style="color:#666;font-size:0.9rem">Enable JavaScript for the full interactive experience.</p>
+    <p style="color:#374151;font-size:0.9rem">Metadata is declared or unknown — never inferred.</p>
   </div>
 </noscript>
 <!-- AGENT-NOSCRIPT:END -->

@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: Lint, test, typecheck and build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit and integration tests
+        run: npm run test:run
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build with agent-layer codegen
+        run: npm run build
+        env:
+          SITE_URL: https://design-resources-hub.vercel.app
+
+      - name: Whitespace check
+        run: git diff --check
+
+      - name: Deprecated Tailwind classes
+        run: |
+          if rg -n 'bg-dark-|border-dark-' src/; then
+            echo 'Deprecated dark-* color scale is still in use.' >&2
+            exit 1
+          fi
+
+      - name: Hover-only actions
+        run: |
+          if rg -n 'opacity-0.*group-hover' src/components/; then
+            echo 'Actions must remain visible without hover.' >&2
+            exit 1
+          fi
