@@ -1,8 +1,8 @@
 {
   "name": "Strata — Design & Agent Engineering Index",
-  "description": "Curated design resources, UI libraries, AI prompt packs, security tools and agent skills for fast human browsing and native AI agent discovery.",
+  "description": "Curated design resources, UI libraries, AI prompt packs, security tools and agent skills for fast human browsing and native AI agent discovery. Unknown metadata is reported as unknown.",
   "url": "https://design-resources-hub.vercel.app/api/a2a",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "provider": {
     "name": "Strata",
     "url": "https://design-resources-hub.vercel.app"
@@ -26,7 +26,7 @@
     {
       "id": "list_categories",
       "name": "List Categories",
-      "description": "Lists all available design and agent categories with resource counts.",
+      "description": "Lists all categories and tracks with resource counts and metadata-governance summary.",
       "tags": [
         "categories",
         "list",
@@ -40,7 +40,7 @@
     {
       "id": "filter_by_category",
       "name": "Filter by Category",
-      "description": "Returns resources for one or more categories, including agent-templates (deployable starter kits).",
+      "description": "Returns resources for one or more categories or a full discovery track.",
       "tags": [
         "filter",
         "category",
@@ -49,15 +49,14 @@
       ],
       "examples": [
         "Show components for React",
-        "Filter by mcp-protocols",
-        "Filter by agent-infra",
-        "filter_by_category: agent-templates"
+        "filter_by_category: agent-templates",
+        "filter_by_category: design-ui"
       ]
     },
     {
       "id": "search_resources",
       "name": "Search Resources",
-      "description": "Searches by name, description, tags or category. Supports free-mcp, mcp-{database,design,cloud,coding,browser,automation} and agent-template archetype aliases (template-starter, template-research, template-multi-agent, template-coding, template-browser, template-voice, template-ui, template-local) with a limit of up to 60.",
+      "description": "Weighted search over name, tags, stack, purpose and description. Supports free-mcp, archetype tags, pricing/track/type filters and limit up to 60.",
       "tags": [
         "search",
         "query",
@@ -67,17 +66,16 @@
       ],
       "examples": [
         "Search tailwind",
-        "Find prompt packs",
         "search_resources: free-mcp",
         "search_resources: mcp database limit: 60",
         "search_resources: template-voice",
-        "search_resources: agent-template limit: 60"
+        "search_resources: pricing: open-source track: ai-agents"
       ]
     },
     {
       "id": "get_resource_details",
       "name": "Get Resource Details",
-      "description": "Returns full metadata for one resource by id or name.",
+      "description": "Returns full declared metadata and provenance for one resource by id or name.",
       "tags": [
         "details",
         "resource",
@@ -85,7 +83,7 @@
       ],
       "examples": [
         "Get details for getlayers",
-        "Tell me about sceneai.art"
+        "get_resource_details: mcp-reference-servers"
       ]
     }
   ]

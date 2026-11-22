@@ -1,8 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+const withAlpha = (variable) => `rgb(var(${variable}) / <alpha-value>)`;
+
 export default {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './index.html',
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'class',
   theme: {
@@ -12,40 +14,43 @@ export default {
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {
-        background: '#09090B',
-        foreground: '#FAFAFA',
+        background: withAlpha('--color-background'),
+        foreground: withAlpha('--color-foreground'),
         card: {
-          DEFAULT: '#111113',
-          foreground: '#FAFAFA',
+          DEFAULT: withAlpha('--color-card'),
+          foreground: withAlpha('--color-card-foreground'),
         },
         muted: {
-          DEFAULT: '#16161A',
-          foreground: '#A1A1AA',
+          DEFAULT: withAlpha('--color-muted'),
+          foreground: withAlpha('--color-muted-foreground'),
         },
         primary: {
-          DEFAULT: '#10B981',
-          foreground: '#09090B',
+          DEFAULT: withAlpha('--color-primary'),
+          foreground: withAlpha('--color-primary-foreground'),
         },
         secondary: {
-          DEFAULT: '#1E1E22',
-          foreground: '#FAFAFA',
+          DEFAULT: withAlpha('--color-secondary'),
+          foreground: withAlpha('--color-secondary-foreground'),
         },
         accent: {
-          DEFAULT: '#2A2A2E',
-          foreground: '#FAFAFA',
+          DEFAULT: withAlpha('--color-accent'),
+          foreground: withAlpha('--color-accent-foreground'),
         },
-        border: '#26262B',
-        input: '#26262B',
-        ring: '#10B981',
+        border: withAlpha('--color-border'),
+        input: withAlpha('--color-input'),
+        ring: withAlpha('--color-ring'),
         destructive: {
-          DEFAULT: '#EF4444',
-          foreground: '#FAFAFA',
+          DEFAULT: withAlpha('--color-destructive'),
+          foreground: withAlpha('--color-destructive-foreground'),
         },
-        backgroundLight: '#FAFAFA',
-        foregroundLight: '#09090B',
-        cardLight: '#FFFFFF',
-        mutedLight: '#F4F4F5',
-        borderLight: '#E4E4E7',
+        success: {
+          DEFAULT: withAlpha('--color-success'),
+          foreground: withAlpha('--color-success-foreground'),
+        },
+        warning: {
+          DEFAULT: withAlpha('--color-warning'),
+          foreground: withAlpha('--color-warning-foreground'),
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -72,4 +77,4 @@ export default {
     },
   },
   plugins: [],
-}
+};

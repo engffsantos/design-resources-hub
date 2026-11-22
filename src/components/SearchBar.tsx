@@ -1,11 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Search, X } from 'lucide-react';
-import { useState, useCallback } from 'react';
+import { useId } from 'react';
 import { Input } from '@/components/ui/Input';
-import { cn } from '@/lib/utils';
-import { ptBR } from '@/locales/pt-BR';
+import { useI18n } from '@/context/I18nContext';
+import { interpolate } from '@/locales';
 
 interface SearchBarProps {
   value: string;
@@ -14,68 +13,48 @@ interface SearchBarProps {
   resultCount?: number;
 }
 
-export function SearchBar({ value, onChange, placeholder = ptBR.searchPlaceholder, resultCount }: SearchBarProps) {
-  const [localValue, setLocalValue] = useState(value);
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setLocalValue(newValue);
-    onChange(newValue);
-  }, [onChange]);
-
-  const handleClear = useCallback(() => {
-    setLocalValue('');
-    onChange('');
-  }, [onChange]);
+export function SearchBar({ value, onChange, placeholder, resultCount }: SearchBarProps) {
+  const { t } = useI18n();
+  const inputId = useId();
 
   return (
-    <div className="relative w-full max-w-xl">
-      <div
-        className={cn(
-          'relative flex items-center transition-all duration-200',
-          isFocused ? 'scale-[1.02]' : ''
-        )}
-      >
-        <Search
-          className={cn(
-            'absolute left-4 h-5 w-5 transition-colors duration-200 pointer-events-none',
-            isFocused || localValue ? 'text-primary' : 'text-muted-foreground'
-          )}
-          aria-hidden="true"
-        />
+    <form role="search" onSubmit={(event) => event.preventDefault()} className="w-full max-w-xl">
+      <label className="sr-only" htmlFor={inputId}>
+        {t.searchLabel}
+      </label>
+      <div className="relative flex items-center">
+        <Search className="pointer-events-none absolute left-3 h-5 w-5 text-muted-foreground" aria-hidden="true" />
         <Input
+          id={inputId}
           type="search"
-          value={localValue}
-          onChange={handleChange}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          placeholder={placeholder}
-          className="pl-10 pr-10 bg-white/50 dark:bg-dark-800/50 backdrop-blur-sm border-border/50 focus:border-primary/50 focus:ring-primary/20"
-          aria-label="Search resources"
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder={placeholder ?? t.searchPlaceholder}
           autoComplete="off"
+          className="border-border bg-card/80 pl-10 pr-10 backdrop-blur-sm"
         />
-        {localValue && (
-          <motion.button
-            onClick={handleClear}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="absolute right-3 h-5 w-5 flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors rounded"
-            aria-label="Clear search"
+        {value.length > 0 && (
+          <button
+            type="button"
+            onClick={() => onChange('')}
+            aria-label={t.clearSearch}
+            className="absolute right-2 inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground"
           >
-            <X className="h-4 w-4" />
-          </motion.button>
+            <X className="h-4 w-4" aria-hidden="true" />
+          </button>
         )}
       </div>
       {resultCount !== undefined && (
-        <motion.p
-          initial={{ opacity: 0, y: -5 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-2 text-sm text-muted-foreground text-right"
-        >
-          {resultCount} {resultCount === 1 ? ptBR.resource : ptBR.resources} {ptBR.found}
-        </motion.p>
+        <p className="mt-2 text-right text-sm text-muted-foreground" aria-live="polite">
+          {interpolate(t.showingRange, {
+            from: resultCount === 0 ? 0 : 1,
+            to: resultCount,
+            total: resultCount,
+          })}
+          {' · '}
+          {interpolate(t.resourcesCount, { count: resultCount })}
+        </p>
       )}
-    </div>
+    </form>
   );
 }

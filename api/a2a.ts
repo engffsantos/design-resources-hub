@@ -1,90 +1,38 @@
 /**
- * Vercel Serverless Function - A2A Endpoint (Hardened)
- * ----------------------------------------------------
- * Protocolo A2A (Agent2Agent) com JSON-RPC 2.0
- * 4 skills somente leitura: list_categories, filter_by_category, search_resources, get_resource_details
- * Retorna Task válido A2A com artifacts (text + data separados)
+ * Vercel Serverless Function - A2A Endpoint
+ * JSON-RPC 2.0 over POST /api/a2a — 4 read-only skills.
+ *
+ * The catalog is imported statically so the serverless bundler inlines it.
+ * Runtime `import('file://' + .../src/data/resources.ts)` caused
+ * ERR_MODULE_NOT_FOUND in /var/task and is deliberately forbidden here.
  */
-
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import {
+  catalogResources,
+  catalogCategories,
+  computeStats,
+  normalizeText,
+  searchCatalog,
+  scoreResource,
+  TRACKS,
+  isPricing,
+  type CatalogResource,
+  type Pricing,
+  type SortId,
+  type TrackId,
+} from '../src/lib/catalog.js';
+import type { Category } from '../src/data/resources.js';
 
 // ---------------------------------------------------------------------------
-// Tipos de domínio
+// A2A / JSON-RPC types
 // ---------------------------------------------------------------------------
 
-interface Resource {
-  id: string;
-  name: string;
-  url: string;
-  description: string;
-  category: string;
-  tags: string[];
-  featured?: boolean;
-}
-
-interface Category {
-  id: string;
-  label: string;
-  icon: string;
-  description: string;
-}
-
-interface NormalizedResource {
-  id: string;
-  name: string;
-  url: string;
-  description: string;
-  category: string;
-  categoryLabel: string;
-  tags: string[];
-  featured: boolean;
-  resourceType: string;
-  whenToUse: string;
-  stack: string[];
-  pricing: string;
-  agentConsumable: boolean;
-  repoUrl?: string;
-}
-
-// ---------------------------------------------------------------------------
-// Tipos A2A / JSON-RPC 2.0
-// ---------------------------------------------------------------------------
-
-interface JsonRpcRequest {
-  jsonrpc: '2.0';
-  method: string;
-  params?: unknown;
-  id: string | number | null;
-}
-
-interface JsonRpcError {
-  code: number;
-  message: string;
-  data?: unknown;
-}
-
-interface JsonRpcResponse {
-  jsonrpc: '2.0';
-  result?: unknown;
-  error?: JsonRpcError;
-  id: string | number | null;
-}
-
-// A2A Message Part - suporta kind (A2A) e type (legado)
 interface A2AMessagePart {
-  kind?: string;      // A2A spec: "text" | "data" | "file"
-  type?: string;      // compat: "text" | "data"
-  text?: string;      // quando kind/type === "text"
-  data?: unknown;     // quando kind/type === "data"
-  mimeType?: string;  // opcional
-  file?: {            // opcional
-    name?: string;
-    bytes?: string;   // base64
-    uri?: string;
-  };
+  kind?: 'text' | 'data' | 'file';
+  type?: string;
+  text?: string;
+  data?: unknown;
+  mimeType?: string;
 }
 
 interface A2AMessage {
@@ -92,32 +40,21 @@ interface A2AMessage {
   parts: A2AMessagePart[];
   messageId?: string;
   contextId?: string;
-  taskId?: string;
 }
 
-interface A2AParams {
-  message: A2AMessage;
-  metadata?: unknown;
-}
-
-// A2A Task - resposta canônica
 interface A2ATask {
   id: string;
   contextId: string;
-  status: {
-    state: 'submitted' | 'working' | 'input-required' | 'completed' | 'canceled' | 'failed';
-    timestamp: string;
-    message?: A2AMessage;
-  };
-  artifacts?: A2AArtifact[];
+  status: { state: 'completed' | 'failed'; timestamp: string };
+  artifacts: Array<{ artifactId: string; name: string; parts: A2AMessagePart[] }>;
   metadata?: unknown;
 }
 
-interface A2AArtifact {
-  artifactId: string;
-  name?: string;
-  description?: string;
-  parts: A2AMessagePart[];
+interface JsonRpcResponse {
+  jsonrpc: '2.0';
+  result?: unknown;
+  error?: { code: number; message: string; data?: unknown };
+  id: string | number | null;
 }
 
 const ERROR = {
@@ -128,381 +65,344 @@ const ERROR = {
   INTERNAL_ERROR: -32603,
 } as const;
 
+const MAX_SEARCH_LIMIT = 60;
+const DEFAULT_SEARCH_LIMIT = 20;
+
 // ---------------------------------------------------------------------------
-// Carregamento do catálogo (import dinâmico ESM/tsx)
+// Query understanding
 // ---------------------------------------------------------------------------
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const projectRoot = path.resolve(__dirname, '..');
-const dataPath = path.join(projectRoot, 'src/data/resources.ts');
-
-let resources: NormalizedResource[] = [];
-let categories: Category[] = [];
-
-function enrichResource(r: any, catLabel: string, catDesc: string): NormalizedResource {
-  const url: string = r.url || '';
-  const isGithub = url.includes('github.com/');
-  const repoUrl = (r.repoUrl || (isGithub ? (url.endsWith('/') ? url.slice(0, -1) : url) : undefined)) as string | undefined;
-  const resourceType = (r.resourceType || (r.category === 'agent-skills' ? 'agent-skill' : r.category === 'ai-prompts' ? 'prompt-pack' : r.category === 'security' ? 'tool' : r.category === 'libraries' ? 'library' : ['landings', 'typography', 'motion', 'micro-interactions', 'ux-flows'].includes(r.category) ? 'gallery' : 'docs') as string);
-  const agentConsumable = r.agentConsumable !== undefined ? r.agentConsumable : ['mcp-protocols', 'agent-templates', 'agent-infra', 'agent-skills', 'ai-prompts', 'security', 'libraries', 'components'].includes(r.category);
-  const pricing = (r.pricing || (r.category === 'agent-skills' || r.category === 'ai-prompts' || r.category === 'libraries' ? 'open-source' : 'free') as string);
-  const whenToUse = r.whenToUse || (catLabel ? `Curated ${catLabel.toLowerCase()} resource for design and AI builder workflows.` : `Design resource from the ${catLabel} category.`);
-  const stack = r.stack || ['design', 'engineering'].flatMap(s => [s]);
-  return { id: r.id, name: r.name, url, description: r.description, category: r.category, categoryLabel: catLabel, tags: r.tags || [], featured: r.featured ?? false, resourceType, whenToUse, stack, pricing, agentConsumable, repoUrl };
-}
-
-async function loadCatalog(): Promise<{ resources: NormalizedResource[]; categories: Category[] }> {
-  if (resources.length > 0) return { resources, categories };
-  const mod = await import('file://' + dataPath);
-  const catList = mod.categories || [];
-  resources = (mod.resources || []).map((r: any) => {
-    const catInfo = catList.find((c: Category) => c.id === r.category);
-    return enrichResource(r, catInfo?.label ?? r.category, catInfo?.description ?? '');
-  });
-  // Build categories array from distinct categories present in resources
-  const allCategoryIds = [...new Set(resources.map(r => r.category))];
-  categories = allCategoryIds.map(catId => {
-    const catInfo = catList.find((c: Category) => c.id === catId);
-    return { id: catId, label: catInfo?.label ?? catId, icon: catInfo?.icon ?? '', description: catInfo?.description ?? '' };
-  });
-  return { resources, categories };
-}
-
-function normalize(text: string): string {
-  return text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-}
-
-/** Maps natural-language MCP queries to the canonical subdomain tag. */
-const SEARCH_TAG_ALIASES: Record<string, string> = {
-  'free-mcp': 'free-mcp',
-  'free mcp': 'free-mcp',
-  'mcp free': 'free-mcp',
-  'mcp gratis': 'free-mcp',
-  'mcp gratuito': 'free-mcp',
-  'mcp gratuitos': 'free-mcp',
-  'mcp gratuita': 'free-mcp',
-  'mcp gratuitas': 'free-mcp',
-  'servidores mcp gratis': 'free-mcp',
-  'mcp database': 'mcp-database',
-  'mcp databases': 'mcp-database',
-  'mcp banco de dados': 'mcp-database',
-  'mcp design': 'mcp-design',
-  'mcp cloud': 'mcp-cloud',
-  'mcp nuvem': 'mcp-cloud',
-  'mcp coding': 'mcp-coding',
-  'mcp browser': 'mcp-browser',
-  'mcp automation': 'mcp-automation',
-  'mcp automacao': 'mcp-automation',
-  'mcp proxy': 'mcp-proxy',
-  // Agent templates: canonical tag + archetype + technology aliases
-  'agent-template': 'agent-template',
-  'agent templates': 'agent-template',
-  'template-starter': 'template-starter',
-  'template-research': 'template-research',
-  'template-multi-agent': 'template-multi-agent',
-  'template-coding': 'template-coding',
-  'template-browser': 'template-browser',
-  'template-voice': 'template-voice',
-  'template-ui': 'template-ui',
-  'template-local': 'template-local',
-  ollama: 'ollama',
-  langgraph: 'langgraph',
-  a2a: 'a2a',
+const CATEGORY_ALIASES: Record<string, string> = {
+  mcp: 'mcp-protocols', a2a: 'mcp-protocols', protocols: 'mcp-protocols', protocolos: 'mcp-protocols', 'llms.txt': 'mcp-protocols',
+  'agent-infra': 'agent-infra', sdks: 'agent-infra', evals: 'agent-infra', frameworks: 'agent-infra', observabilidade: 'agent-infra', sandbox: 'agent-infra',
+  icons: 'icons-assets', icones: 'icons-assets', colors: 'icons-assets', cores: 'icons-assets', svg: 'icons-assets', assets: 'icons-assets',
+  'design-systems': 'design-systems', tokens: 'design-systems', a11y: 'design-systems', acessibilidade: 'design-systems', headless: 'design-systems',
+  'agent-templates': 'agent-templates', templates: 'agent-templates', starters: 'agent-templates', boilerplates: 'agent-templates',
+  modelos: 'agent-templates', exemplos: 'agent-templates', 'voice-agents': 'agent-templates', 'deep-research': 'agent-templates',
+  'rag-templates': 'agent-templates', copilots: 'agent-templates',
+  'design-ui': 'design-ui', 'design e ui': 'design-ui',
+  'ai-agents': 'ai-agents', 'ia e agentes': 'ai-agents',
+  'dev-tools': 'dev-tools', 'dev tools': 'dev-tools', seguranca: 'dev-tools',
 };
 
-const MAX_SEARCH_LIMIT = 60;
+const TRACK_ALIASES: Record<string, TrackId> = {
+  'design-ui': 'design-ui', 'design e ui': 'design-ui', design: 'design-ui', ui: 'design-ui',
+  'ai-agents': 'ai-agents', 'ia e agentes': 'ai-agents', agentes: 'ai-agents',
+  'dev-tools': 'dev-tools', 'dev tools': 'dev-tools', ferramentas: 'dev-tools', seguranca: 'dev-tools',
+};
 
-/** Extracts the query and an optional `limit` (capped at 60) from a search instruction. */
-function parseSearchInput(text: string): { query: string; limit?: number } {
-  const cleaned = text.replace(/^(?:search_resources|buscar por|buscar|busque)\s*:?\s*/i, '').trim();
-  const limitMatch = cleaned.match(/\b(?:limite|limit)\s*[:=]?\s*(\d{1,3})\b/i);
-  let limit: number | undefined;
-  if (limitMatch) {
-    const parsed = Number(limitMatch[1]);
-    if (Number.isFinite(parsed) && parsed > 0) limit = Math.min(MAX_SEARCH_LIMIT, Math.floor(parsed));
+const TAG_ALIASES: Record<string, string> = {
+  'free-mcp': 'free-mcp', 'free mcp': 'free-mcp', 'mcp free': 'free-mcp',
+  'mcp gratis': 'free-mcp', 'mcp grátis': 'free-mcp', 'mcp gratuito': 'free-mcp',
+  'mcp gratuitos': 'free-mcp', 'mcp gratuita': 'free-mcp', 'mcp gratuitas': 'free-mcp',
+  'servidores mcp gratis': 'free-mcp', 'mcp database': 'mcp-database',
+  'mcp databases': 'mcp-database', 'mcp banco de dados': 'mcp-database',
+  'mcp design': 'mcp-design', 'mcp cloud': 'mcp-cloud', 'mcp nuvem': 'mcp-cloud',
+  'mcp coding': 'mcp-coding', 'mcp browser': 'mcp-browser',
+  'mcp automation': 'mcp-automation', 'mcp automacao': 'mcp-automation', 'mcp proxy': 'mcp-proxy',
+  'agent-template': 'agent-template', 'agent templates': 'agent-template',
+  'template-starter': 'template-starter', 'template-research': 'template-research',
+  'template-multi-agent': 'template-multi-agent', 'template-coding': 'template-coding',
+  'template-browser': 'template-browser', 'template-voice': 'template-voice',
+  'template-ui': 'template-ui', 'template-local': 'template-local',
+};
+
+interface ParsedQuery {
+  text: string;
+  limit?: number;
+  pricing?: Pricing;
+  track?: TrackId;
+  type?: string;
+  agentReady?: boolean;
+  tag?: string;
+  sort?: SortId;
+}
+
+const FILTER_KEYS = 'limite|limit|pricing|preco|price|track|trilha|type|tipo|agent|sort|ordem';
+const FILTER_INLINE = new RegExp(`^(${FILTER_KEYS})\\s*[:=]\\s*(.+)$`, 'i');
+const FILTER_BARE = new RegExp(`^(${FILTER_KEYS})\\s*[:=]?$`, 'i');
+
+function parseSearchInput(input: string): ParsedQuery {
+  const tokens = input.trim().split(/\s+/).filter(Boolean);
+  const result: ParsedQuery = { text: '' };
+  const textTokens: string[] = [];
+  const sortValues: SortId[] = ['relevance', 'featured', 'az', 'opensource'];
+
+  const applyFilter = (rawKey: string, value: string) => {
+    const key = rawKey.toLowerCase();
+    if (key === 'limite' || key === 'limit') {
+      const parsed = Number(value);
+      if (Number.isFinite(parsed) && parsed > 0) result.limit = Math.min(MAX_SEARCH_LIMIT, Math.floor(parsed));
+    } else if (key === 'pricing' || key === 'preco' || key === 'price') {
+      if (isPricing(value)) result.pricing = value;
+      else if (value === 'unknown' || value === 'desconhecido') result.pricing = undefined;
+    } else if (key === 'track' || key === 'trilha') {
+      result.track = TRACK_ALIASES[normalizeText(value)];
+    } else if (key === 'type' || key === 'tipo') {
+      result.type = normalizeText(value);
+    } else if (key === 'agent') {
+      result.agentReady = /^(true|1|sim|yes)$/i.test(value);
+    } else if (key === 'sort' || key === 'ordem') {
+      if ((sortValues as string[]).includes(value)) result.sort = value as SortId;
+    }
+  };
+
+  for (let index = 0; index < tokens.length; index += 1) {
+    const token = tokens[index];
+    const inline = token.match(FILTER_INLINE);
+    if (inline) {
+      applyFilter(inline[1], inline[2].trim());
+      continue;
+    }
+    if (FILTER_BARE.test(token)) {
+      const next = tokens[index + 1];
+      if (next !== undefined && !FILTER_BARE.test(next) && !FILTER_INLINE.test(next)) {
+        applyFilter(token, next);
+        index += 1;
+        continue;
+      }
+    }
+    textTokens.push(token);
   }
-  const query = cleaned.replace(/\b(?:limite|limit)\s*[:=]?\s*\d{1,3}\b/i, '').trim();
-  return { query, limit };
+
+  const joined = textTokens.join(' ').trim();
+  const normalized = normalizeText(joined);
+  result.tag = TAG_ALIASES[normalized] ?? TAG_ALIASES[joined.toLowerCase()];
+  if (result.tag) {
+    result.text = '';
+    result.limit = result.limit ?? MAX_SEARCH_LIMIT;
+  } else {
+    result.text = joined;
+  }
+  return result;
 }
 
-function nowISO(): string {
-  return new Date().toISOString();
+function asTextParts(message: A2AMessage | undefined): string[] {
+  if (!message || !Array.isArray(message.parts)) return [];
+  return message.parts
+    .filter((p) => p && typeof p === 'object' && (p.kind === 'text' || p.type === 'text') && typeof p.text === 'string')
+    .map((p) => p.text as string);
 }
 
-// ---------------------------------------------------------------------------
-// Helpers de resposta A2A
-// ---------------------------------------------------------------------------
-
-function createJsonRpcError(id: string | number | null, code: number, message: string, data?: unknown): JsonRpcResponse {
-  return { jsonrpc: '2.0', error: { code, message, data }, id };
-}
-
-function createJsonRpcResponse(id: string | number | null, result: unknown): JsonRpcResponse {
-  return { jsonrpc: '2.0', result, id };
-}
-
-/**
- * Cria um Task A2A válido com:
- * - artifacts[0]: part de texto (Markdown legível por humanos)
- * - artifacts[1]: part de dados puros (JSON estruturado)
- */
-function createTask(
-  requestId: string | number | null,
-  contextId: string,
-  markdownText: string,
-  dataPayload: unknown,
-  state: A2ATask['status']['state'] = 'completed'
-): A2ATask {
-  const taskId = typeof requestId === 'string' ? requestId : `task-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+function createTask(requestId: string | number | null, markdown: string, data: unknown): A2ATask {
+  const id = typeof requestId === 'string' ? requestId : `task-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
   return {
-    id: taskId,
-    contextId,
-    status: {
-      state,
-      timestamp: nowISO(),
-    },
+    id,
+    contextId: `ctx-${id}`,
+    status: { state: 'completed', timestamp: new Date().toISOString() },
     artifacts: [
-      {
-        artifactId: `${taskId}-text`,
-        name: 'Human-readable summary',
-        parts: [{ kind: 'text', type: 'text', text: markdownText }],
-      },
-      {
-        artifactId: `${taskId}-data`,
-        name: 'Structured data',
-        parts: [{ kind: 'data', type: 'data', data: dataPayload }],
-      },
+      { artifactId: `${id}-text`, name: 'Human-readable summary', parts: [{ kind: 'text', text: markdown }] },
+      { artifactId: `${id}-data`, name: 'Structured data', parts: [{ kind: 'data', data }] },
     ],
   };
 }
 
+function jsonError(id: string | number | null, code: number, message: string, data?: unknown): JsonRpcResponse {
+  return { jsonrpc: '2.0', error: { code, message, ...(data !== undefined ? { data } : {}) }, id };
+}
+
 // ---------------------------------------------------------------------------
-// Implementação das 4 Skills
+// Skills
 // ---------------------------------------------------------------------------
 
-async function handleListCategories(): Promise<{ markdown: string; data: unknown }> {
-  await loadCatalog();
-  const result = categories.map((c: Category) => ({
+function handleListCategories() {
+  const stats = computeStats(catalogResources);
+  const categories = catalogCategories.map((c) => ({
     id: c.id,
     label: c.label,
-    count: resources.filter((r: NormalizedResource) => r.category === c.id).length,
+    count: stats.byCategory[c.id] ?? 0,
+    track: TRACKS.find((t) => (t.categoryIds as string[]).includes(c.id))?.id ?? null,
   }));
-  const freeMcpCount = resources.filter((r: NormalizedResource) => r.tags.includes('free-mcp')).length;
-  const agentTemplateCount = resources.filter((r: NormalizedResource) => r.tags.includes('agent-template')).length;
-  const archetypeTags = ['template-starter', 'template-research', 'template-multi-agent', 'template-coding', 'template-browser', 'template-voice', 'template-ui', 'template-local'];
-  const markdown = `## Categorias Disponíveis (${categories.length})\n\n` +
-    result.map(c => `- **${c.label}** (${c.count} recurso${c.count !== 1 ? 's' : ''})`).join('\n') +
-    `\n\n**${freeMcpCount} servidores MCP gratuitos/open-source** estão indexados (tag \`free-mcp\`). ` +
-    `Filtre com \`search_resources: free-mcp\` (até ${MAX_SEARCH_LIMIT} resultados).` +
-    `\n\n**${agentTemplateCount} templates de agentes prontos** estão indexados (tag \`agent-template\`). ` +
-    `Filtre com \`filter_by_category: agent-templates\` ou por arquétipo: \`${archetypeTags.join('`, `')}\`.`;
+  const markdown = [
+    `## Categorias Disponíveis (${stats.categories})`,
+    '',
+    ...categories.map((c) => `- **${c.label}** (${c.count}) — ${c.id}`),
+    '',
+    `**Trilhas:** ${TRACKS.map((t) => `${t.id} (${stats.byTrack[t.id]})`).join(', ')}`,
+    '',
+    `**${stats.unknownPricing} recursos sem classificação de preço** — não foi atribuída nenhuma classificação presumida.`,
+    `**Agent-Ready:** ${stats.agentReady} recursos com \`agentConsumable: true\` declarado.`,
+    `**Busca:** \`search_resources\` aceita \`limit\` até ${MAX_SEARCH_LIMIT}.`,
+  ].join('\n');
   return {
     markdown,
     data: {
-      categories: result,
-      freeMcpCount,
-      freeMcpQuery: `search_resources: free-mcp`,
-      agentTemplateCount,
-      agentTemplatesQuery: `filter_by_category: agent-templates`,
-      archetypeTags,
+      categories,
+      tracks: TRACKS.map((t) => ({ id: t.id, label: t.label, count: stats.byTrack[t.id], categoryIds: t.categoryIds })),
+      byPricing: stats.byPricing,
+      unknownPricing: stats.unknownPricing,
+      agentReady: stats.agentReady,
       maxSearchLimit: MAX_SEARCH_LIMIT,
     },
   };
 }
 
-async function handleFilterByCategory(names: string[]): Promise<{ markdown: string; data: unknown }> {
-  await loadCatalog();
-  const norm = names.map(normalize);
-  const aliases: Record<string, string> = {
-    mcp: 'mcp-protocols', a2a: 'mcp-protocols', protocols: 'mcp-protocols', protocolos: 'mcp-protocols', 'llms.txt': 'mcp-protocols',
-    'agent-infra': 'agent-infra', sdks: 'agent-infra', evals: 'agent-infra', frameworks: 'agent-infra', observabilidade: 'agent-infra', sandbox: 'agent-infra',
-    icons: 'icons-assets', icones: 'icons-assets', colors: 'icons-assets', cores: 'icons-assets', svg: 'icons-assets', assets: 'icons-assets',
-    'design-systems': 'design-systems', tokens: 'design-systems', a11y: 'design-systems', acessibilidade: 'design-systems', headless: 'design-systems',
-    'agent-templates': 'agent-templates', templates: 'agent-templates', starters: 'agent-templates', boilerplates: 'agent-templates',
-    modelos: 'agent-templates', exemplos: 'agent-templates', 'voice-agents': 'agent-templates', 'deep-research': 'agent-templates',
-    'rag-templates': 'agent-templates', copilots: 'agent-templates',
-  };
-  const aliasedIds = new Set(norm.map((name) => aliases[name]).filter(Boolean));
-  const matched = categories.filter((c) =>
-    norm.includes(normalize(c.id)) || norm.includes(normalize(c.label)) || aliasedIds.has(c.id),
-  );
-  if (matched.length === 0) {
-    const available = categories.map(c => c.id).join(', ');
-    return { markdown: `❌ Nenhuma categoria correspondente. Disponíveis: ${available}`, data: { error: 'Categoria não encontrada', available } };
+function handleFilterByCategory(names: string[]) {
+  const tracks = new Set<TrackId>();
+  const cats = new Set<Category>();
+  for (const raw of names) {
+    const name = normalizeText(raw);
+    if (!name) continue;
+    const resolved = CATEGORY_ALIASES[name];
+    if (resolved && (TRACKS.some((t) => t.id === resolved))) tracks.add(resolved as TrackId);
+    else if (resolved) cats.add(resolved as Category);
+    else if (TRACK_ALIASES[name]) tracks.add(TRACK_ALIASES[name]);
+    else if ((catalogCategories as Array<{ id: string }>).some((c) => c.id === name)) cats.add(name as Category);
   }
-  const filtered = resources.filter((r) => matched.some((c) => c.id === r.category));
-  const markdown = `## Recursos por Categoria (${filtered.length})\n\n` +
-    filtered.map((r) => `- **${r.name}** (${r.category}) - ${r.url}\n  ${r.description}`).join('\n\n');
-  return { markdown, data: filtered };
+  if (tracks.size === 0 && cats.size === 0) {
+    const available = catalogCategories.map((c) => c.id).join(', ');
+    return {
+      markdown: `❌ Nenhuma categoria correspondente. Disponíveis: ${available}. Trilhas: ${TRACKS.map((t) => t.id).join(', ')}`,
+      data: { error: 'Categoria não encontrada', available, tracks: TRACKS.map((t) => t.id) },
+    };
+  }
+  const filtered = catalogResources.filter((r) => tracks.has(r.track) || cats.has(r.category));
+  return {
+    markdown: `## Recursos por Categoria (${filtered.length})\n\n` +
+      filtered.map((r) => `- **${r.name}** (${r.category}) - ${r.url}\n  ${r.description}`).join('\n\n'),
+    data: filtered,
+  };
 }
 
-async function handleSearchResources(query: string, limit?: number): Promise<{ markdown: string; data: unknown }> {
-  await loadCatalog();
-  const q = normalize(query);
-  if (!q) return { markdown: '❌ Query de busca não fornecida.', data: { error: 'Query vazia' } };
-  const aliasTag = SEARCH_TAG_ALIASES[q];
-  const effectiveLimit = Math.min(MAX_SEARCH_LIMIT, Math.max(1, limit ?? (aliasTag === 'free-mcp' ? MAX_SEARCH_LIMIT : 20)));
-  const results = resources.filter((r) => {
-    if (aliasTag) return r.tags.some((t) => normalize(t) === aliasTag);
-    return normalize(r.name).includes(q) || normalize(r.description).includes(q) ||
-      r.tags.some((t) => normalize(t).includes(q)) || normalize(r.category).includes(q);
-  }).slice(0, effectiveLimit);
-  const markdown = `## Busca: "${query}" (${results.length} de ${resources.length})\n\n` +
-    (aliasTag ? `> Tag canônica: \`${aliasTag}\` · limite ${effectiveLimit}\n\n` : '') +
-    results.map((r) => `- **${r.name}** [${r.category}] - ${r.url}\n  ${r.description}`).join('\n\n');
-  return { markdown, data: results };
+function handleSearchResources(input: string) {
+  const parsed = parseSearchInput(input);
+  if (!parsed.text && !parsed.tag && !parsed.pricing && !parsed.track && !parsed.type && parsed.agentReady === undefined) {
+    return { markdown: '❌ Query de busca não fornecida.', data: { error: 'Query vazia' } };
+  }
+  const limit = parsed.limit ?? DEFAULT_SEARCH_LIMIT;
+  let matched: CatalogResource[];
+  if (parsed.tag) {
+    matched = catalogResources.filter((r) => r.tags.some((t) => normalizeText(t) === parsed.tag));
+  } else {
+    matched = searchCatalog(catalogResources, {
+      query: parsed.text,
+      pricing: parsed.pricing,
+      track: parsed.track,
+      type: parsed.type,
+      agentReady: parsed.agentReady,
+      sort: parsed.sort,
+    });
+  }
+  const results = matched.slice(0, limit);
+  const note = parsed.tag ? `> Tag canônica: \`${parsed.tag}\` · limite ${limit}\n\n` : `> Limite ${limit}\n\n`;
+  return {
+    markdown: `## Busca: "${input}" (${results.length} de ${catalogResources.length})\n\n${note}` +
+      results.map((r) => `- **${r.name}** [${r.category}] - ${r.url}\n  ${r.description}`).join('\n\n'),
+    data: results,
+  };
 }
 
-async function handleGetResourceDetails(identifier: string): Promise<{ markdown: string; data: unknown }> {
-  await loadCatalog();
-  const normId = normalize(identifier);
-  const resource = resources.find((r) => normalize(r.id) === normId || normalize(r.name) === normId);
-  if (!resource) return { markdown: `❌ Recurso "${identifier}" não encontrado.`, data: { error: 'Não encontrado', identifier } };
-  const markdown = `## ${resource.name}\n\n` +
-    `**ID:** ${resource.id}\n**URL:** ${resource.url}\n**Categoria:** ${resource.category}\n` +
-    `**Tags:** ${resource.tags.join(', ')}\n**Em destaque:** ${resource.featured ? 'Sim' : 'Não'}\n\n` +
-    `**Descrição:**\n${resource.description}`;
+function handleGetResourceDetails(identifier: string) {
+  const needle = normalizeText(identifier);
+  const resource = catalogResources.find((r) => normalizeText(r.id) === needle || normalizeText(r.name) === needle);
+  if (!resource) {
+    return { markdown: `❌ Recurso "${identifier}" não encontrado.`, data: { error: 'Não encontrado', identifier } };
+  }
+  const markdown = [
+    `## ${resource.name}`,
+    '',
+    `**ID:** ${resource.id}`,
+    `**URL:** ${resource.url}`,
+    `**Categoria:** ${resource.category}`,
+    `**Trilha:** ${resource.track}`,
+    `**Tags:** ${resource.tags.join(', ')}`,
+    `**Preço:** ${resource.pricing ?? 'desconhecido'}`,
+    `**Agent-Ready:** ${resource.agentConsumable === true ? 'sim' : resource.agentConsumable === false ? 'não' : 'desconhecido'}`,
+    '',
+    `**Descrição:**\n${resource.description}`,
+  ].join('\n');
   return { markdown, data: resource };
 }
 
-// ---------------------------------------------------------------------------
-// Dispatcher determinístico (sem LLMs)
-// ---------------------------------------------------------------------------
+function dispatch(text: string) {
+  const raw = text.trim().toLowerCase();
+  const lower = normalizeText(text);
 
-async function dispatch(text: string): Promise<{ markdown: string; data: unknown }> {
-  const lower = text.trim().toLowerCase();
-
-  // list_categories
-  if (
-    lower === 'list_categories' ||
-    lower.includes('listar categorias') ||
-    lower.includes('quais categorias') ||
-    lower.includes('categorias disponíveis')
-  ) {
+  if (raw.startsWith('list_categories') || lower === 'list categories' ||
+      lower.includes('listar categorias') || lower.includes('quais categorias') || lower.includes('categorias disponiveis')) {
     return handleListCategories();
   }
 
-  // filter_by_category
-  if (
-    lower.startsWith('filter_by_category') ||
-    lower.startsWith('filtrar por categoria') ||
-    lower.includes('recursos de ') ||
-    lower.includes('mostre ') ||
-    lower.includes('filtre por ')
-  ) {
+  if (raw.startsWith('filter_by_category') || lower.startsWith('filter by category') ||
+      lower.startsWith('filtrar por categoria') || lower.includes('recursos de ') ||
+      lower.includes('mostre ') || lower.includes('filtre por ')) {
     let catsText = '';
-    if (lower.includes(':')) catsText = text.split(':')[1].trim();
+    if (text.includes(':')) catsText = (text.split(':').slice(1).join(':')).trim();
+    else if (raw.startsWith('filter_by_category ')) catsText = text.slice('filter_by_category '.length).trim();
+    else if (lower.startsWith('filter by category ')) catsText = text.slice('filter by category '.length).trim();
     else if (lower.includes('recursos de ')) catsText = text.slice(text.toLowerCase().indexOf('recursos de ') + 12).trim();
     else if (lower.includes('filtre por ')) catsText = text.slice(text.toLowerCase().indexOf('filtre por ') + 11).trim();
     else if (lower.includes('mostre ')) catsText = text.slice(text.toLowerCase().indexOf('mostre ') + 7).trim();
-    const catNames = catsText.split(/[,;]/).map(s => s.trim()).filter(Boolean);
-    return handleFilterByCategory(catNames);
+    return handleFilterByCategory(catsText.split(/[,;]/).map((s) => s.trim()).filter(Boolean));
   }
 
-  // search_resources
-  if (
-    lower.startsWith('search_resources') ||
-    lower.startsWith('buscar ') ||
-    lower.startsWith('busque ') ||
-    lower.includes('buscar por ') ||
-    lower.includes('mcp gratis') || lower.includes('mcp grátis') ||
-    lower.includes('mcp gratuito') || lower.includes('mcp gratuitos') ||
-    lower === 'free-mcp' || lower === 'free mcp' ||
-    lower === 'agent-template' || lower.startsWith('template-')
-  ) {
-    const { query, limit } = parseSearchInput(text);
-    return handleSearchResources(query, limit);
+  if (raw.startsWith('search_resources') || lower.startsWith('search resources') ||
+      lower.startsWith('buscar ') || lower.startsWith('busque ') || lower.includes('buscar por ') ||
+      lower.includes('mcp gratis') || lower.includes('mcp gratuito') || lower === 'free-mcp' ||
+      lower === 'free mcp' || lower === 'agent-template' || lower.startsWith('template-') ||
+      /\b(limit|pricing|track|type|agent|sort)\s*[:=]/i.test(text)) {
+    return handleSearchResources(text.replace(/^(?:search_resources|search resources|buscar por|buscar|busque)\s*:?\s*/i, ''));
   }
 
-  // get_resource_details
-  if (
-    lower.startsWith('get_resource_details') ||
-    lower.startsWith('detalhes do recurso') ||
-    lower.startsWith('informações sobre ') ||
-    lower.startsWith('url do recurso ')
-  ) {
+  if (raw.startsWith('get_resource_details') || lower.startsWith('get resource details') ||
+      lower.startsWith('detalhes do recurso') || lower.startsWith('informacoes sobre ') || lower.startsWith('url do recurso ')) {
     let id = '';
-    if (lower.includes(':')) id = text.split(':')[1].trim();
+    if (text.includes(':')) id = (text.split(':').slice(1).join(':')).trim();
+    else if (raw.startsWith('get_resource_details ')) id = text.slice('get_resource_details '.length).trim();
+    else if (lower.startsWith('get resource details ')) id = text.slice('get resource details '.length).trim();
     else if (lower.startsWith('detalhes do recurso ')) id = text.slice(20).trim();
-    else if (lower.startsWith('informações sobre ')) id = text.slice(18).trim();
+    else if (lower.startsWith('informacoes sobre ')) id = text.slice(18).trim();
     else if (lower.startsWith('url do recurso ')) id = text.slice(15).trim();
     return handleGetResourceDetails(id);
   }
 
-  // Fallback: listar categorias
-  return handleListCategories();
+  // Friendly fallback: treat unknown plain text as a search, never as a silent listing.
+  return handleSearchResources(text);
 }
 
 // ---------------------------------------------------------------------------
-// Handler principal
+// Handler
 // ---------------------------------------------------------------------------
 
+export async function handleA2ARequest(body: unknown): Promise<JsonRpcResponse> {
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return jsonError(null, ERROR.INVALID_REQUEST, 'Invalid Request');
+  }
+  const request = body as Record<string, unknown>;
+  const id = (typeof request.id === 'string' || typeof request.id === 'number') ? request.id : null;
+  if (request.jsonrpc !== '2.0') return jsonError(id, ERROR.INVALID_REQUEST, 'jsonrpc must be "2.0"');
+  if (request.method !== 'message/send') return jsonError(id, ERROR.METHOD_NOT_FOUND, `Method not found: ${String(request.method)}`);
+  const params = request.params as Record<string, unknown> | undefined;
+  const message = params?.message as A2AMessage | undefined;
+  const texts = asTextParts(message);
+  if (!message || texts.length === 0) {
+    return jsonError(id, ERROR.INVALID_PARAMS, 'params.message.parts must contain a text part');
+  }
+  try {
+    const { markdown, data } = dispatch(texts.join(' '));
+    return { jsonrpc: '2.0', result: createTask(id, markdown, data), id };
+  } catch (error) {
+    return jsonError(id, ERROR.INTERNAL_ERROR, 'Internal error', error instanceof Error ? error.message : String(error));
+  }
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
-  // CORS headers PRIMEIRO - antes de qualquer retorno de erro
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
-  // Preflight
-  if (req.method === 'OPTIONS') {
-    res.status(204).end();
-    return;
+  if (req.method === 'OPTIONS') { res.status(204).end(); return; }
+  if (req.method !== 'POST') { res.status(405).json(jsonError(null, ERROR.METHOD_NOT_FOUND, 'Use POST /api/a2a')); return; }
+
+  let body: unknown = req.body;
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); }
+    catch { res.status(200).json(jsonError(null, ERROR.PARSE_ERROR, 'Parse error')); return; }
   }
-
-  // Apenas POST
-  if (req.method !== 'POST') {
-    res.status(405).json(createJsonRpcError(null, ERROR.METHOD_NOT_FOUND, 'Method not allowed. Use POST.'));
-    return;
-  }
-
-  // Parse JSON body
-  let body: JsonRpcRequest;
-  try {
-    body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-  } catch {
-    res.status(400).json(createJsonRpcError(null, ERROR.PARSE_ERROR, 'Parse error: Invalid JSON'));
-    return;
-  }
-
-  // Validar JSON-RPC 2.0
-  if (!body || body.jsonrpc !== '2.0' || typeof body.method !== 'string') {
-    res.status(400).json(createJsonRpcError(body?.id ?? null, ERROR.INVALID_REQUEST, 'Invalid Request: must be JSON-RPC 2.0'));
-    return;
-  }
-
-  // Validar método A2A
-  if (body.method !== 'message/send') {
-    res.status(400).json(createJsonRpcError(body.id ?? null, ERROR.METHOD_NOT_FOUND, `Method not found: ${body.method}`));
-    return;
-  }
-
-  // Extrair params com suporte a kind (A2A) e type (legado)
-  const params = body.params as A2AParams | undefined;
-  if (!params || !params.message || !Array.isArray(params.message.parts)) {
-    res.status(400).json(createJsonRpcError(body.id, ERROR.INVALID_PARAMS, 'Invalid params: message.parts must be an array'));
-    return;
-  }
-
-  // Aceitar parts com kind === 'text'/'data' OU type === 'text'/'data'
-  const textParts = params.message.parts
-    .filter((p: A2AMessagePart) => (p.kind === 'text' || p.type === 'text') && typeof p.text === 'string')
-    .map((p: A2AMessagePart) => p.text!)
-    .join('\n');
-
-  if (!textParts.trim()) {
-    res.status(400).json(createJsonRpcError(body.id, ERROR.INVALID_PARAMS, 'Invalid params: message must contain text or data parts'));
-    return;
-  }
-
-  // Context ID para rastreamento (pode vir do cliente)
-  const contextId = params.message.contextId || `ctx-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-
-  try {
-    const { markdown, data } = await dispatch(textParts);
-    const task = createTask(body.id, contextId, markdown, data, 'completed');
-    res.status(200).json(createJsonRpcResponse(body.id, task));
-  } catch (err) {
-    res.status(500).json(createJsonRpcError(body.id, ERROR.INTERNAL_ERROR, String(err)));
-  }
+  const response = await handleA2ARequest(body);
+  res.status(200).json(response);
 }
+
+/** Exported for bundled integration tests that exercise the deploy artifact. */
+export const __internals = { MAX_SEARCH_LIMIT, CATEGORY_ALIASES, TAG_ALIASES, scoreResource };

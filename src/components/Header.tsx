@@ -1,80 +1,102 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, Sun, Moon, Github } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/Button';
+import { Github, Sparkles } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { useI18n } from '@/context/I18nContext';
+import { useTheme, type ThemeMode } from '@/context/ThemeContext';
+import { useReducedMotion } from '@/hooks';
 import { cn } from '@/lib/utils';
-import { useLocalStorage, useReducedMotion } from '@/hooks';
-import { ptBR } from '@/locales/pt-BR';
+
+const REPOSITORY_URL = 'https://github.com/engffsantos/design-resources-hub';
 
 export function Header() {
   const prefersReducedMotion = useReducedMotion();
-  const [darkMode, setDarkMode] = useLocalStorage('darkMode', false);
+  const { t, locale, setLocale } = useI18n();
+  const { mode, setMode } = useTheme();
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: prefersReducedMotion ? 0 : 0.6, ease: 'easeOut' }}
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 backdrop-blur-md transition-all duration-300',
-        scrolled
-          ? 'bg-white/80 dark:bg-dark-950/80 border-b border-border/50 shadow-sm'
-          : 'bg-transparent'
-      )}
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-2"
-          >
-            <Sparkles className="h-8 w-8 text-primary" aria-hidden="true" />
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
-              Strata — Design Resources
-            </span>
-          </motion.div>
+    <>
+      <a href="#main-content" className="skip-link">
+        {t.skipToContent}
+      </a>
+      <motion.header
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.6, ease: 'easeOut' }}
+        className={cn(
+          'fixed inset-x-0 top-0 z-50 border-b transition-colors duration-300 backdrop-blur-md',
+          scrolled
+            ? 'border-border bg-background/85 shadow-sm'
+            : 'border-transparent bg-background/60',
+        )}
+      >
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+          <a href="/" className="flex min-w-0 items-center gap-2 rounded-md" aria-label={t.siteTitle}>
+            <Sparkles className="h-7 w-7 shrink-0 text-primary" aria-hidden="true" />
+            <span className="truncate text-lg font-bold tracking-tight sm:text-xl">Strata</span>
+          </a>
 
-          <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setDarkMode(!darkMode)}
-              aria-label={darkMode ? ptBR.toggleLightMode : ptBR.toggleDarkMode}
-              className="h-10 w-10"
+          <nav aria-label={t.mainNavigation} className="hidden items-center gap-5 text-sm md:flex">
+            <a className="rounded text-muted-foreground hover:text-foreground" href="/#main-content">
+              {t.allResources}
+            </a>
+            <a className="rounded text-muted-foreground hover:text-foreground" href="/agents">
+              A2A
+            </a>
+            <a className="rounded text-muted-foreground hover:text-foreground" href="/catalog.json">
+              JSON
+            </a>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <label className="sr-only" htmlFor="strata-locale">
+              {t.language}
+            </label>
+            <select
+              id="strata-locale"
+              value={locale}
+              onChange={(event) => setLocale(event.target.value as 'pt-BR' | 'en')}
+              className="h-9 rounded-md border border-input bg-card px-2 text-sm text-foreground"
             >
-              {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
+              <option value="pt-BR">{t.portuguese}</option>
+              <option value="en">{t.english}</option>
+            </select>
+
+            <label className="sr-only" htmlFor="strata-theme">
+              {t.themeLabel}
+            </label>
+            <select
+              id="strata-theme"
+              value={mode}
+              onChange={(event) => setMode(event.target.value as ThemeMode)}
+              className="h-9 rounded-md border border-input bg-card px-2 text-sm text-foreground"
+            >
+              <option value="system">{t.themeSystem}</option>
+              <option value="light">{t.themeLight}</option>
+              <option value="dark">{t.themeDark}</option>
+            </select>
+
             <a
-              href="https://github.com"
+              href={REPOSITORY_URL}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub"
+              aria-label={t.github}
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-input bg-card text-foreground hover:bg-accent hover:text-accent-foreground"
             >
-              <Button variant="ghost" size="icon" className="h-10 w-10">
-                <Github className="h-5 w-5" />
-              </Button>
+              <Github className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
         </div>
-      </div>
-    </motion.header>
+      </motion.header>
+    </>
   );
 }

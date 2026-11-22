@@ -1,32 +1,24 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import {
-  Bot,
-  Box,
-  Boxes,
-  Cpu,
-  GitBranch,
-  HelpCircle,
-  Layers,
-  LayoutTemplate,
-  MousePointer2,
-  Move,
-  Network,
-  Package,
-  Palette,
-  Shield,
-  Sparkles,
-  Type,
+  Bot, Box, Boxes, Cpu, GitBranch, HelpCircle, Layers, LayoutTemplate, MousePointer2,
+  Move, Package, Palette, Shield, Sparkles, Type,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { useI18n } from '@/context/I18nContext';
+import { categoryLabel } from '@/locales';
 import { cn } from '@/lib/utils';
-import { categories, Category } from '@/data/resources';
-import { useReducedMotion } from '@/hooks';
-import { ptBR } from '@/locales/pt-BR';
+import type { Category } from '@/data/resources';
+
+export interface CategoryOption {
+  id: Category;
+  label: string;
+  count: number;
+}
 
 interface CategoryFilterProps {
   activeCategory: Category | 'all';
+  categories: CategoryOption[];
   onCategoryChange: (category: Category | 'all') => void;
 }
 
@@ -41,52 +33,70 @@ const categoryIcons: Record<string, LucideIcon> = {
   package: Package,
   shield: Shield,
   cpu: Cpu,
-  network: Network,
+  network: Layers,
   bot: Bot,
   palette: Palette,
   layers: Layers,
   boxes: Boxes,
 };
 
-export function CategoryFilter({ activeCategory, onCategoryChange }: CategoryFilterProps) {
-  const prefersReducedMotion = useReducedMotion();
-  const allCategories: (Category | 'all')[] = ['all', ...categories.map((category) => category.id)];
+export function CategoryFilter({ activeCategory, categories, onCategoryChange }: CategoryFilterProps) {
+  const { t } = useI18n();
 
   return (
-    <div className="relative -mx-4 sm:mx-0">
+    <div className="-mx-4 sm:mx-0">
       <div
-        className="flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-2 scroll-smooth sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
+        className="flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-2 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
         role="group"
-        aria-label="Filter by category"
+        aria-label={t.categoriesTitle}
       >
-        {allCategories.map((category) => {
+        {(['all', ...categories.map((c) => c.id)] as const).map((category) => {
           const isActive = activeCategory === category;
-          const categoryInfo = categories.find((item) => item.id === category);
-          const Icon = categoryInfo ? categoryIcons[categoryInfo.icon] ?? HelpCircle : undefined;
+          const info = categories.find((c) => c.id === category);
+          const Icon = info ? categoryIcons[getIconForCategory(info.id)] ?? HelpCircle : undefined;
+          const label = category === 'all' ? t.allCategories : categoryLabel(t, category);
 
           return (
-            <motion.button
+            <button
               key={category}
               type="button"
               onClick={() => onCategoryChange(category)}
-              className={cn(
-                'relative inline-flex shrink-0 snap-start items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-200',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-                isActive
-                  ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
-                  : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground',
-                'whitespace-nowrap'
-              )}
-              whileTap={{ scale: prefersReducedMotion ? 1 : 0.95 }}
               aria-pressed={isActive}
-              aria-label={categoryInfo?.label ?? ptBR.allCategories}
+              className={cn(
+                'inline-flex shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors',
+                isActive
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'border border-border bg-card text-muted-foreground hover:bg-accent hover:text-accent-foreground',
+              )}
             >
               {Icon && <Icon aria-hidden="true" className="h-4 w-4" />}
-              <span>{categoryInfo?.label ?? ptBR.allCategories}</span>
-            </motion.button>
+              <span>{label}</span>
+              {info && <span className="text-xs opacity-70">({info.count})</span>}
+            </button>
           );
         })}
       </div>
     </div>
   );
+}
+
+function getIconForCategory(category: Category): string {
+  const icons: Partial<Record<Category, string>> = {
+    'ai-prompts': 'sparkles',
+    landings: 'layout-template',
+    components: 'cube',
+    motion: 'move',
+    'micro-interactions': 'mouse-pointer-2',
+    typography: 'type',
+    'ux-flows': 'git-branch',
+    libraries: 'package',
+    security: 'shield',
+    'agent-skills': 'bot',
+    'mcp-protocols': 'network',
+    'agent-infra': 'cpu',
+    'icons-assets': 'palette',
+    'design-systems': 'layers',
+    'agent-templates': 'boxes',
+  };
+  return icons[category] ?? 'layers';
 }

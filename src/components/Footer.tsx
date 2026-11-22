@@ -1,105 +1,83 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Github, Twitter, Heart, Sparkles } from 'lucide-react';
-import { useReducedMotion } from '@/hooks';
-import { categories } from '@/data/resources';
+import { Heart, Sparkles } from 'lucide-react';
+import { catalogCategories } from '@/lib/catalog';
+import { useI18n } from '@/context/I18nContext';
+import { categoryLabel } from '@/locales';
+
+const REPOSITORY_URL = 'https://github.com/engffsantos/design-resources-hub';
+const ISSUES_URL = `${REPOSITORY_URL}/issues/new`;
 
 export function Footer() {
-  const prefersReduced = useReducedMotion();
+  const { t } = useI18n();
+
+  const discoveryLinks = [
+    { href: '/agents', label: 'A2A / Agents' },
+    { href: '/catalog.json', label: 'catalog.json' },
+    { href: '/llms.txt', label: 'llms.txt' },
+    { href: '/llms-full.txt', label: 'llms-full.txt' },
+  ];
 
   return (
-    <footer className="border-t border-border/50 bg-white/50 dark:bg-dark-950/50 backdrop-blur-sm">
+    <footer className="border-t border-border bg-card/50 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-3">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: prefersReduced ? 0 : 0.5 }}
-            className="space-y-4"
-          >
+          <section className="space-y-4" aria-labelledby="footer-about">
             <div className="flex items-center gap-2">
-              <Sparkles className="h-6 w-6 text-primary" />
-              <span className="text-lg font-bold">Hub de Recursos de Design</span>
+              <Sparkles className="h-6 w-6 text-primary" aria-hidden="true" />
+              <h2 id="footer-about" className="text-lg font-bold">Strata</h2>
             </div>
-            <p className="text-sm text-muted-foreground max-w-xs">
-              Uma coleção curada dos melhores recursos de design, componentes de UI, prompts de IA{' '}
-              e inspiração para desenvolvimento web moderno.
-            </p>
-            <div className="flex items-center gap-4">
-              <a
-                href="https://github.com/engffsantos/design-resources-hub"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-5 w-5" />
-              </a>
-            </div>
-          </motion.div>
+            <p className="max-w-xs text-sm text-muted-foreground">{t.footerDescription}</p>
+            <a
+              href={REPOSITORY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex rounded text-sm font-medium text-primary hover:underline"
+            >
+              {t.github} ↗
+            </a>
+          </section>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: prefersReduced ? 0 : 0.5, delay: 0.1 }}
-          >
-            <h3 className="font-semibold mb-4">Categorias</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              {categories.map((cat) => (
-                <li key={cat.id}>
-                  {cat.id === 'security'
-                    ? 'Segurança & Autenticação'
-                    : cat.id === 'agent-skills'
-                    ? 'Skills de Agente'
-                    : cat.label}
+          <section aria-labelledby="footer-categories">
+            <h2 id="footer-categories" className="mb-4 font-semibold">{t.categoriesTitle}</h2>
+            <ul className="grid grid-cols-2 gap-2 text-sm text-muted-foreground">
+              {catalogCategories.map((category) => (
+                <li key={category.id}>
+                  <a href={`/?category=${category.id}`} className="rounded hover:text-foreground hover:underline">
+                    {categoryLabel(t, category.id)}
+                  </a>
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </section>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: prefersReduced ? 0 : 0.5, delay: 0.2 }}
-            className="space-y-4"
-          >
-            <h3 className="font-semibold">Sobre</h3>
-            <p className="text-sm text-muted-foreground">
-              Construído com React, TypeScript, Tailwind CSS e Framer Motion.
-              Implantado na Vercel.
+          <section className="space-y-4" aria-labelledby="footer-discovery">
+            <h2 id="footer-discovery" className="font-semibold">{t.aboutTitle}</h2>
+            <p className="text-sm text-muted-foreground">{t.builtWith}</p>
+            <ul className="space-y-1 text-sm text-muted-foreground">
+              {discoveryLinks.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="rounded hover:text-foreground hover:underline">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Heart className="h-4 w-4 text-destructive" aria-hidden="true" />
+              {t.madeFor}
             </p>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Heart className="h-4 w-4 text-red-500" aria-hidden="true" />
-              <span>Feito para designers e desenvolvedores</span>
-            </div>
-          </motion.div>
+          </section>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: prefersReduced ? 0 : 0.5, delay: 0.3 }}
-          className="mt-10 pt-8 border-t border-border/50 text-center text-sm text-muted-foreground"
-        >
+        <div className="mt-10 border-t border-border pt-8 text-center text-sm text-muted-foreground">
           <p>
-            Curado com carinho para a comunidade de design.{' '}
-            <a href="#" className="underline hover:text-primary">Enviar um recurso</a>
+            {t.curatedWith}{' '}
+            <a href={ISSUES_URL} target="_blank" rel="noopener noreferrer" className="rounded underline hover:text-primary">
+              {t.submitResource}
+            </a>
           </p>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );
