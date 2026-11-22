@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { useLocalStorage, useReducedMotion } from '@/hooks';
+import { ptBR } from '@/locales/pt-BR';
 
 export function Header() {
   const prefersReducedMotion = useReducedMotion();
@@ -56,7 +57,7 @@ export function Header() {
               variant="ghost"
               size="icon"
               onClick={() => setDarkMode(!darkMode)}
-              aria-label={darkMode ? 'Alternar para o modo claro' : 'Alternar para o modo escuro'}
+              aria-label={darkMode ? ptBR.toggleLightMode : ptBR.toggleDarkMode}
               className="h-10 w-10"
             >
               {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}

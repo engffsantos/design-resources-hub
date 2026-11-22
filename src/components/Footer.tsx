@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Github, Twitter, Heart, Sparkles } from 'lucide-react';
 import { useReducedMotion } from '@/hooks';
+import { categories } from '@/data/resources';
 
 export function Footer() {
   const prefersReduced = useReducedMotion();
@@ -28,7 +29,7 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <a
-                href="https://github.com"
+                href="https://github.com/engffsantos/design-resources-hub"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -56,14 +57,15 @@ export function Footer() {
           >
             <h3 className="font-semibold mb-4">Categorias</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Prompts de IA e Bibliotecas</li>
-              <li>Inspiração para Páginas de Destino</li>
-              <li>Componentes de UI e Blocos</li>
-              <li>Motion e Animação</li>
-              <li>Micro-interações</li>
-              <li>Tipografia e Fontes</li>
-              <li>Fluxos e Jornadas de UX</li>
-              <li>Bibliotecas para Desenvolvedores</li>
+              {categories.map((cat) => (
+                <li key={cat.id}>
+                  {cat.id === 'security'
+                    ? 'Segurança & Autenticação'
+                    : cat.id === 'agent-skills'
+                    ? 'Skills de Agente'
+                    : cat.label}
+                </li>
+              ))}
             </ul>
           </motion.div>
 

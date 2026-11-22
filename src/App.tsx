@@ -78,7 +78,7 @@ export function App() {
             <SearchBar
               value={searchQuery}
               onChange={setSearchQuery}
-              placeholder="Search by name, description, tags, or category..."
+              placeholder={ptBR.searchPlaceholder}
               resultCount={filteredResources.length}
             />
             <CategoryFilter

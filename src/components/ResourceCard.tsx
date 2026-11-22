@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { ExternalLink, Star } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/Button';
 import { Resource } from '@/data/resources';
 import { cn, getCategoryColor, formatUrl } from '@/lib/utils';
 import { ptBR } from '@/locales/pt-BR';
@@ -102,16 +101,16 @@ export function ResourceCard({ resource, index }: ResourceCardProps) {
           <span className="text-xs text-muted-foreground font-mono truncate max-w-[150px]">
             {formatUrl(resource.url)}
           </span>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 h-8 px-3"
-            onClick={() => window.open(resource.url, '_blank', 'noopener,noreferrer')}
-            aria-label={`${ptBR.visitResource.replace('{{name}}', resource.name)}`}
+          <a
+            href={resource.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 h-8 px-3 py-2 rounded-md bg-primary text-primary-foreground text-sm font-medium text-decoration-none hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            aria-label={ptBR.visitResource.replace('{{name}}', resource.name)}
           >
             <ExternalLink className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">{ptBR.visit}</span>
-          </Button>
+          </a>
         </CardFooter>
       </Card>
     </motion.div>
