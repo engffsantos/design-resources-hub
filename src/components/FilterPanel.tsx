@@ -1,10 +1,12 @@
 'use client';
 
+import { SlidersHorizontal } from 'lucide-react';
 import { useId, useState } from 'react';
 import type { CatalogFilters } from '@/hooks/useCatalogUrlState';
 import { isPricingFilter, type PricingFilter, type SortId } from '@/lib/catalog';
 import { useI18n } from '@/context/I18nContext';
 import { cn } from '@/lib/utils';
+import { interpolate } from '@/locales';
 
 interface FilterPanelProps {
   filters: CatalogFilters;
@@ -14,7 +16,7 @@ interface FilterPanelProps {
   onReset: () => void;
 }
 
-const selectClass = 'h-9 rounded-md border border-input bg-card px-2 text-sm text-foreground';
+const selectClass = 'h-10 rounded-md border border-input bg-card px-2 text-sm text-foreground';
 
 export function FilterPanel({ filters, resourceTypes, favoritesCount, onChange, onReset }: FilterPanelProps) {
   const { t } = useI18n();
@@ -27,6 +29,14 @@ export function FilterPanel({ filters, resourceTypes, favoritesCount, onChange, 
 
   const priceOptions: Array<PricingFilter | ''> = ['', 'open-source', 'free', 'free-open-source', 'freemium', 'paid'];
   const sortOptions: SortId[] = ['relevance', 'featured', 'az', 'opensource'];
+
+  const activeCount = [
+    filters.pricing !== '',
+    filters.type !== '',
+    filters.sort !== 'relevance',
+    filters.agentReady,
+    filters.favoritesOnly,
+  ].filter(Boolean).length;
 
   const priceLabel = (price: PricingFilter | '') => {
     if (price === '') return t.allPrices;
@@ -45,30 +55,33 @@ export function FilterPanel({ filters, resourceTypes, favoritesCount, onChange, 
   };
 
   return (
-    <section aria-labelledby="filters-heading" className="rounded-xl border border-border bg-card/50 p-4">
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <h2 id="filters-heading" className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-          {t.filtersTitle}
-        </h2>
-        <div className="flex items-center gap-3">
-          <button
-            type="button"
-            aria-expanded={controlsOpen}
-            aria-controls="filter-controls"
-            onClick={() => setControlsOpen((current) => !current)}
-            className="rounded-md border border-input bg-card px-2 py-1 text-sm sm:hidden"
-          >
-            {t.filtersTitle}
-          </button>
-          <button type="button" onClick={onReset} className="rounded text-sm text-primary hover:underline">
-            {t.clearAllFilters}
-          </button>
-        </div>
+    <section aria-labelledby="filters-heading" className="rounded-xl border border-border bg-card/50 px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <button
+          type="button"
+          aria-label={t.filtersTitle}
+          aria-expanded={controlsOpen}
+          aria-controls="filter-controls"
+          onClick={() => setControlsOpen((current) => !current)}
+          className="inline-flex min-h-9 items-center gap-2 rounded-md text-sm font-medium text-foreground hover:text-primary"
+        >
+          <SlidersHorizontal className="h-4 w-4 text-primary" aria-hidden="true" />
+          {t.advancedFilters}
+          {activeCount > 0 && (
+            <span className="rounded-full bg-primary px-2 py-0.5 text-xs font-semibold text-primary-foreground">
+              {interpolate(t.activeFiltersCount, { count: activeCount })}
+            </span>
+          )}
+        </button>
+        <button type="button" onClick={onReset} className="rounded text-sm font-medium text-primary hover:underline">
+          {t.clearAllFilters}
+        </button>
+        <h2 id="filters-heading" className="sr-only">{t.filtersTitle}</h2>
       </div>
 
       <div
         id="filter-controls"
-        className={cn('gap-3 sm:grid sm:grid-cols-2 lg:grid-cols-5', controlsOpen ? 'grid' : 'hidden')}
+        className={cn('gap-3 pt-4 sm:grid sm:grid-cols-2 lg:grid-cols-5', controlsOpen ? 'grid' : 'hidden')}
       >
         <div>
           <label className="mb-1 block text-xs text-muted-foreground" htmlFor={priceId}>{t.price}</label>
@@ -139,7 +152,7 @@ export function FilterPanel({ filters, resourceTypes, favoritesCount, onChange, 
         </label>
       </div>
 
-      <p className={cn('mt-3 text-xs text-muted-foreground')}>{t.metadataNote}</p>
+      <p className="mt-3 text-xs text-muted-foreground">{t.metadataNote}</p>
     </section>
   );
 }

@@ -19,12 +19,20 @@ describe('SearchBar', () => {
     expect(input).toHaveValue('motion');
   });
 
-  it('exposes an accessible clear action and result count', () => {
+  it('exposes an accessible clear action and the real page range', () => {
     const onChange = vi.fn();
-    renderWithProviders(<SearchBar value="icons" onChange={onChange} resultCount={7} />);
+    renderWithProviders(
+      <SearchBar value="icons" onChange={onChange} range={{ from: 25, to: 48, total: 344, editorialCount: 9 }} />,
+    );
     fireEvent.click(screen.getByRole('button', { name: /limpar busca/i }));
     expect(onChange).toHaveBeenCalledWith('');
-    expect(screen.getByText(/7 recursos/i)).toBeInTheDocument();
+    expect(screen.getByText(/exibindo 25–48 de 344/i)).toBeInTheDocument();
+    expect(screen.getByText(/\+ 9 na seleção editorial/i)).toBeInTheDocument();
+  });
+
+  it('shows zero-based empty ranges without inventing results', () => {
+    renderWithProviders(<SearchBar value="none" onChange={vi.fn()} range={{ from: 0, to: 0, total: 0 }} />);
+    expect(screen.getByText(/exibindo 0–0 de 0/i)).toBeInTheDocument();
   });
 
   it('keeps state in sync when the URL drives the query', () => {
