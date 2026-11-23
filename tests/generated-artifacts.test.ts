@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { catalogCategories, catalogResources, computeStats, TRACKS } from '../src/lib/catalog';
 
 const root = process.cwd();
 const read = (relative: string) => readFileSync(path.join(root, relative), 'utf-8');
@@ -20,11 +21,13 @@ interface CatalogArtifact {
 describe('generated discovery artifacts', () => {
   const catalog = JSON.parse(read('public/catalog.json')) as CatalogArtifact;
 
-  it('is generated from the canonical 219-resource catalog', () => {
-    expect(catalog.resources).toHaveLength(219);
-    expect(catalog.categories).toHaveLength(15);
-    expect(catalog.tracks).toHaveLength(3);
-    expect(catalog.stats.unknownPricing).toBe(85);
+  it('is generated from the canonical catalog without losing IDs', () => {
+    const canonicalIds = catalogResources.map((r) => r.id);
+    expect(catalog.resources.map((r) => r.id)).toEqual(canonicalIds);
+    expect(catalog.categories).toHaveLength(catalogCategories.length);
+    expect(catalog.tracks).toHaveLength(TRACKS.length);
+    expect(catalog.stats.unknownPricing).toBe(computeStats().unknownPricing);
+    expect(catalog.resources.filter((r) => r.pricing === null)).toHaveLength(computeStats().unknownPricing);
   });
 
   it('does not leak invented pricing or generic metadata', () => {
@@ -33,7 +36,7 @@ describe('generated discovery artifacts', () => {
     expect(raw).not.toContain('"whenToUse": "Curated ');
     expect(raw).not.toContain('"design,engineering"');
     expect(catalog.metadataPolicy.forbiddenFallbacks).toContain('category-based pricing');
-    expect(catalog.resources.filter((r) => r.pricing === null)).toHaveLength(85);
+    expect(catalog.resources.filter((r) => r.pricing === null)).toHaveLength(computeStats().unknownPricing);
     expect(catalog.resources.every((r) => r.provenance?.pricing === (r.pricing ? 'declared' : 'unknown'))).toBe(true);
   });
 
@@ -61,7 +64,7 @@ describe('generated discovery artifacts', () => {
 
   it('documents the provenance policy in llms.txt', () => {
     const text = read('public/llms.txt');
-    expect(text).toContain('Unknown pricing: 85 resources');
+    expect(text).toContain(`Unknown pricing: ${computeStats().unknownPricing} resources`);
     expect(text).toContain('never inferred from category');
     expect(text).toContain('search_resources: free-mcp');
   });

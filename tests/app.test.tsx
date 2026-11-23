@@ -1,7 +1,12 @@
 import { fireEvent, screen, waitFor, within } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import { App } from '@/App';
+import { catalogResources, EDITORIAL_IDS } from '@/lib/catalog';
 import { renderWithProviders } from './helpers/render';
+
+const catalogItems = catalogResources.filter((r) => !EDITORIAL_IDS.includes(r.id)).length;
+const totalPages = Math.ceil(catalogItems / 24);
+const lastPageButton = new RegExp(`página ${totalPages} de ${totalPages}`, 'i');
 
 describe('Strata App', () => {
   it('renders the editorial shortlist plus a paginated catalog', () => {
@@ -9,9 +14,9 @@ describe('Strata App', () => {
 
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Strata');
     expect(screen.getByText('Seleção editorial')).toBeInTheDocument();
-    expect(screen.getAllByRole('article')).toHaveLength(33); // 9 editorial + 24 first page
+    expect(screen.getAllByRole('article')).toHaveLength(EDITORIAL_IDS.length + Math.min(24, catalogItems));
     expect(screen.getByRole('tabpanel')).toHaveAttribute('aria-labelledby', 'track-tab-all');
-    expect(screen.getByRole('button', { name: /página 9 de 9/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: lastPageButton })).toBeInTheDocument();
   });
 
   it('keeps search state shareable in the URL', async () => {
@@ -28,7 +33,7 @@ describe('Strata App', () => {
 
   it('switches tracks, narrows categories and resets pagination', () => {
     renderWithProviders(<App />);
-    fireEvent.click(screen.getByRole('button', { name: /página 2 de 9/i }));
+    fireEvent.click(screen.getByRole('button', { name: new RegExp(`página 2 de ${totalPages}`, 'i') }));
     expect(window.location.search).toContain('page=2');
 
     fireEvent.click(screen.getByRole('tab', { name: /IA & Agentes/i }));

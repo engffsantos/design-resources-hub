@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { resources as rawResources } from '../src/data/resources';
 import {
   catalogCategories,
   catalogResources,
@@ -11,20 +12,33 @@ import {
 } from '../src/lib/catalog';
 
 describe('canonical catalog', () => {
-  it('preserves all 219 resources, 15 categories and 3 tracks', () => {
+  it('preserves catalog identity, all 15 categories and 3 tracks', () => {
     const stats = computeStats();
-    expect(catalogResources).toHaveLength(219);
+    const ids = catalogResources.map((r) => r.id);
+    expect(catalogResources).toHaveLength(rawResources.length);
+    expect(new Set(ids).size).toBe(ids.length);
     expect(catalogCategories).toHaveLength(15);
     expect(TRACKS).toHaveLength(3);
-    expect(stats.total).toBe(219);
+    expect(stats.total).toBe(rawResources.length);
     expect(stats.categories).toBe(15);
-    expect(stats.byTrack['design-ui'] + stats.byTrack['ai-agents'] + stats.byTrack['dev-tools']).toBe(219);
+    expect(stats.byTrack['design-ui'] + stats.byTrack['ai-agents'] + stats.byTrack['dev-tools']).toBe(rawResources.length);
+
+    // P0 regression: IDs and categories lost during the 2026-11-22 uncatalogued expansion.
+    const protectedIds = [
+      'arcjet', 'better-auth', 'gitleaks', 'mobbin', 'oxc', 'refero-design', 'semgrep',
+      'aider', 'biome-tool', 'stagehand', 'langfuse-tool', 'openhands',
+      'vercel-ai-sdk', 'mastra', 'langgraph', 'pydantic-ai', 'promptfoo', 'e2b-sandboxes',
+    ];
+    expect(protectedIds.every((id) => ids.includes(id))).toBe(true);
+    expect(stats.byCategory['agent-infra']).toBeGreaterThan(0);
+    expect(catalogResources.filter((r) => !catalogCategories.some((c) => c.id === r.category))).toHaveLength(0);
   });
 
   it('does not invent metadata for unknown values', () => {
     const stats = computeStats();
-    expect(stats.unknownPricing).toBe(85);
-    expect(catalogResources.filter((r) => r.pricing === null)).toHaveLength(85);
+    const unknownFromSource = rawResources.filter((r) => !r.pricing).length;
+    expect(stats.unknownPricing).toBe(unknownFromSource);
+    expect(catalogResources.filter((r) => r.pricing === null)).toHaveLength(unknownFromSource);
     expect(catalogResources.some((r) => r.stack?.join(',') === 'design,engineering')).toBe(false);
     expect(catalogResources.some((r) => r.whenToUse?.includes('Curated '))).toBe(false);
     for (const resource of catalogResources) {
@@ -34,15 +48,15 @@ describe('canonical catalog', () => {
     }
   });
 
-  it('keeps declared pricing distribution stable', () => {
+  it('keeps declared pricing distribution consistent with declared metadata', () => {
     const stats = computeStats();
-    expect(stats.byPricing).toMatchObject({
-      'open-source': 110,
-      free: 9,
-      freemium: 15,
-      unknown: 85,
-    });
+    const declared = catalogResources.filter((r) => r.pricing !== null);
+    for (const pricing of ['open-source', 'free', 'freemium', 'paid']) {
+      expect(stats.byPricing[pricing] ?? 0).toBe(declared.filter((r) => r.pricing === pricing).length);
+    }
+    expect(stats.byPricing.unknown).toBe(catalogResources.length - declared.length);
     expect(stats.byPricing.paid).toBeUndefined();
+    expect(Object.values(stats.byPricing).reduce((sum, n) => sum + n, 0)).toBe(catalogResources.length);
   });
 
   it('uses only real IDs for the editorial shortlist', () => {

@@ -4,9 +4,9 @@ Curated design resources, UI libraries, AI prompt packs, security tools and agen
 
 ## Discovery tracks
 
-- **design-ui** — Design & UI: 52 resources across 8 categories.
-- **ai-agents** — IA & Agentes: 134 resources across 5 categories.
-- **dev-tools** — Dev Tools & Segurança: 33 resources across 2 categories.
+- **design-ui** — Design & UI: 132 resources across 8 categories.
+- **ai-agents** — IA & Agentes: 152 resources across 5 categories.
+- **dev-tools** — Dev Tools & Segurança: 69 resources across 2 categories.
 
 ## Free MCP servers
 
@@ -14,65 +14,69 @@ Curated design resources, UI libraries, AI prompt packs, security tools and agen
 
 ## Agent Templates
 
-**40 deployable agent templates** are in the `agent-templates` category. Retrieve all with `filter_by_category: agent-templates` or `search_resources: agent-template limit: 60`. Archetypes: `template-starter` (12), `template-research` (8), `template-multi-agent` (10), `template-coding` (5), `template-browser` (2), `template-voice` (3), `template-ui` (9), `template-local` (7).
+**33 deployable agent templates** are in the `agent-templates` category. Retrieve all with `filter_by_category: agent-templates` or `search_resources: agent-template limit: 60`. Archetypes: `template-starter` (12), `template-research` (8), `template-multi-agent` (10), `template-coding` (5), `template-browser` (2), `template-voice` (3), `template-ui` (9), `template-local` (7).
 
 ## Metadata governance
 
-- Declared pricing: 134 resources.
-- Unknown pricing: 85 resources — reported as `unknown`, never inferred from category.
-- Declared `whenToUse`: 134.
-- Declared `stack`: 127.
-- Declared `resourceType`: 134.
-- Declared `repoUrl`: 139 (includes values derived from explicit GitHub URLs; provenance is exposed in `catalog.json`).
-- Declared `agentConsumable`: 134.
+- Declared pricing: 267 resources.
+- Unknown pricing: 86 resources — reported as `unknown`, never inferred from category.
+- Declared `whenToUse`: 268.
+- Declared `stack`: 231.
+- Declared `resourceType`: 268.
+- Declared `repoUrl`: 192 (includes values derived from explicit GitHub URLs; provenance is exposed in `catalog.json`).
+- Declared `agentConsumable`: 267.
 
 ## Categories (15)
 
-- [AI Prompts] (14) resource(s) — ai-prompts
-- [Landing Pages] (10) resource(s) — landings
-- [UI Components] (13) resource(s) — components
-- [Motion & Animation] (11) resource(s) — motion
-- [Micro-interactions] (4) resource(s) — micro-interactions
-- [Typography] (4) resource(s) — typography
-- [UX Flows] (3) resource(s) — ux-flows
-- [Libraries & Tools] (28) resource(s) — libraries
-- [Security & Auth] (5) resource(s) — security
-- [Agent Skills] (22) resource(s) — agent-skills
-- [MCP & Protocols] (51) resource(s) — mcp-protocols
-- [Agent SDKs & Evals] (7) resource(s) — agent-infra
-- [Icons, Color & Assets] (4) resource(s) — icons-assets
-- [Design Systems & A11y] (3) resource(s) — design-systems
-- [Agent Templates] (40) resource(s) — agent-templates
+- [AI Prompts] (30) resource(s) — ai-prompts
+- [Landing Pages] (11) resource(s) — landings
+- [UI Components] (34) resource(s) — components
+- [Motion & Animation] (22) resource(s) — motion
+- [Micro-interactions] (11) resource(s) — micro-interactions
+- [Typography] (21) resource(s) — typography
+- [UX Flows] (21) resource(s) — ux-flows
+- [Libraries & Tools] (50) resource(s) — libraries
+- [Security & Auth] (19) resource(s) — security
+- [Agent Skills] (25) resource(s) — agent-skills
+- [MCP & Protocols] (53) resource(s) — mcp-protocols
+- [Agent SDKs & Evals] (11) resource(s) — agent-infra
+- [Icons, Color & Assets] (6) resource(s) — icons-assets
+- [Design Systems & A11y] (6) resource(s) — design-systems
+- [Agent Templates] (33) resource(s) — agent-templates
 
 ## How AI Agents Should Use Strata
 
 ### Actionable categories (declared agent-ready)
-- **MCP & Protocols** (51) — mcp-protocols
-- **Agent Templates** (40) — agent-templates
-- **Agent SDKs & Evals** (7) — agent-infra
-- **Agent Skills** (22) — agent-skills
-- **AI Prompts** (14) — ai-prompts
-- **UI Components** (13) — components
-- **Libraries & Tools** (28) — libraries
-- **Security & Auth** (5) — security
-- **Motion & Animation** (11) — motion
-- **Micro-interactions** (4) — micro-interactions
-- **UX Flows** (3) — ux-flows
-- **Icons, Color & Assets** (4) — icons-assets
-- **Design Systems & A11y** (3) — design-systems
+- **MCP & Protocols** (53) — mcp-protocols
+- **Agent Templates** (33) — agent-templates
+- **Agent SDKs & Evals** (11) — agent-infra
+- **Agent Skills** (25) — agent-skills
+- **AI Prompts** (30) — ai-prompts
+- **UI Components** (34) — components
+- **Libraries & Tools** (50) — libraries
+- **Security & Auth** (19) — security
+- **Motion & Animation** (22) — motion
+- **Micro-interactions** (11) — micro-interactions
+- **Typography** (21) — typography
+- **UX Flows** (21) — ux-flows
+- **Icons, Color & Assets** (6) — icons-assets
+- **Design Systems & A11y** (6) — design-systems
 
 ### Visual reference categories (declared not agent-ready)
-- **UI Components** (13) — components
-- **Landing Pages** (10) — landings
-- **Typography** (4) — typography
-- **UX Flows** (3) — ux-flows
-- **Icons, Color & Assets** (4) — icons-assets
-- **Design Systems & A11y** (3) — design-systems
+- **AI Prompts** (30) — ai-prompts
+- **UI Components** (34) — components
+- **Libraries & Tools** (50) — libraries
+- **Landing Pages** (11) — landings
+- **Motion & Animation** (22) — motion
+- **Typography** (21) — typography
+- **UX Flows** (21) — ux-flows
+- **Icons, Color & Assets** (6) — icons-assets
+- **Design Systems & A11y** (6) — design-systems
 
 ### Endpoint selection guide
 1. **/?q=...** — human UI with shareable search state.
 2. **/llms.txt** — concise machine-readable index.
-3. **/llms-full.txt** — complete Markdown dump of all 219 resources.
+3. **/llms-full.txt** — complete Markdown dump of all 353 resources.
 4. **/catalog.json** — complete JSON via GET with provenance.
 5. **/api/a2a** — JSON-RPC 2.0 POST for filtered queries.
 

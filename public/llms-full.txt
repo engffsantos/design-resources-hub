@@ -1,15 +1,15 @@
 # Strata — Complete Catalog
 
-Total resources: 219
+Total resources: 353
 Categories: 15
 Tracks: 3
 Generated at build-time from src/data/resources.ts
-Updated: 2026-11-22T20:37:56.000Z
+Updated: 2026-11-23T00:01:28.000Z
 
 Metadata rule: declared values are preserved; absent values are printed as "Not specified". No category-based fallback is applied.
 
 
-## AI Prompts (14)
+## AI Prompts (30)
 
 ### getlayers.ai (getlayers)
 - **URL**: https://getlayers.ai
@@ -180,8 +180,207 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Featured**: No
 - **Description**: Directory plugin connecting AI coding editors directly to curated UI component registries, themes, and generation prompts.
 
+### Anthropic Prompt Library (anthropic-prompt-library)
+- **URL**: https://docs.anthropic.com/en/prompt-library/library
+- **Track**: ai-agents
+- **Type**: prompt-pack
+- **Agent-Consumable**: Yes
+- **Price**: free
+- **When to use**: Use as canonical reference for structured, explained prompts across diverse tasks with reasoning behind effectiveness.
+- **Stack**: claude, anthropic
+- **Tags**: anthropic, official, task-specific, explained, learning, real-world
+- **Featured**: Yes
+- **Description**: Official well-organized collection of prompt examples tailored for various tasks from summarization to creative writing. Each example includes insights into why it works, offering valuable learning experience. Wide variety of task-specific templates with detailed explanations of effective prompt techniques.
 
-## Landing Pages (10)
+### OpenAI Prompt Engineering Guide (openai-prompt-guide)
+- **URL**: https://platform.openai.com/docs/guides/prompt-engineering
+- **Track**: ai-agents
+- **Type**: docs
+- **Agent-Consumable**: Yes
+- **Price**: free
+- **When to use**: Use as authoritative reference for OpenAI-specific prompt engineering strategies and best practices.
+- **Stack**: openai, gpt
+- **Tags**: openai, official, guide, strategies, context, iterative, best-practices
+- **Featured**: Yes
+- **Description**: Official guide providing foundational understanding of how to design prompts for OpenAI models. Explores strategies for structuring queries, incorporating context, and iteratively refining prompts for optimal results. Step-by-step instructions, techniques for clarity, best practices for iterative testing.
+
+### AIPRM (aiprm)
+- **URL**: https://www.aiprm.com/
+- **Track**: ai-agents
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use for community-curated, industry-specific prompts with customization tools for ChatGPT and other AI tools.
+- **Stack**: chatgpt, browser-extension
+- **Tags**: community, chatgpt, industry-specific, marketing, content-creation, customization
+- **Featured**: Yes
+- **Description**: Dynamic community-driven platform with growing library of prompts for ChatGPT and other AI tools. Industry-specific prompts for marketing, content creation, and more. Customization tools to adapt prompts for unique requirements. Community-curated prompt libraries for diverse use cases.
+
+### PromptHub (prompthub)
+- **URL**: https://prompthub.com/
+- **Track**: ai-agents
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use for team-based prompt testing, evaluation, and collaboration across multiple LLMs with built-in metrics.
+- **Stack**: web, api
+- **Tags**: testing, evaluation, library, nlp-tasks, metrics, hyperparameter-tuning, collaboration
+- **Featured**: No
+- **Description**: Platform for prompt testing and evaluation for LLMs. Pre-built prompt library for common NLP tasks (summarization, QA, code generation). Test your own or library prompts with different LLMs. Evaluation metrics: accuracy, relevance, coherence. Hyperparameter tuning. Collaboration features for teams.
+
+### Priompt (priompt)
+- **URL**: https://github.com/priompt/priompt
+- **Track**: ai-agents
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when building complex prompts with priority-based context management and React-like declarative syntax.
+- **Stack**: typescript, jsx, react
+- **Tags**: jsx, react-syntax, priorities, context-window, control-flow, fallbacks, open-source
+- **Featured**: Yes
+- **Repo**: https://github.com/priompt/priompt (declared)
+- **Description**: JSX-based prompt library for LLMs. Uses React-like syntax to structure prompts. Define priorities for different prompt parts to control context window inclusion. Control flow components for fallbacks or shortening over-long prompts. Makes prompt building intuitive for React developers.
+
+### PromptLayer (promptlayer)
+- **URL**: https://promptlayer.com/
+- **Track**: ai-agents
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use for production prompt management with versioning, testing, analytics, and team collaboration across projects.
+- **Stack**: python, javascript, rest-api
+- **Tags**: registry, versioning, batch-testing, analytics, logging, metadata, collaboration, sdk, rest-api
+- **Featured**: Yes
+- **Description**: Comprehensive prompt engineering application: prompt registry with versioning and retrieval, batch testing, advanced search, LLM analytics, API request logging, metadata tracking, project collaboration. Model-agnostic with OpenAI focus. Python and JavaScript SDKs, REST API. Free tier: 7 days logs, 5k requests/month.
+
+### Promptmetheus (promptmetheus)
+- **URL**: https://promptmetheus.com/
+- **Track**: ai-agents
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use for visual prompt engineering with block-based composition, cost estimation, and multi-LLM testing in an IDE environment.
+- **Stack**: web, api
+- **Tags**: ide, blocks, history, cost-estimation, multi-llm, playground, local-storage
+- **Featured**: No
+- **Description**: IDE for complex LLM prompt creation. Break prompts into data/text blocks to rearrange, combine, test. Stores design history, estimates costs. AI programming interface executing prompts on remote server. Supports Anthropic, Cohere, OpenAI, Google, Mistral, Perplexity, Groq, Deep Infra, AI21 Labs. Free playground with local data storage.
+
+### PromptPerfect (promptperfect)
+- **URL**: https://promptperfect.jina.ai/
+- **Track**: ai-agents
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use to optimize and deploy prompts as APIs with model comparison across text and image generation models.
+- **Stack**: api, chatgpt, claude, llama, dalle, midjourney
+- **Tags**: optimization, api, model-comparison, prompt-as-service, multi-model, image-models, paid-chatgpt
+- **Featured**: No
+- **Description**: Improves prompt quality for consistent LLM results. Deploy prompts to server, use via API. Adjust prompt length, output quality, iterations. AI model "battleground" for comparing model outputs. Prompt-as-a-service for deploying as REST API. Works with ChatGPT, Claude, Llama, DALL-E, Midjourney, Stable Diffusion. Requires paid ChatGPT.
+
+### PromptSource (promptsources)
+- **URL**: https://github.com/promptsource/promptsource
+- **Track**: ai-agents
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for collaborative prompt development with Jinja templating, versioning, and API access to 2000+ community prompts.
+- **Stack**: python, jinja, web, api
+- **Tags**: jinja, templating, 2000-prompts, api, gui, iterative, open-source, sharing
+- **Featured**: Yes
+- **Repo**: https://github.com/promptsource/promptsource (declared)
+- **Description**: Toolkit for creating, sharing, and using natural language prompts. ~2,000 English prompts via API. Web-based GUI for writing prompts in Jinja templating language. Iterative development process. Available on GitHub for free.
+
+### ThoughtSource (thoughtsource)
+- **URL**: https://github.com/thoughtsource/thoughtsource
+- **Track**: ai-agents
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to implement chain-of-thought reasoning with standardized datasets and evaluation for trustworthy model outputs.
+- **Stack**: python, jupyter, openai, huggingface
+- **Tags**: chain-of-thought, reasoning, datasets, scientific, medical, annotator, jupyter, open-source
+- **Featured**: Yes
+- **Repo**: https://github.com/thoughtsource/thoughtsource (declared)
+- **Description**: Open-source framework for chain-of-thought prompting to increase model trustworthiness. Standardized chain-of-thought format datasets (general, scientific, medical QA). Annotator for highlighting reasoning chain similarities. Python, Jupyter notebooks. Generates reasoning chains with OpenAI and Hugging Face models.
+
+### Awesome LLM Prompt Libraries (danielrosehill) (awesome-llm-prompt-libs)
+- **URL**: https://github.com/danielrosehill/Awesome-LLM-Prompt-Libraries
+- **Track**: ai-agents
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as a master index to discover open-source prompt libraries and collections across GitHub.
+- **Stack**: github, markdown
+- **Tags**: awesome-list, github, chatgpt, system-prompts, superprompting, reference, engineering, curated
+- **Featured**: Yes
+- **Repo**: https://github.com/danielrosehill/Awesome-LLM-Prompt-Libraries (declared)
+- **Description**: Curated list of open-source GPT prompt libraries on GitHub. Includes awesome-chatgpt-prompts, ChatGPT System Prompts, Awesome Prompts by AI Boost, yokoffing, ChatGPT Superprompting, ChatGPT-Prompts-Reference, Awesome ChatGPT Suggestions, AI Prompts 200 Ideas, Lit Prompts. Separate list for engineering prompts.
+
+### Awesome GPT Prompt Engineering (snwfdhmp) (awesome-gpt-prompt-eng)
+- **URL**: https://github.com/snwfdhmp/awesome-gpt-prompt-engineering
+- **Track**: ai-agents
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to explore the largest community-curated ChatGPT prompt collection with voting and sharing.
+- **Stack**: github, web
+- **Tags**: community, awesomegptprompts, 500-templates, promptpal, upvotes, sharing, largest
+- **Featured**: Yes
+- **Repo**: https://github.com/snwfdhmp/awesome-gpt-prompt-engineering (declared)
+- **Description**: Largest open-source prompt community. awesomegptprompts.com to explore hundreds of best ChatGPT prompts. fka/awesome-chatgpt-prompts dataset. 500+ ChatGPT Prompt Templates. PromptPal collection. Community-driven with upvotes and sharing.
+
+### FlowGPT (flowgpt)
+- **URL**: https://flowgpt.com/
+- **Track**: ai-agents
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for free prompt exploration and testing with multiple models, daily credits, and template creation.
+- **Stack**: chatgpt, claude, web
+- **Tags**: free, community, academics, marketing, business, startups, chatgpt-4, claude, daily-credits, templates
+- **Featured**: Yes
+- **Description**: Free community to explore and find prompt ideas geared towards academics, marketing, business, startups. Chat and test prompts with ChatGPT, ChatGPT-4, Claude. Daily free credits, earn more by completing tasks. Create templates with predefined inputs for single-turn responses.
+
+### SaaS Prompts (saas-prompts)
+- **URL**: https://saasprompts.com/
+- **Track**: ai-agents
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for SaaS-focused role-based prompts that provide immediate context for business, marketing, and product tasks.
+- **Stack**: chatgpt, web
+- **Tags**: saas, 500-prompts, role-prompting, ux-researcher, startup-founder, context, free
+- **Featured**: Yes
+- **Description**: 500+ free ChatGPT prompt ideas specifically for growing SaaS businesses. Role prompting technique: "I want you to act as a UX researcher" or "startup founder". Helps AI zero in on context for more relevant responses. Created by Bren Kinfa.
+
+### Prompt Engineering Guide (prompt-engineering-guide)
+- **URL**: https://www.promptingguide.ai/
+- **Track**: ai-agents
+- **Type**: docs
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as a structured reference when designing or reviewing prompts, RAG pipelines and agent context strategies.
+- **Stack**: markdown, documentation, github
+- **Tags**: prompt-engineering, context-engineering, rag, agents, guides
+- **Featured**: No
+- **Repo**: https://github.com/dair-ai/Prompt-Engineering-Guide (declared)
+- **Description**: Community-maintained guide with lessons, papers, notebooks and resources for prompt engineering, context engineering, RAG and AI agents.
+
+### OpenAI Cookbook (openai-cookbook)
+- **URL**: https://cookbook.openai.com
+- **Track**: ai-agents
+- **Type**: docs
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when implementing a concrete OpenAI API pattern and needing an authoritative runnable example.
+- **Stack**: python, typescript, api, documentation
+- **Tags**: openai, examples, prompt-engineering, api, guides
+- **Featured**: No
+- **Repo**: https://github.com/openai/openai-cookbook (declared)
+- **Description**: Official examples and guides for using the OpenAI API, including practical patterns for prompts, embeddings and agents.
+
+
+## Landing Pages (11)
 
 ### land-book.com (land-book)
 - **URL**: https://land-book.com
@@ -299,12 +498,24 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Price**: free
 - **When to use**: Use as a visual benchmark when structuring product landing pages, hero sections, and editorial storytelling.
 - **Stack**: Not specified
-- **Tags**: landing-pages, inspiration, web-design, hero, showcase
+- **Tags**: landing-pages, inspiration, web-design, hero, showcase, animated, video-recordings, filters, motion
 - **Featured**: No
 - **Description**: Curated showcase of standout landing page designs highlighting modern hero composition, visual rhythm, and conversion clarity.
 
+### One Page Love (one-page-love)
+- **URL**: https://onepagelove.com
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use when researching real one-page layouts and component sections before designing a landing page.
+- **Stack**: html, css, curation
+- **Tags**: inspiration, one-page, gallery, templates, sections
+- **Featured**: No
+- **Description**: Curated gallery of one-page websites, landing page sections, fonts and website templates.
 
-## UI Components (13)
+
+## UI Components (34)
 
 ### component.gallery (component-gallery)
 - **URL**: https://component.gallery
@@ -448,7 +659,7 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Price**: open-source
 - **When to use**: Use for high-craft animated React blocks, bento grids, marquees, and interactive marketing components.
 - **Stack**: react, typescript, tailwind, motion
-- **Tags**: react, tailwind, motion, animated-ui, design-engineering
+- **Tags**: react, tailwind, motion, animated-ui, design-engineering, typescript, animated, bento-grids, marquees, design-engineers, 150-components
 - **Featured**: Yes
 - **Description**: 150+ free and open-source animated components and effects built with React, TypeScript, Tailwind CSS, and Motion for design engineers.
 
@@ -464,8 +675,262 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Featured**: No
 - **Description**: Specialized React component collection extending shadcn/ui with niche product patterns, previewable and installable via MCP.
 
+### Radix UI (radix-ui)
+- **URL**: https://www.radix-ui.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as the accessible behavioral foundation for building custom design systems with zero styling lock-in.
+- **Stack**: react, typescript
+- **Tags**: headless, accessible, primitives, waia-ria, design-system, react, unstyled, shadcn-foundation
+- **Featured**: Yes
+- **Description**: Low-level UI component library with focus on accessibility, customization, and developer experience. Unstyled, accessible primitives for building design systems. React, WAI-ARIA compliant. Used as foundation by shadcn/ui and many others. 14k+ stars.
 
-## Motion & Animation (11)
+### DaisyUI (daisyui)
+- **URL**: https://daisyui.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when you want pre-designed component classes like Bootstrap but with Tailwind flexibility and 29 built-in themes.
+- **Stack**: tailwind, css, vue, react, angular, meteor
+- **Tags**: tailwind, plugin, components, themes, dark-mode, accessibility, multi-framework, 29-themes
+- **Featured**: Yes
+- **Description**: Tailwind CSS plugin with ready-made components and utilities. 29 themes, dark mode, accessibility features. Supports Vue, React, Meteor, Angular. 29k+ stars. Higher-level utility classes on top of Tailwind atomic classes.
+
+### Base Web by Uber (base-web)
+- **URL**: https://baseweb.design/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for building scalable web applications with a robust, customizable React component foundation from Uber.
+- **Stack**: react, typescript
+- **Tags**: uber, design-system, react, theming, overrides-api, enterprise, scalable
+- **Featured**: Yes
+- **Description**: Open-source design system and React component library from Uber. High-quality components, theming capabilities, Overrides API for extreme customization. Scalable for enterprise systems. 8k+ stars.
+
+### Chakra UI (chakra-ui)
+- **URL**: https://chakra-ui.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for rapid accessible React UI development with built-in theming, dark mode, and composable component patterns.
+- **Stack**: react, typescript, emotion
+- **Tags**: accessible, modular, themeable, dark-mode, composable, dx, inclusive, react
+- **Featured**: Yes
+- **Description**: Simple, modular, accessible component library for React. Themeable, composable, light/dark mode built-in. Focus on developer experience and inclusivity. 34k+ stars. Used by many production apps.
+
+### Mantine (mantine)
+- **URL**: https://mantine.dev/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for comprehensive React component library with built-in hooks, theming, and advanced components like tables and charts.
+- **Stack**: react, typescript
+- **Tags**: 120-components, hooks, dark-mode, theming, forms, tables, charts, notifications, react
+- **Featured**: Yes
+- **Description**: 120+ responsive React components with hooks. Dark/light color schemes, Mantine theme customizations. Feature-rich: forms, tables, charts, notifications, modals, navigation. 23k+ stars. Free and open-source.
+
+### Headless UI (headless-ui)
+- **URL**: https://headlessui.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when you want full styling control with Tailwind but need accessible component behavior (dialogs, menus, tabs, listboxes).
+- **Stack**: react, vue, tailwind
+- **Tags**: unstyled, accessible, react, vue, tailwind, tailwind-labs, tailwind-ui-foundation
+- **Featured**: Yes
+- **Description**: Completely unstyled, fully accessible UI components for React and Vue. Built by Tailwind Labs. Integrates perfectly with Tailwind CSS. Focus on accessibility and developer experience. Used by Tailwind UI.
+
+### Zag (zag)
+- **URL**: https://zagjs.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to build framework-agnostic design systems with state-machine-driven component logic.
+- **Stack**: react, vue, solid, typescript
+- **Tags**: framework-agnostic, react, vue, solid, state-machines, design-systems, chakra-team, 20-components
+- **Featured**: Yes
+- **Description**: Framework-agnostic UI component patterns for React, Vue, and Solid. Machine-driven components with state machines. 20+ components. Build design systems without framework lock-in. From Chakra UI team.
+
+### Ariakit (ariakit)
+- **URL**: https://ariakit.org/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for building accessible React components with minimal bundle size and zero styling opinions.
+- **Stack**: react, typescript
+- **Tags**: headless, accessible, waia-ria, keyboard, react, combobox, dialog, popover, tooltip, menu, tabs
+- **Featured**: Yes
+- **Description**: Low-level accessible UI components for React. Headless, no styling opinions. Focus on WAI-ARIA compliance and keyboard navigation. Combobox, dialog, popover, tooltip, menu, tabs, toolbar, disclosure, toolbar. MIT licensed.
+
+### Blueprint (Palantir) (blueprint)
+- **URL**: https://blueprintjs.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for building complex, data-heavy desktop web applications with sophisticated table, tree, and datetime components.
+- **Stack**: react, typescript
+- **Tags**: palantir, data-dense, desktop, core, datetime, table, tree, select, react
+- **Featured**: Yes
+- **Description**: React-based UI toolkit for the web, optimized for complex data-dense interfaces for desktop applications. Core components, datetime components, table, select, tree. 20k+ stars. From Palantir.
+
+### Evergreen (Segment) (evergreen)
+- **URL**: https://evergreen.segment.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for enterprise-grade React UI framework with design system alignment and comprehensive component coverage.
+- **Stack**: react, typescript
+- **Tags**: segment, enterprise, design-system, composable, ambitious, react, comprehensive
+- **Featured**: No
+- **Description**: React UI Framework for building ambitious products. Comprehensive components, enterprise-grade, design system friendly. From Segment. 12k+ stars. Flexible, composable, well-documented.
+
+### PrimeReact (primereact)
+- **URL**: https://primereact.org/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for rapid development with extensive component library and ready-to-use UI blocks for enterprise applications.
+- **Stack**: react, typescript
+- **Tags**: 90-components, 280-blocks, theming, accessibility, rtl, enterprise, mercedes, ebay, nvidia
+- **Featured**: Yes
+- **Description**: Feature-rich React UI library with 90+ components. 280+ UI blocks for quick development. Used by Mercedes, eBay, Nvidia. 105k+ weekly downloads. 6k+ stars. Theming, accessibility, RTL support.
+
+### Untitled UI React (untitled-ui)
+- **URL**: https://untitledui.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for production-ready, modern, accessible React components with Figma design sync and Tailwind v4.
+- **Stack**: react, typescript, tailwind, react-aria
+- **Tags**: tailwind-v4, react-aria, typescript, figma, largest-collection, cli, starter-kits, nextjs, bolt, vite
+- **Featured**: Yes
+- **Description**: World's largest collection of open-source React components built with Tailwind CSS v4.1, TypeScript, React Aria. Consistent, professionally designed, everything needed for modern interfaces. Based on Untitled UI Figma (world's most popular Figma UI kit). Custom CLI tool, starter kits for Next.js, Bolt.new, Vite.
+
+### Preline UI (preline-ui)
+- **URL**: https://preline.co/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for the most extensive free Tailwind component library with 170+ sections and full dark mode.
+- **Stack**: tailwind, html, javascript
+- **Tags**: tailwind, 60-components, 170-sections, dark-mode, polished, responsive, mit, free
+- **Featured**: Yes
+- **Description**: Largest free Tailwind-based library with 60+ components and 170+ sections. Full dark mode support, polished look. Highly responsive components for simple and complex layouts. MIT licensed.
+
+### Sailboat UI (sailboat-ui)
+- **URL**: https://sailboatui.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for flexible Tailwind components with Alpine.js interactivity and multiple style variants.
+- **Stack**: tailwind, alpine-js, html
+- **Tags**: tailwind, 150-components, alpine-js, interactive, variants, brand-theme, open-source
+- **Featured**: Yes
+- **Description**: Modern Tailwind CSS library with 150+ open-source components. Multiple styles of components (accordions, buttons, etc.). Alpine.js integration for interactive components. Flexible variants to match brand theme.
+
+### Park UI (park-ui)
+- **URL**: https://park-ui.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when building design systems across React, Vue, and Solid with shared Tailwind/Panda CSS foundation.
+- **Stack**: react, vue, solid, tailwind, panda-css
+- **Tags**: tailwind, panda-css, react, vue, solid, multi-framework, design-consistency
+- **Featured**: Yes
+- **Description**: Integrates with Tailwind and Panda CSS. Supports React, Vue, and Solid. Flexibility for projects spanning different frameworks. Same design principles across tech stacks. 4k+ stars.
+
+### Pines UI (pines-ui)
+- **URL**: https://pines-ui.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for quick consistent UI with multiple Tailwind variants and dark mode support.
+- **Stack**: tailwind, html, javascript
+- **Tags**: tailwind, variants, dark-mode, consistent, sleek, themes
+- **Featured**: No
+- **Description**: Tailwind-based library offering multiple component variants with full dark mode support. Quick way to build consistent, sleek UI elements that adapt to different themes.
+
+### Aceternity UI (aceternity-ui)
+- **URL**: https://ui.aceternity.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for stunning marketing and landing page sections with 3D effects, parallax, and motion that impress visitors.
+- **Stack**: react, typescript, tailwind, framer-motion
+- **Tags**: tailwind, framer-motion, 3d-cards, parallax, animated-backgrounds, handcrafted, wow-factor, marketing
+- **Featured**: Yes
+- **Description**: Bespoke, handcrafted UI sections built with Tailwind and Framer Motion. Specializes in eye-catching effects: 3D card elements, parallax scrolling, animated backgrounds. "Wow" factor with minimal setup.
+
+### Rebass (rebass)
+- **URL**: https://rebassjs.org/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for ultra-lightweight React UI foundation with styled-system theming in just 4KB.
+- **Stack**: react, styled-system
+- **Tags**: minimalist, styled-system, 4kb, 8-components, responsive, extensible, themeable, brent-jackson
+- **Featured**: No
+- **Description**: Minimalist React UI Kit with styled system by Brent Jackson. Just 8 foundational components in 4KB. Responsive, extensible, themeable. Designed for swift design and development system with tiny footprint. 7.9k+ stars.
+
+### Monday UI (monday-ui)
+- **URL**: https://mondayui.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for a complete basic React UI component set with MIT license and rich component variety.
+- **Stack**: react, typescript
+- **Tags**: mit, rich-components, buttons, forms, accordions, dialogs, react, basic-ui
+- **Featured**: No
+- **Description**: Free open-source (MIT) rich components library for React. Buttons, button groups, colors, form elements, accordions, dialogs, and more. Complete basic UI component set.
+
+### Ark UI (ark-ui)
+- **URL**: https://ark-ui.com
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when building an accessible design system that must share behavior across multiple frontend frameworks.
+- **Stack**: typescript, state-machines, zag, react, vue
+- **Tags**: headless, accessibility, react, vue, svelte, solid
+- **Featured**: No
+- **Repo**: https://github.com/chakra-ui/ark (declared)
+- **Description**: Headless, accessible and framework-agnostic UI component library covering React, Solid, Vue and Svelte.
+
+### React Spectrum (react-spectrum)
+- **URL**: https://react-spectrum.adobe.com
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when accessibility, high contrast, touch and internationalization requirements must be covered by a component library.
+- **Stack**: react, typescript, aria, adobe
+- **Tags**: react, accessibility, adobe, components, internationalization
+- **Featured**: No
+- **Repo**: https://github.com/adobe/react-spectrum (declared)
+- **Description**: Adobe collection of React libraries and tools for accessible, adaptive user interfaces with dark mode, high contrast and reduced-motion support.
+
+
+## Motion & Animation (22)
 
 ### getlayers.ai/tools/liquid-colour (getlayers-liquid-colour)
 - **URL**: https://getlayers.ai/tools/liquid-colour
@@ -602,8 +1067,142 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Featured**: Yes
 - **Description**: Production-grade animation library for React, JavaScript, and Vue (formerly Framer Motion) with spring physics, layout animations, and scroll triggers.
 
+### React Spring (react-spring)
+- **URL**: https://www.react-spring.dev/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for natural, physics-based animations with a simple declarative API across web and native platforms.
+- **Stack**: react, react-native, typescript
+- **Tags**: spring-physics, react, react-native, web, expressive-api, colors, css-variables, arrays
+- **Featured**: Yes
+- **Description**: Spring physics-based animation library for web, react-native, and react-native-web. Simple, expressive API. Supports colors, CSS variables, lengths, angles, arrays. 25k+ stars. Easy install, handy docs.
 
-## Micro-interactions (4)
+### GSAP (GreenSock Animation Platform) (gsap)
+- **URL**: https://gsap.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use for complex sequenced animations, scroll-driven effects (ScrollTrigger), FLIP layout animations, and performance-critical animations bypassing React.
+- **Stack**: javascript, typescript, react, vue, any-framework
+- **Tags**: professional, timelines, scrolltrigger, flip, physics, framework-agnostic, industry-standard, high-fidelity
+- **Featured**: Yes
+- **Description**: Professional-grade JavaScript animation platform transcending React ecosystem. Comprehensive solution for complex sequenced timelines, ScrollTrigger, Flip plugin, physics-based easing. Industry standard for high-fidelity web animation for 10+ years. Works with any framework.
+
+### Animate.css (animate-css-lib)
+- **URL**: https://animate.style/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for simple CSS-only animations without JavaScript dependencies. Just add classes.
+- **Stack**: css
+- **Tags**: css, classes, keyframes, reduced-motion, cross-browser, lightweight, no-js
+- **Featured**: Yes
+- **Description**: CSS library of ready-made animations. Just add classes to elements instead of writing keyframes. Reduced-motion support. 80k+ stars. Cross-browser, lightweight.
+
+### AnimXYZ (animxyz)
+- **URL**: https://animxyz.com/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for composable CSS animations using utility variables without JavaScript runtime.
+- **Stack**: css
+- **Tags**: css, composable, variables, utility, framework-agnostic, no-js, lightweight
+- **Featured**: No
+- **Description**: CSS animation utility library with composable variables. Create complex animations by combining utility variables. Works with any framework. Lightweight, no JS runtime.
+
+### Whirl (whirl)
+- **URL**: https://whirl.netlify.app/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for beautiful, framework-agnostic loading animations with pure CSS.
+- **Stack**: css
+- **Tags**: css, loading, animations, vanilla-css, any-framework, ux
+- **Featured**: No
+- **Description**: CSS library for beautiful loading animations. Compatible with any JS framework (vanilla CSS). Minor adjustments for framework quirks. Seamless loading animations for better UX.
+
+### Moving Letters (moving-letters)
+- **URL**: https://tobiasahlin.com/moving-letters/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for creative text animation inspiration and ready-to-port effects for headlines and UI typography.
+- **Stack**: css, javascript
+- **Tags**: text, typography, animation, creative, portable, any-framework, headlines
+- **Featured**: Yes
+- **Description**: Text animation showcase and library for animating typography. Easily portable to any JS framework. Creative text effects for headlines and UI text.
+
+### LDRS (ldrs)
+- **URL**: https://ldrs.dev/
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for ready-made CSS loader and spinner components with React support.
+- **Stack**: css, react
+- **Tags**: loaders, spinners, css, react, any-framework, loading-states
+- **Featured**: Yes
+- **Description**: CSS loaders and spinner animations with ReactJS support. Implement with any JavaScript framework. Ready-made spinner components for loading states.
+
+### Animista (animista)
+- **URL**: https://animista.net/
+- **Track**: design-ui
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to visually pick and copy CSS animations with keyframes without any installation.
+- **Stack**: css
+- **Tags**: css, playground, on-demand, keyframes, no-install, ready-made
+- **Featured**: Yes
+- **Description**: On-demand CSS animations library. Visit playground, choose animation, get class and keyframes. No installation required. Ready-made animations for various app parts.
+
+### Theatre.js (theatre-js)
+- **URL**: https://www.theatrejs.com
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when a timeline-based motion workflow with keyframes and easing is needed instead of imperative animation code.
+- **Stack**: javascript, typescript, threejs, react
+- **Tags**: animation, timeline, motion-design, extensions, webgl
+- **Featured**: No
+- **Repo**: https://github.com/theatre-js/theatre (declared)
+- **Description**: Motion design editor and animation toolbox for the web with a dope sheet, graph editor and extensible workflow.
+
+### Anime.js (anime-js)
+- **URL**: https://animejs.com
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for performant DOM/SVG animation with fine-grained timing control and a small bundle.
+- **Stack**: javascript, typescript, svg, css
+- **Tags**: animation, javascript, svg, springs, scroll
+- **Featured**: No
+- **Repo**: https://github.com/juliangarnier/anime (declared)
+- **Description**: Lightweight JavaScript animation engine with an intuitive API, SVG tooling, staggering, springs, draggable and scroll observer.
+
+### Rive (rive)
+- **URL**: https://rive.app
+- **Track**: design-ui
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use when interactive vector motion must ship across platforms and be generated or iterated with a coding agent via the Rive CLI.
+- **Stack**: rive, typescript, cli, gpu
+- **Tags**: motion, interactive, vector, state-machines, cli
+- **Featured**: No
+- **Description**: Agent-native 2D and 3D engine for interactive UI, motion and games, with open-source runtimes and a .riv file format.
+
+
+## Micro-interactions (11)
 
 ### getlayers.ai/tools/custom-cursors (getlayers-custom-cursors)
 - **URL**: https://getlayers.ai/tools/custom-cursors
@@ -649,12 +1248,102 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Price**: open-source
 - **When to use**: Use when adding playful or tactile micro-interactions, text reveals, and interactive hover surfaces to React apps.
 - **Stack**: react, typescript, tailwind
-- **Tags**: micro-interactions, react, animated-text, interactive, open-source
+- **Tags**: micro-interactions, react, animated-text, interactive, open-source, typescript, tailwind, motion, interactive-cards, backgrounds, live-demos
 - **Featured**: Yes
 - **Description**: Free open-source collection of animated text, interactive cards, backgrounds, and micro-interaction components for React with live demos.
 
+### React Micro Interactions (OliviaR13) (react-micro-interactions)
+- **URL**: https://github.com/OliviaR13/react-micro-interactions
+- **Track**: design-ui
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to copy-paste production-ready React micro-interaction components with full source, dependencies, and design rationale.
+- **Stack**: react, typescript, framer-motion
+- **Tags**: react, framer-motion, typescript, lucide-react, liquid-gooey, bencho, 47-components, copy-paste, open-source, github
+- **Featured**: Yes
+- **Repo**: https://github.com/OliviaR13/react-micro-interactions (declared)
+- **Description**: 47 polished React + Framer Motion micro-interaction components sourced from bencho.dev. Each includes complete .tsx source, meta.json with install deps, usage examples, and design notes. Categories: Interactions (like, magnet-select, checklist, drag-ball, dock, pull, slide-confirm, confirm, stepper, liq-arrange, liq-toggle), Feedback, Navigation, Input, Data Display.
 
-## Typography (4)
+### Micro-Interactions Library (micro-interactions-library)
+- **URL**: https://micro-interactions-library.vercel.app/
+- **Track**: design-ui
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: free
+- **When to use**: Use for lightweight, accessible micro-interactions with pure CSS (no JS animation library needed) and built-in reduced-motion support.
+- **Stack**: nextjs, typescript, css
+- **Tags**: nextjs, typescript, css-animations, copy-paste, 15-components, accessibility, reduced-motion
+- **Featured**: Yes
+- **Description**: 15 copy-paste micro-interactions built with Next.js, TypeScript, and pure CSS animations. Categories: Button Loading States, Skeleton to Content, Toast Notifications, Form Validation, Progress Bar, Ripple Effect, Bounce Press, Glow Pulse, Confetti Burst, Focus Indicators, Skip to Content, Reduced Motion Toggle, Mobile Menu Transition, Tab Indicator Slide, Dropdown Menu.
+
+### uselayouts (SunnyCOdet/microinteractions) (uselayouts)
+- **URL**: https://uselayouts.com/
+- **Track**: design-ui
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: free
+- **When to use**: Use to add premium Framer Motion micro-interactions that work natively with shadcn/ui via one-command CLI install.
+- **Stack**: react, typescript, tailwind, framer-motion
+- **Tags**: react, framer-motion, tailwind, shadcn, cli-install, premium, accessible, customizable
+- **Featured**: Yes
+- **Repo**: https://github.com/SunnyCOdet/microinteractions (declared)
+- **Description**: Free premium animated React components and micro-interactions built with Framer Motion and Tailwind CSS. Designed to integrate seamlessly with shadcn/ui. Install via shadcn CLI: `npx shadcn@latest add uselayouts.com/r/3d-book`. Live previews, copy-paste source, accessible, customizable with Tailwind.
+
+### MicroKit (henriquegpb/microkit) (microkit-gh)
+- **URL**: https://github.com/henriquegpb/microkit
+- **Track**: design-ui
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for a comprehensive micro-interaction library with live previews, multiple implementation variants, and shadcn CLI integration.
+- **Stack**: react, typescript, tailwind, css
+- **Tags**: react, typescript, tailwind, css, shadcn, cli, 50-components, live-preview, copy-paste, github-submissions
+- **Featured**: Yes
+- **Repo**: https://github.com/henriquegpb/microkit (declared)
+- **Description**: 50 interactive micro-interaction components with dedicated preview pages. One-command install through shadcn CLI or copy source by hand. JavaScript and TypeScript implementations, CSS and Tailwind styling variants. Live previews, copy-ready source, favorites and recently viewed stored locally. GitHub-based submissions.
+
+### React Interactive (rafgraph/react-interactive) (react-interactive)
+- **URL**: https://github.com/rafgraph/react-interactive
+- **Track**: design-ui
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when you need precise control over interactive states (hover, active, focus) with callbacks and touch-device bug fixes beyond CSS capabilities.
+- **Stack**: react, typescript
+- **Tags**: react, interactive-states, hover, active, focus, touch, keyboard, callbacks, css-bug-fix, mit
+- **Featured**: Yes
+- **Repo**: https://github.com/rafgraph/react-interactive (declared)
+- **Description**: Better hover, active, and focus states than CSS pseudo-classes with callback when interactive state changes. Provides hover, active, mouseActive, touchActive, keyActive, focus, focusFromMouse, focusFromTouch, focusFromKey. Eliminates CSS sticky :hover bug on touch devices. Allows focus styles only when focus is from keyboard. MIT licensed, 530 commits since 2016.
+
+### AutoAnimate (auto-animate)
+- **URL**: https://auto-animate.formkit.com
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to add subtle layout transitions to existing lists and containers without authoring keyframes.
+- **Stack**: javascript, typescript, react, vue, svelte
+- **Tags**: animation, layout, transitions, frameworks, utility
+- **Featured**: No
+- **Repo**: https://github.com/formkit/auto-animate (declared)
+- **Description**: Zero-config drop-in utility that animates DOM layout changes with one line of code across React, Vue, Preact, Solid and Svelte.
+
+### Atropos (atropos)
+- **URL**: https://atroposjs.com
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for tasteful 3D tilt and parallax feedback on cards without a heavy animation dependency.
+- **Stack**: javascript, typescript, css, vanilla
+- **Tags**: parallax, 3d, hover, touch, css
+- **Featured**: No
+- **Repo**: https://github.com/nolimits4web/atropos (declared)
+- **Description**: Lightweight, touch-friendly 3D parallax hover-effect library for cards and interactive surfaces.
+
+
+## Typography (21)
 
 ### fontinlogo.com (fontinlogo)
 - **URL**: https://fontinlogo.com
@@ -704,8 +1393,213 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Featured**: No
 - **Description**: Collection of 500+ curated Google Font pairings with live text preview and ready-to-use typographic combinations.
 
+### Use & Modify (use-modify)
+- **URL**: https://use-and-modify.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to discover distinctive open-license typefaces you won't see everywhere, all free for commercial work.
+- **Stack**: Not specified
+- **Tags**: open-source, fonts, ofl, curated, no-ads, free-commercial
+- **Featured**: Yes
+- **Description**: Personal selection of beautiful, classy, punk, professional, incomplete, weird open-source typefaces (OFL, Apache, MIT, CC0, public domain). No ads, no premium tier, just fonts someone found, liked and checked.
 
-## UX Flows (3)
+### Velvetyne Type Foundry (velvetyne)
+- **URL**: https://velvetyne.fr/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for posters and covers that need a typeface with an opinion and experimental edge.
+- **Stack**: Not specified
+- **Tags**: libre, foundry, display, experimental, france, open-source
+- **Featured**: Yes
+- **Description**: Libre type foundry in France since 2011 with experimental display faces, strange grotesques, revivals, and workshop type. Free to use, change, and share with designer credit.
+
+### Collletttivo (collletttivo)
+- **URL**: https://collletttivo.it/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for contemporary sans and display faces from a designer collective with finished, polished work.
+- **Stack**: Not specified
+- **Tags**: open-source, foundry, collective, sans, display, curated
+- **Featured**: Yes
+- **Description**: Open-source foundry and network of designers with a small, carefully kept set of finished, contemporary sans and display faces. All free for commercial use.
+
+### UNCUT.wtf (uncut-wtf)
+- **URL**: https://uncut.wtf/
+- **Track**: design-ui
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to browse current, design-studio quality free typefaces without the hunt.
+- **Stack**: Not specified
+- **Tags**: catalogue, contemporary, sans, serif, mono, display, free-commercial
+- **Featured**: Yes
+- **Description**: Independent catalogue of ~160 somewhat contemporary free typefaces across sans, serif, mono, and display, each free for commercial use and linked to its maker.
+
+### Free Faces (free-faces)
+- **URL**: https://freefaces.gallery/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for browsing by look with good specimens and direct links to font sources.
+- **Stack**: Not specified
+- **Tags**: gallery, curated, serif, sans, slab, mono, display, cursive
+- **Featured**: Yes
+- **Description**: Curated gallery of free typefaces sorted into serif, sans, slab, mono, display, and cursive with big specimens. Licences vary; each entry links to the source.
+
+### The League of Moveable Type (league-movable-type)
+- **URL**: https://www.theleagueofmoveabletype.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for reliable headline faces from the pioneering open-source foundry.
+- **Stack**: Not specified
+- **Tags**: open-source, foundry, ofl, raleway, league-spartan, league-gothic, ostrich-sans
+- **Featured**: Yes
+- **Description**: First open-source foundry since 2009. Sturdy OFL workhorses like Raleway, League Spartan, League Gothic, Ostrich Sans. All free for commercial use.
+
+### Type Department (type-department)
+- **URL**: https://typedepartment.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use for bold display type for posters from a foundry that tests every font.
+- **Stack**: Not specified
+- **Tags**: foundry, uk, display, poster, tested, free-weight
+- **Featured**: No
+- **Description**: UK foundry and marketplace with a free collection tested before release. Display-heavy, poster-friendly, often a free weight of a paid family.
+
+### Studio 2am (studio-2am)
+- **URL**: https://studio2am.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use for branding, merch, and album-art type from a design-resource studio.
+- **Stack**: Not specified
+- **Tags**: studio, branding, merch, posters, album-art, free-fonts
+- **Featured**: No
+- **Description**: Design-resource studio with a handful of free fonts made for branding, merch, posters, and album art alongside paid textures and mockups.
+
+### YouWorkForThem (youworkforthem)
+- **URL**: https://www.youworkforthem.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use to try a foundry's type before buying the full licence.
+- **Stack**: Not specified
+- **Tags**: foundry, marketplace, desktop, commercial, paid-licence
+- **Featured**: No
+- **Description**: Type foundry and marketplace since 2001. Free fonts under same licence as paid: desktop and commercial use covered; apps, e-books, big companies need paid licence.
+
+### Awwwards Free Fonts (awwwards-fonts)
+- **URL**: https://www.awwwards.com/free-fonts/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for web-design type picked by an award-winning eye with direct maker links.
+- **Stack**: Not specified
+- **Tags**: awwwards, curated, web-design, gumroad, behance, foundry
+- **Featured**: Yes
+- **Description**: Close to 300 free fonts picked by the web-design awards site, each linking to its maker (Gumroad, Behance, foundry sites, Fontshare).
+
+### 72pt.app (72pt)
+- **URL**: https://72pt.app/fonts
+- **Track**: design-ui
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to browse 891 commercial-free typefaces with live specimens and downloadable ZIPs including licences.
+- **Stack**: Not specified
+- **Tags**: commercial-free, specimens, designers, foundries, zip-with-licence
+- **Featured**: Yes
+- **Description**: 891 free typefaces from 509 designers and foundries, every one cleared for commercial work. Each name opens its specimen; set any specimen in your own words.
+
+### Open-Foundry (open-foundry)
+- **URL**: https://open-foundry.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to discover beautiful open-source typefaces with curated presentation.
+- **Stack**: Not specified
+- **Tags**: open-source, curated, exploration, reliable
+- **Featured**: Yes
+- **Description**: Platform curating open-source typefaces to highlight their beauty, activate ideas, and encourage exploration. Explicitly open-source and reliable.
+
+### Tunera Type Foundry (tunera-type)
+- **URL**: https://tuneratype.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for fun, funky, and fresh typefaces from a libre foundry with wide project range.
+- **Stack**: Not specified
+- **Tags**: libre, foundry, elegant, goofy, variety
+- **Featured**: No
+- **Description**: Fun, funky, and fresh libre type foundry with variety from elegant to goofy. Great range for different projects.
+
+### Lost Type Co-Op (lost-type)
+- **URL**: https://losttype.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use for pay-what-you-want typefaces from classic to kitsch (check language support).
+- **Stack**: Not specified
+- **Tags**: pay-what-you-want, classic, kitsch, co-op, limited-support
+- **Featured**: No
+- **Description**: Pay-what-you-want for fun, funky, functional typefaces ranging from classic to kitsch. Limited language support on some faces.
+
+### ETC Type (etc-type)
+- **URL**: https://etctype.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to link original foundry website for open-source typefaces also on Google Fonts.
+- **Stack**: Not specified
+- **Tags**: open-source, google-fonts, figma, posterity
+- **Featured**: No
+- **Description**: Open-source typefaces on Google Fonts and Figma. Original website for posterity and direct foundry link.
+
+### Fontsource (fontsource)
+- **URL**: https://fontsource.org
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when self-hosting open-source web fonts with versioned packages instead of a third-party CDN.
+- **Stack**: javascript, npm, css, woff2
+- **Tags**: fonts, self-hosting, npm, webfonts, open-source
+- **Featured**: No
+- **Repo**: https://github.com/fontsource/fontsource (declared)
+- **Description**: Open-source fonts packaged as self-hosted npm modules for predictable local font delivery.
+
+### Google Fonts (google-fonts)
+- **URL**: https://fonts.google.com
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: Yes
+- **Price**: free
+- **When to use**: Use when discovering open-source typefaces or consuming the documented CSS API for web font delivery.
+- **Stack**: css, webfonts, api
+- **Tags**: fonts, webfonts, open-source, css-api, typography
+- **Featured**: No
+- **Description**: Google catalog of open-source fonts and icons with a documented CSS API for web delivery.
+
+
+## UX Flows (21)
 
 ### pageflows.com (pageflows)
 - **URL**: https://pageflows.com
@@ -719,17 +1613,185 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Featured**: Yes
 - **Description**: Real UX flows, start to finish. Complete user journey references for popular products.
 
-### Refero (refero-design)
-- **URL**: https://refero.design/
+### UXArchive (uxarchive)
+- **URL**: https://uxarchive.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to study complete mobile app flows across 25 categories for UX pattern reference and inspiration.
+- **Stack**: Not specified
+- **Tags**: ux-flows, mobile, apps, 1000-flows, 25-categories, free
+- **Featured**: Yes
+- **Description**: Fantastic showcase of 1000+ app flows from hundreds of apps. Browse in 25 categories, scroll through entire app flows for free. Excellent resource for getting unstuck on mobile UX patterns.
+
+### Waveguide (waveguide)
+- **URL**: https://waveguide.io/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to understand the reasoning behind specific UX patterns and micro-interactions, not just see them.
+- **Stack**: Not specified
+- **Tags**: ux, interactions, features, flows, correctness, delight, discoverability, learnability
+- **Featured**: Yes
+- **Description**: UX design inspiration that takes small interactions, features, screens, or flows and explains how and why they work. Categorization based on correctness, delight, discoverability, aggregation, learnability, and more.
+
+### GoodUX (goodux)
+- **URL**: https://goodux.io/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to learn why specific UX flows work with contextual explanations and quick-reference bullets.
+- **Stack**: Not specified
+- **Tags**: ux, context, explained, bullet-points, newsletter
+- **Featured**: Yes
+- **Description**: UX design examples in context: they take a flow and explain why it works. Bullet points at the end of each article for quick scanning. Newsletter available for regular good UX examples.
+
+### Screenlane (screenlane)
+- **URL**: https://screenlane.com/
 - **Track**: design-ui
 - **Type**: tool
-- **Agent-Consumable**: Yes
-- **Price**: freemium
-- **When to use**: Use for UX pattern research by humans or via Refero MCP so AI agents can inspect real interface flows.
-- **Stack**: mcp, figma
-- **Tags**: ux-flows, ui-research, mcp, agent-ready, figma
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use as a free alternative to Mobbin for mobile app screen references with tag-based filtering.
+- **Stack**: Not specified
+- **Tags**: mobile, ui, screenlane, free, mobbin-alternative, tagged, filter
 - **Featured**: Yes
-- **Description**: Curated UI/UX design research library for the AI era featuring real product screens, flows, Figma plugin, and Refero MCP with agent-ready metadata.
+- **Description**: Free Mobbin alternative. Each design is tagged for filtering by screen type, elements on screen, and product categories. Decent free alternative for mobile app UI references.
+
+### Design Spells (design-spells)
+- **URL**: https://www.designspells.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for micro-interaction and animation inspiration from real mobile apps and websites.
+- **Stack**: Not specified
+- **Tags**: micro-interactions, animations, mobile, web, magical, inspiration, 100-items
+- **Featured**: Yes
+- **Description**: Neat library of micro-interactions and animations inside mobile apps and websites. Close to 100 magical animations and design details for inspiration.
+
+### Marbleflows (marbleflows)
+- **URL**: https://marbleflows.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to study complete onboarding flows from top SaaS products for pattern reference.
+- **Stack**: Not specified
+- **Tags**: onboarding, saas, airbnb, airtable, zapier, stripe, 100-flows, user-journeys
+- **Featured**: Yes
+- **Description**: Over 100 web onboarding flows from the most popular SaaS apps like Airbnb, Airtable, Zapier, and Stripe. Complete user journey references for onboarding patterns.
+
+### Interface Index (interface-index)
+- **URL**: https://interfaceindex.com/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for component-level UI reference from top B2B and SaaS products (tooltips, buttons, sidebars, etc.).
+- **Stack**: Not specified
+- **Tags**: b2b, saas, desktop, ui-components, tooltips, buttons, sidebar, component-level
+- **Featured**: Yes
+- **Description**: Focuses on interface elements from the best B2B, SaaS, and desktop apps and services. Shows screenshots of UI components like tooltips, buttons, sidebar, etc. (not just full pages).
+
+### Handheld (handheld)
+- **URL**: https://handheld.design/
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for curated mobile app references sourced from Twitter/X with designer discovery.
+- **Stack**: Not specified
+- **Tags**: mobile, curated, twitter, x, hand-picked, social-feed
+- **Featured**: No
+- **Description**: Curated and hand-picked mobile app references from X/Twitter. Find new design people to follow to enrich your social feed with design inspiration.
+
+### Adapty (adapty)
+- **URL**: https://adapty.io/
+- **Track**: design-ui
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use when designing mobile paywall and growth experiment flows with real examples from 500+ apps.
+- **Stack**: Not specified
+- **Tags**: paywalls, mobile, growth, conversion, 500-apps, screenshots
+- **Featured**: Yes
+- **Description**: Focuses specifically on mobile paywalls. Over 500 mobile apps and paywall screenshots in collection. Super useful when designing growth experiments and conversion flows.
+
+### Appshots (appshots)
+- **URL**: https://appshots.io/
+- **Track**: design-ui
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use for iOS/Android/web app references and App Store screenshots (free tier limited).
+- **Stack**: Not specified
+- **Tags**: ios, android, web, app-store, marketing, limited-free
+- **Featured**: No
+- **Description**: Collection of iOS, Android, and web app references. Free version limited to latest 4 mobile & web apps with limited search. Has App Store screenshots for marketing reference.
+
+### Reforge User Flows (reforge-user-flows)
+- **URL**: https://www.reforge.com/artifacts/c/user-research/user-flow
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use to study real user flow diagrams from top tech companies with downloadable templates.
+- **Stack**: Not specified
+- **Tags**: reforge, user-flows, templates, cloudbees, sprig, fuzzy, top-companies
+- **Featured**: Yes
+- **Description**: 8 real user flow examples from top companies (CloudBees, Sprig, Fuzzy, etc.) with templates. Learn how the best operators think about user flows. Updated May 2024.
+
+### Reforge User Journey Maps (reforge-user-journeys)
+- **URL**: https://www.reforge.com/artifacts/c/user-research/user-journey-map
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use to study comprehensive user journey maps with emotional context from leading tech companies.
+- **Stack**: Not specified
+- **Tags**: reforge, user-journey-maps, 47-examples, ngrok, airtable, whimsical, emotions, touchpoints
+- **Featured**: Yes
+- **Description**: 47 real user journey map examples from top companies (ngrok, Airtable, Whimsical, etc.). Visualize steps users take with product, capturing experiences and emotions at each touchpoint.
+
+### Swetrix User Flow Diagrams (swetrix-user-flows)
+- **URL**: https://swetrix.com/blog/user-flow-diagram-examples
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for detailed strategic analysis of critical user flows with editable templates and privacy-first metrics.
+- **Stack**: Not specified
+- **Tags**: swetrix, ecommerce, saas-onboarding, api-integrations, templates, metrics, strategic-analysis
+- **Featured**: Yes
+- **Description**: 8 deep-dive user journey examples from e-commerce checkout to SaaS onboarding and complex API integrations. Each includes visual breakdown, strategic analysis, actionable takeaways, key metrics, and editable templates.
+
+### ClickUp User Flow Guide (clickup-user-flows)
+- **URL**: https://clickup.com/blog/user-flow-examples
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use for practical user flow examples from major products with optimization strategies and tool recommendations.
+- **Stack**: Not specified
+- **Tags**: clickup, instagram, spotify, onboarding, ecommerce, strategies, tools, best-practices
+- **Featured**: No
+- **Description**: Comprehensive guide with real-world examples: Instagram login, Spotify web app, onboarding, e-commerce purchase. Covers strategies, tools, and best practices for optimizing user flows.
+
+### UX Design Institute User Flow Guide (uxdesigninstitute-flows)
+- **URL**: https://www.uxdesigninstitute.com/blog/design-user-flows-with-examples
+- **Track**: design-ui
+- **Type**: docs
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use to learn the methodology and see wireflow examples for mobile screens combining wireframes with flowcharts.
+- **Stack**: Not specified
+- **Tags**: guide, wireflows, user-journey, task-flow, user-flow, step-by-step, examples
+- **Featured**: No
+- **Description**: Complete guide to mastering user flow design with wireflow examples, step-by-step process, and distinctions between user journeys, task flows, and user flows.
 
 ### Mobbin (mobbin)
 - **URL**: https://mobbin.com/
@@ -743,8 +1805,56 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Featured**: Yes
 - **Description**: Extensive searchable reference library of real-world mobile and web app screenshots, onboarding journeys, and end-to-end UX flows.
 
+### Refero (refero-design)
+- **URL**: https://refero.design/
+- **Track**: design-ui
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use for UX pattern research by humans or via Refero MCP so AI agents can inspect real interface flows.
+- **Stack**: mcp, figma
+- **Tags**: ux-flows, ui-research, mcp, agent-ready, figma
+- **Featured**: Yes
+- **Description**: Curated UI/UX design research library for the AI era featuring real product screens, flows, Figma plugin, and Refero MCP with agent-ready metadata.
 
-## Libraries & Tools (28)
+### Pttrns (pttrns)
+- **URL**: https://www.pttrns.com
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: free
+- **When to use**: Use when researching real in-production mobile patterns and app screens for an interface flow.
+- **Stack**: mobile, ui-patterns, curation
+- **Tags**: mobile, patterns, app-screens, research, inspiration
+- **Featured**: No
+- **Description**: Curated collection of production mobile app interfaces and UX/UI patterns organized for product design research.
+
+### SaaSUI (saasui)
+- **URL**: https://www.saasui.design
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: Unknown
+- **Price**: Unknown
+- **When to use**: Use to benchmark signup, onboarding, dashboard and pricing screens from real SaaS products.
+- **Stack**: ui-patterns, curation, product-design
+- **Tags**: saas, patterns, onboarding, dashboard, research
+- **Featured**: No
+- **Description**: Hand-picked library of real SaaS UI/UX design patterns with breakdowns for product teams and founders.
+
+### SaaSFrame (saasframe)
+- **URL**: https://www.saasframe.io
+- **Track**: design-ui
+- **Type**: gallery
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use when comparing full flows and screen sequences across SaaS products rather than isolated patterns.
+- **Stack**: ui-patterns, curation, product-design
+- **Tags**: saas, flows, screens, patterns, research
+- **Featured**: No
+- **Description**: Searchable SaaS UI/UX inspiration library of website pages, product screens, patterns and flows.
+
+
+## Libraries & Tools (50)
 
 ### libraries.dev (libraries-dev)
 - **URL**: https://libraries.dev
@@ -1074,17 +2184,270 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Repo**: https://github.com/avivgerz-hue/ghost-qa (derived-from-url)
 - **Description**: v2.1.2 — 8-trap headless Playwright QA across Desktop, Tablet & Mobile. Autonomous headless browser QA & self-healing verification loop. Crawls live app on desktop, tablet & mobile, 8-trap engine (Console, Network, Layout, A11y, Perf, Visual, DOM, Hydration), safety-gated interaction runner. MCP server + CLI + Agent Skill. Self-contained HTML evidence dashboard. Zero config, runs against any localhost.
 
-### Biome (biome)
+### Composio (composio)
+- **URL**: https://composio.dev/
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use to build complex AI automation workflows connecting LLMs to 90+ SaaS tools and developer platforms.
+- **Stack**: python, typescript, ai, api
+- **Tags**: ai-automation, 90-integrations, github, jira, slack, gmail, pr-review, issue-resolution
+- **Featured**: Yes
+- **Description**: AI automation platform connecting AI models to 90+ third-party applications (GitHub, Jira, Slack, Gmail, etc.). Automate GitHub tasks like PR reviews, issue resolution by linking with AI models. Key player in AI landscape.
+
+### Encore (encore)
+- **URL**: https://encore.dev/
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use to simplify backend development with automatic cloud infrastructure and type-safe service definitions.
+- **Stack**: go, typescript, cloud
+- **Tags**: backend, framework, cloud, infrastructure, type-safe, automation, provisioning
+- **Featured**: Yes
+- **Description**: Backend framework simplifying cloud services with type-safe frameworks, automatic infrastructure provisioning, and automation. Removes chaotic cloud service management.
+
+### Tolgee (tolgee)
+- **URL**: https://tolgee.io/
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use for developer-friendly localization with in-context translation and automated screenshot generation.
+- **Stack**: javascript, react, vue, angular, sdk
+- **Tags**: localization, translation, in-context, screenshots, javascript, sdk, global
+- **Featured**: Yes
+- **Description**: JavaScript SDK for content localization in web apps. In-context translation, automated screenshot generation. Streamlines adapting applications for global audiences.
+
+### CopilotKit (copilotkit)
+- **URL**: https://copilotkit.ai/
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to embed interactive AI copilots directly inside React/Next.js apps with shared state and agent-driven UI.
+- **Stack**: typescript, react, nextjs, langgraph
+- **Tags**: react, chatbot, autocomplete, copilot, ag-ui, generative-ui, hitl, open-source, agent-template, template-ui
+- **Featured**: Yes
+- **Repo**: https://github.com/CopilotKit/CopilotKit (declared)
+- **Description**: React components for seamless AI integration: chatbots, text auto-completion, in-app copilots. Comprehensive solution for adding AI features to web apps. Open-source framework with AG-UI protocol, generative UI, HITL actions.
+
+### Biome (biome-tool)
 - **URL**: https://biomejs.dev/
 - **Track**: dev-tools
 - **Type**: tool
 - **Agent-Consumable**: Yes
 - **Price**: open-source
-- **When to use**: Use to replace Prettier and ESLint with a single ultra-fast, zero-config formatter and linter in TypeScript repos.
-- **Stack**: typescript, javascript, css, rust
-- **Tags**: linter, formatter, rust, typescript, toolchain
+- **When to use**: Use to replace Prettier and ESLint with a single ultra-fast, zero-config toolchain in TypeScript/JavaScript repos.
+- **Stack**: rust, typescript, javascript, css
+- **Tags**: linter, formatter, compiler, rust, typescript, prettier-replacement, eslint-replacement, fast
 - **Featured**: Yes
-- **Description**: Fast unified Rust-based web toolchain combining formatting and linting for JavaScript, TypeScript, JSX, JSON, and CSS.
+- **Description**: All-in-one web development tool combining linting, formatting, and compiling. Rust-based, better performance and smoother DX than traditional tools. Replaces Prettier + ESLint. JavaScript, TypeScript, JSX, JSON, CSS.
+
+### Continue (continue-dev)
+- **URL**: https://continue.dev/
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as a customizable, open-source AI coding assistant supporting any LLM in VS Code and JetBrains.
+- **Stack**: typescript, python, vscode, jetbrains
+- **Tags**: ai-coding, assistant, autocomplete, chat, vscode, jetbrains, customizable, open-source, cursor-alternative
+- **Featured**: Yes
+- **Repo**: https://github.com/continuedev/continue (declared)
+- **Description**: Open-source AI-powered coding assistant (like Cursor IDE). Highly customizable, integrate any language model for auto-completion and chat. Works with VS Code and JetBrains. Makes coding more efficient and intuitive.
+
+### Tabby (tabby)
+- **URL**: https://tabby.tabbyml.com/
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for self-hosted AI coding assistant with full data privacy and multiple model backend support.
+- **Stack**: rust, typescript, docker
+- **Tags**: self-hosted, ai-coding, copilot-alternative, completion, chat, inline-edit, vscode, jetbrains, vim, neovim
+- **Featured**: Yes
+- **Repo**: https://github.com/TabbyML/tabby (declared)
+- **Description**: Self-hosted AI coding assistant. Open-source alternative to GitHub Copilot. Supports code completion, chat, and inline editing. Works with VS Code, JetBrains, Vim/Neovim. Multiple model backends.
+
+### Refact AI (refact-ai)
+- **URL**: https://refact.ai/
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for open-source AI coding assistant with codebase-specific fine-tuning and refactoring capabilities.
+- **Stack**: typescript, python, vscode, jetbrains
+- **Tags**: open-source, chat, completion, refactoring, fine-tuning, vscode, jetbrains, codebase-specific
+- **Featured**: No
+- **Repo**: https://github.com/smallcloudai/refact (declared)
+- **Description**: Open-source AI assistant with chat, completion, refactoring, and codebase-specific fine-tuning. Extensions for VS Code and JetBrains. Source available.
+
+### Pieces (pieces)
+- **URL**: https://pieces.app/
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use for AI-powered workflow management with code snippets, contextual assistance, and offline privacy.
+- **Stack**: desktop, vscode, jetbrains, browser
+- **Tags**: workflow, copilot, snippets, contextual, proactive, offline, privacy, hyper-aware
+- **Featured**: Yes
+- **Description**: AI productivity tool for workflow copilot: intelligent code snippet management, contextualized copilot interactions, proactive surfacing of useful materials. Offline-first approach for privacy. "What was I working on an hour ago?" - hyper-aware assistance.
+
+### Linear (linear)
+- **URL**: https://linear.app/
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use for developer-focused issue tracking and project management with automatic workflow automation.
+- **Stack**: web, desktop, api
+- **Tags**: task-management, issues, projects, roadmaps, automatic-tracking, warnings, command-menu, open-source
+- **Featured**: Yes
+- **Description**: Task management tool for streamlining issues, projects, and product roadmaps. Automatic tracking, at-risk cycle warnings, global command menu. Open source. Better than Jira/Trello for developer teams.
+
+### n8n (n8n)
+- **URL**: https://n8n.io/
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use for visual workflow automation with 400+ integrations, self-hosted control, and custom logic.
+- **Stack**: typescript, docker, node
+- **Tags**: workflow-automation, fair-code, self-hosted, 400-integrations, node-based, docker, npm, custom-functions
+- **Featured**: Yes
+- **Repo**: https://github.com/n8n-io/n8n (declared)
+- **Description**: Extendable workflow automation tool. Fair-code: visible source, self-hostable, custom functions/logic/apps. 400+ integrations. Node-based approach connects anything to everything. Docker, npm, self-host options.
+
+### The Silver Searcher (ag) (silver-searcher)
+- **URL**: https://github.com/ggreer/the_silver_searcher
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for lightning-fast codebase searching in large projects with editor integration.
+- **Stack**: c, cli
+- **Tags**: code-search, grep, fast, multi-threaded, gitignore, editor-integration, ack, cli
+- **Featured**: Yes
+- **Repo**: https://github.com/ggreer/the_silver_searcher (declared)
+- **Description**: Ultra-fast code-searching tool, 5-10x faster than grep. Multi-threading, respects .gitignore/.ignore/.hgignore, customizable via config. Integrates with text editors and IDEs. Clone of Ack but faster.
+
+### Fig Autocomplete (fig-autocomplete)
+- **URL**: https://fig.io/
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use to add intelligent autocomplete to any terminal for faster, more collaborative command-line workflows.
+- **Stack**: macos, linux, shell
+- **Tags**: autocomplete, terminal, shell, subcommands, contextual, collaborative, cli, team
+- **Featured**: Yes
+- **Description**: IDE-style autocomplete for terminal and shell. Subcommands, options, contextually relevant arguments as you type. Makes command line easier and more collaborative for teams. Popular product: Autocomplete.
+
+### QualityHive (qualityhive)
+- **URL**: https://qualityhive.com/
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: No
+- **Price**: freemium
+- **When to use**: Use for visual bug reporting with screenshots and recordings directly from the website.
+- **Stack**: web, widget
+- **Tags**: bug-tracking, task-management, screenshots, screen-recordings, widget, website, agencies, feedback
+- **Featured**: No
+- **Description**: Bug tracking and task management for website owners, developers, design agencies. Fast widget on your website to raise bugs with screenshots and screen recordings. Improves feedback process.
+
+### Taipy (taipy)
+- **URL**: https://taipy.io/
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for production-grade Python data/AI web apps with better performance than Streamlit and built-in scheduling.
+- **Stack**: python, data, ai
+- **Tags**: python, gui, data, ai, pipeline, scheduling, deployment, what-if, streamlit-alternative, performance
+- **Featured**: Yes
+- **Repo**: https://github.com/Avaiga/taipy (declared)
+- **Description**: Open-source Python library for easy end-to-end application development: what-if analyses, smart pipeline execution, built-in scheduling, deployment tools. Better performance than Streamlit for production data/AI apps. Connects with leading data platforms.
+
+### OpenHands (OpenDevin) (openhands)
+- **URL**: https://github.com/All-Hands-AI/OpenHands
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as production reference architecture for building autonomous coding agents in isolated Docker runtimes.
+- **Stack**: python, typescript, docker
+- **Tags**: autonomous, coding-agent, docker, sandbox, shell, browser, github, issue-resolver, swe, agent-template, template-coding
+- **Featured**: Yes
+- **Repo**: https://github.com/All-Hands-AI/OpenHands (declared)
+- **Description**: Open-source autonomous software engineering agent with Docker sandboxes, shell execution, browser tools, automated GitHub issue resolvers. Production reference architecture for autonomous coding agents.
+
+### Browser Use (browser-use)
+- **URL**: https://github.com/browser-use/browser-use
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when AI agents need to visually operate real websites via Playwright with minimal custom selectors.
+- **Stack**: python, playwright
+- **Tags**: browser-agent, playwright, autonomous, form-filling, multi-tab, research, shopping, ui-automation, python, agent-template, template-browser, web-agent, automation
+- **Featured**: Yes
+- **Repo**: https://github.com/browser-use/browser-use (declared)
+- **Description**: Open-source autonomous web browser agent framework with Python templates for form filling, multi-tab research, shopping, UI workflow automation. Playwright-based, visually and structurally operates real websites.
+
+### Stagehand (stagehand)
+- **URL**: https://github.com/browserbase/stagehand
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for reliable production browser agents in TypeScript combining strict Zod extraction with self-healing selectors.
+- **Stack**: typescript, playwright, zod
+- **Tags**: typescript, playwright, zod, structured-extraction, self-healing, browser-automation, ai, production, agent-template, template-browser
+- **Featured**: Yes
+- **Repo**: https://github.com/browserbase/stagehand (declared)
+- **Description**: TypeScript AI browser automation SDK blending deterministic Playwright scripts with natural-language act, extract, observe primitives. Self-healing selectors, Zod extraction. Production browser agents in TypeScript.
+
+### Bolt.diy (bolt-diy)
+- **URL**: https://github.com/stackblitz-labs/bolt.diy
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as complete reference for building a prompt-to-fullstack-app IDE agent with live browser execution.
+- **Stack**: typescript, react, webcontainers, ollama
+- **Tags**: app-builder, webcontainers, ollama, fullstack, live-preview, browser, prompt-to-app, stackblitz, agent-template, template-coding, template-ui
+- **Featured**: Yes
+- **Repo**: https://github.com/stackblitz-labs/bolt.diy (declared)
+- **Description**: Open-source full-stack AI app builder agent running live full-stack code previews in browser WebContainers. Pluggable cloud or local Ollama models. Complete reference codebase for prompt-to-fullstack-app IDE agent.
+
+### E2B Fragments (e2b-fragments)
+- **URL**: https://github.com/e2b-dev/fragments
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to build multi-language AI code generator that safely executes and previews live generated apps in isolated sandboxes.
+- **Stack**: typescript, nextjs, python, e2b
+- **Tags**: artifacts, code-interpreter, live-preview, sandbox, nextjs, vue, streamlit, gradio, e2b, multi-language, agent-template, template-coding, template-ui
+- **Featured**: Yes
+- **Repo**: https://github.com/e2b-dev/fragments (declared)
+- **Description**: Claude Artifacts-style code interpreter and live app preview executing AI-generated Next.js, Vue, Streamlit, Gradio apps inside E2B sandboxes. Multi-language AI code generator with safe execution.
+
+### Aider (aider)
+- **URL**: https://github.com/Aider-AI/aider
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as gold-standard reference for repo-map context packing, reliable diff application, and dual-model architect/editor coding harnesses.
+- **Stack**: python, git, tree-sitter
+- **Tags**: cli, coding-agent, tree-sitter, repo-maps, git-diffs, lint, test, architect-editor, dual-model, agent-template, template-coding, git
+- **Featured**: Yes
+- **Repo**: https://github.com/Aider-AI/aider (declared)
+- **Description**: Open-source CLI coding agent with tree-sitter repo maps, structured search/replace git diffs, automated lint/test loops, architect/editor split. Gold standard for repo-map context packing and reliable diff application.
 
 ### Oxc (Oxidation Compiler) (oxc)
 - **URL**: https://oxc.rs/
@@ -1098,8 +2461,34 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Featured**: No
 - **Description**: High-performance suite of JavaScript and TypeScript developer tools written in Rust, including parser, linter (Oxlint), transformer, and formatter.
 
+### Storybook (storybook)
+- **URL**: https://storybook.js.org
+- **Track**: dev-tools
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when developing or documenting components in isolation and exercising edge-case states as stories.
+- **Stack**: javascript, typescript, react, vue, svelte
+- **Tags**: components, testing, documentation, design-systems, stories
+- **Featured**: No
+- **Repo**: https://github.com/storybookjs/storybook (declared)
+- **Description**: Frontend workshop for building, testing and documenting UI components and pages in isolation.
 
-## Security & Auth (5)
+### FilePond (filepond)
+- **URL**: https://github.com/pqina/filepond
+- **Track**: dev-tools
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when implementing a customizable file input with client-side previews and pluggable processing.
+- **Stack**: javascript, typescript, react, vue, svelte
+- **Tags**: file-upload, javascript, drag-drop, forms, plugins
+- **Featured**: No
+- **Repo**: https://github.com/pqina/filepond (declared)
+- **Description**: Flexible JavaScript file-upload library with drag-and-drop, image previews and plugin-based transformations.
+
+
+## Security & Auth (19)
 
 ### vibe-shield (vibe-shield)
 - **URL**: https://github.com/avivgerz-hue/vibe-shield
@@ -1114,17 +2503,147 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Repo**: https://github.com/avivgerz-hue/vibe-shield (derived-from-url)
 - **Description**: v2.1.3 — 92-rule security scanner for Next.js, Supabase RLS, Stripe webhooks & SKILL.md poisoning. Security scanner & MCP guard for AI-generated codebases. 92 detection signatures (secrets, auth, DB/RLS, SQLi, XSS, SSRF, path traversal, agent-skill poisoning, webhook verification). Grades F–A+, SARIF + GitHub annotations, CI gate. Zero deps, offline, scans itself 100/100 A+. MCP server + Agent Skill for Claude Code, Cursor, Codex.
 
-### Better Auth (better-auth)
-- **URL**: https://better-auth.com/
+### Trivy (trivy)
+- **URL**: https://github.com/aquasecurity/trivy
 - **Track**: dev-tools
-- **Type**: library
+- **Type**: github-repo
 - **Agent-Consumable**: Yes
 - **Price**: open-source
-- **When to use**: Use to implement self-hosted, code-first authentication in TypeScript apps including MCP and AI agent token delegation.
-- **Stack**: typescript, node, mcp
-- **Tags**: auth, typescript, passkeys, oauth, mcp-auth, agent-delegation
+- **When to use**: Use for fast, comprehensive security scanning across containers, infrastructure, and code repositories in CI/CD pipelines.
+- **Stack**: go, docker, kubernetes, ci-cd
+- **Tags**: vulnerability-scanner, containers, kubernetes, git, filesystem, vm, secrets, licenses, aquasecurity
 - **Featured**: Yes
-- **Description**: Comprehensive, type-safe authentication framework for TypeScript supporting passkeys, 2FA, OAuth, API keys, MCP auth, and AI agent delegation.
+- **Repo**: https://github.com/aquasecurity/trivy (declared)
+- **Description**: Comprehensive open-source security scanner for containers, filesystems, Git repositories, Kubernetes, and VMs. Detects vulnerabilities, misconfigurations, secrets, and licenses. Caches vulnerability signatures locally for speed. Covers: Filesystem, Git Repos, Container Images, Kubernetes, VM Images.
+
+### SonarQube (sonarqube)
+- **URL**: https://www.sonarqube.org/
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use for continuous code quality and security scanning in CI/CD with IDE integration and quality gates.
+- **Stack**: java, typescript, python, 30-languages, docker
+- **Tags**: code-quality, static-analysis, bugs, vulnerabilities, code-smells, 30-languages, ide-plugins, quality-gates, sonarcloud
+- **Featured**: Yes
+- **Description**: Popular open-source platform for continuous code quality analysis, bug detection, and security vulnerability identification across 30+ programming languages. IDE plugins for Eclipse, IntelliJ, VS Code via SonarLint. Quality gates for build failures. Self-hosted or SonarCloud SaaS.
+
+### OWASP ASST (owasp-asst)
+- **URL**: https://github.com/OWASP/ASST
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for PHP/MySQL projects needing OWASP Top 10 vulnerability scanning with educational remediation guidance.
+- **Stack**: nodejs, php, mysql
+- **Tags**: owasp, php, mysql, nodejs, top-10, educational, open-source
+- **Featured**: No
+- **Repo**: https://github.com/OWASP/ASST (declared)
+- **Description**: Open Source Automated Software Security Toolkit developed with JavaScript (Node.js). Scans PHP & MySQL for security vulnerabilities according to OWASP Top 10. Teaches developers how to secure their code after scan. Open Source or Free license.
+
+### ShiftLeft Scan (shiftleft-scan)
+- **URL**: https://github.com/ShiftLeftSecurity/scan
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as an all-in-one open-source security scanning pipeline for code and dependencies in CI/CD.
+- **Stack**: ci-cd, multiple-languages
+- **Tags**: devsecops, ci-cd, bundled-scanners, dependencies, broad-language-support, open-source
+- **Featured**: Yes
+- **Repo**: https://github.com/ShiftLeftSecurity/scan (declared)
+- **Description**: Free open-source DevSecOps platform bundling various open source scanners into CI/CD pipelines for detecting security issues in source code and dependencies. Broad language support.
+
+### Zennoxa Shield (zennoxa-shield)
+- **URL**: https://github.com/zennoxa/shield
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for comprehensive offline security scanning with reachability analysis across code, deps, containers, and IaC in one pass.
+- **Stack**: cli, 24-languages, sarif, sbom
+- **Tags**: sast, sca, secrets, container, iac, 24-languages, reachability, sarif, sbom, mit, offline
+- **Featured**: Yes
+- **Repo**: https://github.com/zennoxa/shield (declared)
+- **Description**: Open-source (MIT) developer-first scanner. One offline pass runs SAST, dependency (SCA), secret, container, and IaC checks across 24 languages, then ranks findings by whether vulnerable code is reachable. Emits SARIF and CycloneDX/SPDX SBOM.
+
+### Snyk Code (DeepCode) (snyk-code)
+- **URL**: https://github.com/snyk/snyk-code
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use for AI-powered real-time vulnerability scanning with automated fix suggestions in IDE and CI/CD.
+- **Stack**: typescript, python, java, javascript, ide
+- **Tags**: ai-driven, real-time, fixes, version-control, ci-cd, freemium
+- **Featured**: No
+- **Repo**: https://github.com/snyk/snyk-code (derived-from-url)
+- **Description**: Real-time AI-driven code scanning for vulnerabilities with AI-suggested fixes. Integrates with version control for streamlined testing. Free tier for open source. Continuous scanning with fix suggestions.
+
+### Checkov (checkov)
+- **URL**: https://github.com/bridgecrewio/checkov
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to scan IaC files for misconfigurations and security issues across all major cloud platforms before deployment.
+- **Stack**: python, terraform, kubernetes, cloud
+- **Tags**: iac, terraform, cloudformation, kubernetes, helm, dockerfile, serverless, policies, bridgecrew
+- **Featured**: Yes
+- **Repo**: https://github.com/bridgecrewio/checkov (declared)
+- **Description**: Open-source static analysis tool for Infrastructure as Code (Terraform, CloudFormation, ARM, Kubernetes, Helm, Dockerfile, Serverless). Prevents cloud misconfigurations and security issues before deployment. 1000+ built-in policies.
+
+### tfsec (tfsec)
+- **URL**: https://github.com/aquasecurity/tfsec
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for fast, dependency-free Terraform security scanning in CI/CD or locally.
+- **Stack**: go, terraform
+- **Tags**: terraform, static-analysis, security, ci-cd, local, aquasecurity, no-deps
+- **Featured**: Yes
+- **Repo**: https://github.com/aquasecurity/tfsec (declared)
+- **Description**: Static analysis security tool for Terraform code. Scans for security misconfigurations with no external dependencies. Runs locally or in CI/CD. Hundreds of built-in checks.
+
+### KICS (Keeping Infrastructure as Code Secure) (kics)
+- **URL**: https://github.com/Checkmarx/kics
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for comprehensive IaC security and compliance scanning across multiple platforms with extensive query library.
+- **Stack**: go, iac, multi-cloud
+- **Tags**: iac, terraform, cloudformation, kubernetes, docker, arm, helm, compliance, 3000-queries, checkmarx
+- **Featured**: No
+- **Repo**: https://github.com/Checkmarx/kics (declared)
+- **Description**: Open-source static analysis for IaC (Terraform, CloudFormation, Kubernetes, Docker, ARM, Helm). Finds security vulnerabilities, compliance issues, and infrastructure misconfigurations. 3000+ queries.
+
+### Syft (syft)
+- **URL**: https://github.com/anchore/syft
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to generate accurate SBOMs from containers and filesystems for compliance and vulnerability tracking.
+- **Stack**: go, cli, containers
+- **Tags**: sbom, spdx, cyclonedx, container, filesystem, anchore, cli, go
+- **Featured**: Yes
+- **Repo**: https://github.com/anchore/syft (declared)
+- **Description**: Open-source CLI tool and Go library for generating Software Bill of Materials (SBOM) from container images and filesystems. Supports SPDX, CycloneDX, Syft JSON. Foundation for vulnerability scanning.
+
+### Grype (grype)
+- **URL**: https://github.com/anchore/grype
+- **Track**: dev-tools
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to scan containers and filesystems for vulnerabilities using Syft-generated SBOMs with multiple vulnerability databases.
+- **Stack**: go, cli, containers, sbom
+- **Tags**: vulnerability-scanner, containers, sbom, syft, nvd, github-advisory, anchore, no-daemon
+- **Featured**: Yes
+- **Repo**: https://github.com/anchore/grype (declared)
+- **Description**: Open-source vulnerability scanner for container images and filesystems. Works with Syft SBOMs. Fast, no daemon required. Supports multiple vulnerability databases (NVD, GitHub, etc.).
 
 ### Arcjet (arcjet)
 - **URL**: https://github.com/arcjet
@@ -1138,6 +2657,18 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Featured**: Yes
 - **Repo**: https://github.com/arcjet (declared)
 - **Description**: Developer-first security and AI agent runtime protection platform providing bot detection, rate limiting, and shield rules directly in code.
+
+### Better Auth (better-auth)
+- **URL**: https://better-auth.com/
+- **Track**: dev-tools
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to implement self-hosted, code-first authentication in TypeScript apps including MCP and AI agent token delegation.
+- **Stack**: typescript, node, mcp
+- **Tags**: auth, typescript, passkeys, oauth, mcp-auth, agent-delegation
+- **Featured**: Yes
+- **Description**: Comprehensive, type-safe authentication framework for TypeScript supporting passkeys, 2FA, OAuth, API keys, MCP auth, and AI agent delegation.
 
 ### Gitleaks (gitleaks)
 - **URL**: https://github.com/gitleaks/gitleaks
@@ -1164,8 +2695,47 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Featured**: No
 - **Description**: Developer-friendly application security platform combining deterministic custom rules and AI-assisted SAST/SCA to catch code vulnerabilities.
 
+### OSV Scanner (osv-scanner)
+- **URL**: https://github.com/google/osv-scanner
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use in CI to scan lockfiles, source trees and container images against the OSV vulnerability database.
+- **Stack**: go, cli, osv, github-actions
+- **Tags**: vulnerabilities, sbom, lockfile, cli, supply-chain
+- **Featured**: No
+- **Repo**: https://github.com/google/osv-scanner (declared)
+- **Description**: Google vulnerability scanner that checks dependencies and lockfiles against the OSV database.
 
-## Agent Skills (22)
+### zizmor (zizmor)
+- **URL**: https://github.com/zizmorcore/zizmor
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to audit GitHub Actions workflows for security weaknesses before merging CI changes.
+- **Stack**: rust, cli, sarif, github-actions
+- **Tags**: github-actions, ci-security, static-analysis, sarif, supply-chain
+- **Featured**: No
+- **Repo**: https://github.com/zizmorcore/zizmor (declared)
+- **Description**: Static analysis tool for GitHub Actions workflows and related CI configuration.
+
+### OpenSSF Scorecard (openssf-scorecard)
+- **URL**: https://github.com/ossf/scorecard
+- **Track**: dev-tools
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to evaluate dependency and repository security posture with a reproducible, machine-readable score.
+- **Stack**: go, cli, github-actions, json
+- **Tags**: supply-chain, security-score, open-source, ci, best-practices
+- **Featured**: No
+- **Repo**: https://github.com/ossf/scorecard (declared)
+- **Description**: OpenSSF project that computes security-health scores for open-source repositories and publishes machine-readable results.
+
+
+## Agent Skills (25)
 
 ### UI Skills (iberick/ui-skills) (skills-agent-ui)
 - **URL**: https://github.com/ibelick/ui-skills
@@ -1448,8 +3018,73 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Repo**: https://github.com/ComposioHQ/awesome-claude-skills (declared)
 - **Description**: Curated open-source repository of reusable skills for MCP building, canvas design, brand guidelines, webapp testing, and workflow automation.
 
+### skills.sh (skills-sh)
+- **URL**: https://skills.sh
+- **Track**: ai-agents
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to discover and install reusable SKILL.md packages for coding agents from a single directory.
+- **Stack**: typescript, cli, markdown, skills
+- **Tags**: skills, registry, installer, agents, directory
+- **Featured**: No
+- **Repo**: https://github.com/vercel-labs/skills (declared)
+- **Description**: Open directory of agent skills with a leaderboard, install counts and a one-command installer.
 
-## MCP & Protocols (51)
+### Anthropic Skills (anthropic-skills)
+- **URL**: https://github.com/anthropics/skills
+- **Track**: ai-agents
+- **Type**: agent-skill
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as the reference implementation and specification when authoring structured skills for Claude-compatible agents.
+- **Stack**: markdown, skills, yaml, claude
+- **Tags**: skills, specification, claude, skill-md, reference
+- **Featured**: No
+- **Repo**: https://github.com/anthropics/skills (declared)
+- **Description**: Anthropic's reference skills repository with SKILL.md examples, a specification and a skill template.
+
+### agent-browser (agent-browser)
+- **URL**: https://agent-browser.dev
+- **Track**: ai-agents
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when an agent must navigate, click and verify web UI state with a token-efficient CLI.
+- **Stack**: typescript, cli, browser, playwright
+- **Tags**: browser, automation, cli, agents, verification
+- **Featured**: No
+- **Repo**: https://github.com/vercel-labs/agent-browser (declared)
+- **Description**: Open-source browser automation CLI built for coding agents to act, verify and continue work in a browser.
+
+
+## MCP & Protocols (53)
+
+### AG-UI Protocol (ag-ui-protocol)
+- **URL**: https://ag-ui.com
+- **Track**: ai-agents
+- **Type**: docs
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when an agent backend must stream structured UI events to a frontend without inventing a bespoke protocol.
+- **Stack**: typescript, python, events, http
+- **Tags**: protocol, events, frontend, agents, interoperability
+- **Featured**: No
+- **Repo**: https://github.com/ag-ui-protocol/ag-ui (declared)
+- **Description**: Open protocol connecting agent backends to frontend applications through standardized agent-user interaction events.
+
+### A2UI Protocol (a2ui-protocol)
+- **URL**: https://a2ui.org
+- **Track**: ai-agents
+- **Type**: docs
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when an agent must compose UI from an approved component catalog streamed to native renderers.
+- **Stack**: typescript, react, angular, flutter, swiftui
+- **Tags**: generative-ui, protocol, streaming, agents, components
+- **Featured**: No
+- **Repo**: https://github.com/a2ui-project/a2ui (declared)
+- **Description**: Open-source generative UI framework where agents stream layout data rendered by native components in multiple client frameworks.
 
 ### Agent2Agent (A2A) Protocol (a2a-protocol)
 - **URL**: https://github.com/a2aproject/a2a
@@ -2110,101 +3745,179 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Description**: Open-source AI workflow automation platform exposing hundreds of self-hostable integrations as ready-to-use MCP servers for AI agents.
 
 
-## Agent SDKs & Evals (7)
-
-### Vercel AI SDK (vercel-ai-sdk)
-- **URL**: https://ai-sdk.dev/
-- **Track**: ai-agents
-- **Type**: library
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use as the primary TypeScript abstraction layer for multi-provider LLM calls, structured JSON generation, and tool loops.
-- **Stack**: typescript, react, node, vercel
-- **Tags**: typescript, ai-sdk, streaming, agents, vercel
-- **Featured**: Yes
-- **Repo**: https://github.com/vercel/ai (declared)
-- **Description**: Open-source TypeScript AI toolkit providing unified multi-model APIs, structured outputs, tool calling, streaming UI, and agent primitives.
-
-### Mastra (mastra)
-- **URL**: https://github.com/mastra-ai/mastra
-- **Track**: ai-agents
-- **Type**: library
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use when building full-stack TypeScript agents that combine deterministic workflows, memory, and local studio debugging.
-- **Stack**: typescript, node
-- **Tags**: typescript, agents, workflows, memory, evals
-- **Featured**: Yes
-- **Repo**: https://github.com/mastra-ai/mastra (declared)
-- **Description**: Open-source TypeScript agent framework combining agent execution, branching workflows, memory, RAG, human-in-the-loop pauses, tracing, and evals.
-
-### LangGraph (langgraph)
-- **URL**: https://github.com/langchain-ai/langgraph
-- **Track**: ai-agents
-- **Type**: library
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use for complex multi-agent pipelines requiring persistent checkpoints, deterministic routing, and approval gates.
-- **Stack**: python, typescript
-- **Tags**: agents, state-machine, python, typescript, human-in-the-loop
-- **Featured**: Yes
-- **Repo**: https://github.com/langchain-ai/langgraph (declared)
-- **Description**: Open-source Python and TypeScript orchestration framework for stateful, long-running agents with explicit branching, checkpointing, and human review.
-
-### Pydantic AI (pydantic-ai)
-- **URL**: https://github.com/pydantic/pydantic-ai
-- **Track**: ai-agents
-- **Type**: library
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use when building production Python agents that require strict schema validation and clean dependency injection.
-- **Stack**: python, pydantic, mcp
-- **Tags**: python, pydantic, agents, type-safe, structured-output
-- **Featured**: Yes
-- **Repo**: https://github.com/pydantic/pydantic-ai (declared)
-- **Description**: Type-safe Python agent framework built by the Pydantic team featuring strict output validation, dependency injection, provider fallbacks, and MCP support.
+## Agent SDKs & Evals (11)
 
 ### Promptfoo (promptfoo)
 - **URL**: https://github.com/promptfoo/promptfoo
 - **Track**: ai-agents
-- **Type**: tool
+- **Type**: github-repo
 - **Agent-Consumable**: Yes
 - **Price**: open-source
-- **When to use**: Use to run deterministic regression tests, benchmark model upgrades, and red-team prompt/agent security in CI.
+- **When to use**: Use to systematically evaluate, benchmark, and test prompts across multiple LLMs with automated scoring in CI/CD.
 - **Stack**: cli, typescript, github-actions
-- **Tags**: evals, red-teaming, testing, ci-cd, prompts
+- **Tags**: evaluation, benchmarking, testing, side-by-side, auto-scoring, multi-llm, open-source, ci-cd, evals, red-teaming, prompts, benchmarks, model-comparison, security
 - **Featured**: Yes
 - **Repo**: https://github.com/promptfoo/promptfoo (declared)
-- **Description**: Open-source CLI and library for automated LLM prompt evaluation, agent regression benchmarks, model comparisons, and security red-teaming in CI/CD.
+- **Description**: Open-source toolkit for systematic LLM prompt evaluation, benchmarking, and testing. Establishes benchmarks and test cases to evaluate outputs, side-by-side prompt comparisons, automatic scoring based on defined metrics, multiple LLM support (OpenAI, Anthropic, Azure, Google, HuggingFace). Eliminates trial-and-error.
 
-### Langfuse (langfuse)
+### Vercel AI SDK (vercel-ai-sdk)
+- **URL**: https://ai-sdk.dev/
+- **Track**: ai-agents
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as primary TypeScript abstraction for multi-provider LLM calls, structured outputs, and tool loops in Next.js/React apps.
+- **Stack**: typescript, react, node, vercel, nextjs
+- **Tags**: typescript, ai-sdk, streaming, agents, vercel, multi-model, structured-output, tool-calling
+- **Featured**: Yes
+- **Repo**: https://github.com/vercel/ai (declared)
+- **Description**: Open-source TypeScript AI toolkit: unified multi-model APIs, structured outputs, tool calling, streaming UI, agent primitives. Primary abstraction layer for multi-provider LLM calls, JSON generation, tool loops.
+
+### Mastra (mastra)
+- **URL**: https://github.com/mastra-ai/mastra
+- **Track**: ai-agents
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for full-stack TypeScript agents combining deterministic workflows, memory, RAG, and local studio debugging.
+- **Stack**: typescript, node
+- **Tags**: typescript, agents, workflows, memory, rag, hitl, tracing, evals, studio, debugging
+- **Featured**: Yes
+- **Repo**: https://github.com/mastra-ai/mastra (declared)
+- **Description**: Open-source TypeScript agent framework: agent execution, branching workflows, memory, RAG, human-in-the-loop, tracing, evals. Local studio debugging. Full-stack TypeScript agents with deterministic workflows.
+
+### LangGraph (langgraph)
+- **URL**: https://github.com/langchain-ai/langgraph
+- **Track**: ai-agents
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for complex multi-agent pipelines requiring persistent checkpoints, deterministic routing, and approval gates.
+- **Stack**: python, typescript
+- **Tags**: agents, state-machine, python, typescript, human-in-the-loop, checkpointing, branching, multi-agent
+- **Featured**: Yes
+- **Repo**: https://github.com/langchain-ai/langgraph (declared)
+- **Description**: Open-source Python/TypeScript orchestration framework for stateful, long-running agents with explicit branching, checkpointing, human review. Complex multi-agent pipelines with persistent checkpoints and approval gates.
+
+### Pydantic AI (pydantic-ai)
+- **URL**: https://github.com/pydantic/pydantic-ai
+- **Track**: ai-agents
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use for production Python agents requiring strict schema validation, dependency injection, and provider fallbacks.
+- **Stack**: python, pydantic, mcp
+- **Tags**: python, pydantic, agents, type-safe, structured-output, dependency-injection, fallbacks, mcp
+- **Featured**: Yes
+- **Repo**: https://github.com/pydantic/pydantic-ai (declared)
+- **Description**: Type-safe Python agent framework by Pydantic team: strict output validation, dependency injection, provider fallbacks, MCP support. Production Python agents with strict schema validation and clean DI.
+
+### Langfuse (langfuse-tool)
 - **URL**: https://github.com/langfuse/langfuse
 - **Track**: ai-agents
-- **Type**: tool
+- **Type**: github-repo
 - **Agent-Consumable**: Yes
 - **Price**: open-source
 - **When to use**: Use to inspect multi-step agent traces, monitor token costs, and version prompts with self-hostable observability.
 - **Stack**: typescript, python, docker, mcp
-- **Tags**: observability, tracing, evals, analytics, open-source
+- **Tags**: observability, tracing, evals, analytics, prompt-versioning, token-costs, self-hosted, docker, mcp, open-source
 - **Featured**: Yes
 - **Repo**: https://github.com/langfuse/langfuse (declared)
-- **Description**: Open-source LLM engineering platform for tracing agent runs, prompt versioning, latency/cost analytics, and evaluation datasets.
+- **Description**: Open-source LLM engineering platform: tracing agent runs, prompt versioning, latency/cost analytics, evaluation datasets. Self-hostable observability for multi-step agent traces, token costs, prompt versioning.
 
 ### E2B (e2b-sandboxes)
 - **URL**: https://github.com/e2b-dev/e2b
 - **Track**: ai-agents
+- **Type**: github-repo
+- **Agent-Consumable**: Yes
+- **Price**: freemium
+- **When to use**: Use when autonomous agents need isolated VM sandbox to run untrusted code, install packages, or test builds safely.
+- **Stack**: typescript, python, sandbox
+- **Tags**: sandbox, code-execution, security, agents, infrastructure, vm, isolation, untrusted-code
+- **Featured**: Yes
+- **Repo**: https://github.com/e2b-dev/e2b (declared)
+- **Description**: Open-source secure cloud sandboxes for AI agents to safely execute generated code, shell commands, real-world tools in isolation. Designed for autonomous agents needing isolated VM sandbox.
+
+### Arize Phoenix (arize-phoenix)
+- **URL**: https://github.com/Arize-ai/phoenix
+- **Track**: ai-agents
 - **Type**: tool
 - **Agent-Consumable**: Yes
 - **Price**: freemium
-- **When to use**: Use when autonomous agents need an isolated VM sandbox to run untrusted code, install packages, or test builds safely.
-- **Stack**: typescript, python, sandbox
-- **Tags**: sandbox, code-execution, security, agents, infrastructure
-- **Featured**: Yes
-- **Repo**: https://github.com/e2b-dev/e2b (declared)
-- **Description**: Open-source secure cloud sandboxes designed for AI agents to safely execute generated code, shell commands, and real-world tools in isolation.
+- **When to use**: Use when tracing agent executions and running evaluations locally or against a hosted Phoenix instance.
+- **Stack**: python, typescript, opentelemetry, otlp
+- **Tags**: observability, tracing, evaluation, otlp, debugging
+- **Featured**: No
+- **Repo**: https://github.com/Arize-ai/phoenix (declared)
+- **Description**: AI observability and evaluation platform for tracing, debugging and improving LLM applications and agents.
+
+### DeepEval (deepeval)
+- **URL**: https://github.com/confident-ai/deepeval
+- **Track**: ai-agents
+- **Type**: tool
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use to encode LLM quality checks as repeatable test cases in CI and compare prompt or model changes.
+- **Stack**: python, pytest, cli, llm
+- **Tags**: evaluation, metrics, testing, rag, ci
+- **Featured**: No
+- **Repo**: https://github.com/confident-ai/deepeval (declared)
+- **Description**: LLM evaluation framework with metrics, unit-test style assertions and CI integration for prompts, RAG and agents.
+
+### Deep Agents (deep-agents)
+- **URL**: https://github.com/langchain-ai/deepagents
+- **Track**: ai-agents
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when building an agent that needs planning, long-horizon execution and subagent delegation out of the box.
+- **Stack**: python, typescript, langchain, agents
+- **Tags**: agent-harness, planning, subagents, langchain, memory
+- **Featured**: No
+- **Repo**: https://github.com/langchain-ai/deepagents (declared)
+- **Description**: LangChain's batteries-included agent harness with planning, filesystem and subagent capabilities.
+
+### json-render (json-render)
+- **URL**: https://github.com/vercel-labs/json-render
+- **Track**: ai-agents
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when agents need to produce UI from a constrained schema of approved components and actions.
+- **Stack**: typescript, react, json-schema, ai
+- **Tags**: generative-ui, json, agents, components, schema
+- **Featured**: No
+- **Repo**: https://github.com/vercel-labs/json-render (declared)
+- **Description**: Generative UI framework that turns AI output into dynamic UIs using predefined components and actions for safe, predictable results.
 
 
-## Icons, Color & Assets (4)
+## Icons, Color & Assets (6)
+
+### Tabler Icons (tabler-icons)
+- **URL**: https://tabler.io/icons
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when a broad, consistently drawn SVG icon set with permissive licensing is needed.
+- **Stack**: svg, react, vue, svelte, figma
+- **Tags**: icons, svg, mit, design-assets, react
+- **Featured**: No
+- **Repo**: https://github.com/tabler/tabler-icons (declared)
+- **Description**: Large set of free MIT-licensed SVG icons for web projects, available as SVG, icon font and framework packages.
+
+### Iconify (iconify)
+- **URL**: https://iconify.design
+- **Track**: design-ui
+- **Type**: library
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when one icon API must serve many icon sets and multiple frontend frameworks.
+- **Stack**: javascript, typescript, react, vue, svelte
+- **Tags**: icons, framework, api, svg, components
+- **Featured**: No
+- **Repo**: https://github.com/iconify/iconify (declared)
+- **Description**: Universal icon framework with one syntax for hundreds of thousands of open-source icons and framework components.
 
 ### Phosphor Icons (phosphor-icons)
 - **URL**: https://phosphoricons.com/
@@ -2257,7 +3970,46 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Description**: Accessible 12-step UI color system with automatic light/dark mode parity, P3 gamut support, transparent scales, and APCA contrast guarantees.
 
 
-## Design Systems & A11y (3)
+## Design Systems & A11y (6)
+
+### Carbon Design System (carbon-design-system)
+- **URL**: https://www.carbondesignsystem.com
+- **Track**: design-ui
+- **Type**: docs
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as a reference for enterprise-scale design-system governance, accessibility guidance and token structure.
+- **Stack**: react, web-components, design-tokens, scss
+- **Tags**: design-system, ibm, accessibility, tokens, components
+- **Featured**: No
+- **Repo**: https://github.com/carbon-design-system/carbon (declared)
+- **Description**: IBM open-source design system with guidelines, components and implementation packages.
+
+### Fluent 2 (fluent-2)
+- **URL**: https://fluent2.microsoft.design
+- **Track**: design-ui
+- **Type**: docs
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use when designing or implementing Microsoft-style cross-platform interfaces with documented system guidance.
+- **Stack**: react, web-components, design-tokens, fluent-ui
+- **Tags**: design-system, microsoft, accessibility, react, tokens
+- **Featured**: No
+- **Repo**: https://github.com/microsoft/fluentui (declared)
+- **Description**: Microsoft cross-platform design system with guidelines, resources and Fluent UI implementation libraries.
+
+### Adobe Spectrum (adobe-spectrum)
+- **URL**: https://spectrum.adobe.com
+- **Track**: design-ui
+- **Type**: docs
+- **Agent-Consumable**: Yes
+- **Price**: open-source
+- **When to use**: Use as a reference for cross-platform design-system foundations and component guidelines.
+- **Stack**: design-tokens, react, accessibility
+- **Tags**: design-system, adobe, guidelines, components, accessibility
+- **Featured**: No
+- **Repo**: https://github.com/adobe/react-spectrum (declared)
+- **Description**: Adobe design system documentation covering foundations, components and patterns across platforms.
 
 ### Base UI (base-ui)
 - **URL**: https://base-ui.com/
@@ -2298,7 +4050,7 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Description**: Browsable directory of public design systems, component libraries, and token guidelines enabling side-by-side pattern benchmarking.
 
 
-## Agent Templates (40)
+## Agent Templates (33)
 
 ### Vercel AI Chatbot (vercel-ai-chatbot)
 - **URL**: https://github.com/vercel/ai-chatbot
@@ -2625,19 +4377,6 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Repo**: https://github.com/FlowiseAI/Flowise (declared)
 - **Description**: Open-source low-code visual builder for multi-agent graphs and RAG flows offering dozens of ready-to-import JSON templates and embeddable chat widgets.
 
-### OpenHands (formerly OpenDevin) (openhands-agent)
-- **URL**: https://github.com/All-Hands-AI/OpenHands
-- **Track**: ai-agents
-- **Type**: github-repo
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use as a production reference architecture for building autonomous coding agents operating inside isolated Docker runtimes.
-- **Stack**: python, typescript, docker
-- **Tags**: agent-template, template-coding, autonomous, sandbox, github, swe
-- **Featured**: Yes
-- **Repo**: https://github.com/All-Hands-AI/OpenHands (declared)
-- **Description**: Open-source autonomous software engineering agent architecture equipped with Docker sandboxes, shell execution, browser tools, and automated GitHub issue resolvers.
-
 ### SWE-agent (Princeton) (princeton-swe-agent)
 - **URL**: https://github.com/SWE-agent/SWE-agent
 - **Track**: ai-agents
@@ -2650,84 +4389,6 @@ Metadata rule: declared values are preserved; absent values are printed as "Not 
 - **Featured**: Yes
 - **Repo**: https://github.com/SWE-agent/SWE-agent (declared)
 - **Description**: Open-source coding agent harness and YAML configuration templates designed to autonomously diagnose and patch real GitHub issues with a dedicated Agent-Computer Interface.
-
-### Bolt.diy (bolt-diy)
-- **URL**: https://github.com/stackblitz-labs/bolt.diy
-- **Track**: ai-agents
-- **Type**: github-repo
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use as the complete reference codebase for building a prompt-to-fullstack-app IDE agent with live browser execution.
-- **Stack**: typescript, react, webcontainers, ollama
-- **Tags**: agent-template, template-coding, template-ui, app-builder, webcontainers, ollama
-- **Featured**: Yes
-- **Repo**: https://github.com/stackblitz-labs/bolt.diy (declared)
-- **Description**: Open-source full-stack AI app builder agent template running live full-stack code previews inside browser WebContainers with pluggable cloud or local Ollama models.
-
-### Browser Use (browser-use)
-- **URL**: https://github.com/browser-use/browser-use
-- **Track**: ai-agents
-- **Type**: github-repo
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use when an AI agent needs to visually and structurally operate real websites via Playwright with minimal custom selectors.
-- **Stack**: python, playwright
-- **Tags**: agent-template, template-browser, playwright, web-agent, automation
-- **Featured**: Yes
-- **Repo**: https://github.com/browser-use/browser-use (declared)
-- **Description**: Open-source autonomous web browser agent framework with turnkey Python templates for form filling, multi-tab research, shopping, and UI workflow automation.
-
-### Stagehand (browserbase-stagehand)
-- **URL**: https://github.com/browserbase/stagehand
-- **Track**: ai-agents
-- **Type**: github-repo
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use when building reliable production browser agents in TypeScript that combine strict Zod extraction with self-healing selectors.
-- **Stack**: typescript, playwright, zod
-- **Tags**: agent-template, template-browser, typescript, playwright, structured-extraction
-- **Featured**: Yes
-- **Repo**: https://github.com/browserbase/stagehand (declared)
-- **Description**: Open-source TypeScript AI browser automation SDK and templates blending deterministic Playwright scripts with natural-language act, extract, and observe primitives.
-
-### E2B Fragments (e2b-fragments)
-- **URL**: https://github.com/e2b-dev/fragments
-- **Track**: ai-agents
-- **Type**: github-repo
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use to build a multi-language AI code generator that safely executes and previews live generated apps in isolated sandboxes.
-- **Stack**: typescript, nextjs, python, e2b
-- **Tags**: agent-template, template-coding, template-ui, artifacts, sandbox, nextjs
-- **Featured**: Yes
-- **Repo**: https://github.com/e2b-dev/fragments (declared)
-- **Description**: Open-source Claude Artifacts-style code interpreter and live app preview template executing AI-generated Next.js, Vue, Streamlit, and Gradio apps inside E2B sandboxes.
-
-### Aider (aider-coding-agent)
-- **URL**: https://github.com/Aider-AI/aider
-- **Track**: ai-agents
-- **Type**: github-repo
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use as a gold-standard reference for repo-map context packing, reliable diff application, and dual-model architect/editor coding harnesses.
-- **Stack**: python, git, tree-sitter
-- **Tags**: agent-template, template-coding, cli, tree-sitter, git, architect-editor
-- **Featured**: No
-- **Repo**: https://github.com/Aider-AI/aider (declared)
-- **Description**: Open-source CLI coding agent reference architecture featuring tree-sitter repo maps, structured search/replace git diffs, automated lint/test loops, and architect/editor split.
-
-### CopilotKit (copilotkit)
-- **URL**: https://github.com/CopilotKit/CopilotKit
-- **Track**: ai-agents
-- **Type**: github-repo
-- **Agent-Consumable**: Yes
-- **Price**: open-source
-- **When to use**: Use when embedding an interactive AI copilot directly inside an existing React/Next.js app with shared state and agent-driven UI.
-- **Stack**: typescript, react, nextjs, langgraph
-- **Tags**: agent-template, template-ui, copilot, ag-ui, generative-ui, react
-- **Featured**: Yes
-- **Repo**: https://github.com/CopilotKit/CopilotKit (declared)
-- **Description**: Open-source framework and starter templates for building in-app AI copilots and CoAgents with shared frontend state, AG-UI protocol, generative UI, and HITL actions.
 
 ### assistant-ui (assistant-ui)
 - **URL**: https://github.com/assistant-ui/assistant-ui

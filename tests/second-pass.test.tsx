@@ -14,6 +14,9 @@ import { renderWithProviders } from './helpers/render';
 const root = process.cwd();
 const read = (file: string) => readFileSync(`${root}/${file}`, 'utf-8');
 const hash = (file: string) => createHash('sha256').update(read(file)).digest('hex');
+const catalogItems = catalogResources.filter((r) => !EDITORIAL_IDS.includes(r.id)).length;
+const totalPages = Math.ceil(catalogItems / 24);
+const lastPageButton = new RegExp(`página ${totalPages} de ${totalPages}`, 'i');
 
 function parseTokens(block: string): Record<string, [number, number, number]> {
   const tokens: Record<string, [number, number, number]> = {};
@@ -48,18 +51,18 @@ function LocaleToggle() {
 describe('second-pass regressions', () => {
   it('supports the combined free and open-source price filter', () => {
     const results = searchCatalog(catalogResources, { pricing: 'free-open-source' });
-    expect(results).toHaveLength(119);
+    expect(results).toHaveLength(catalogResources.filter((r) => r.pricing === 'free' || r.pricing === 'open-source').length);
     expect(results.every((r) => r.pricing === 'free' || r.pricing === 'open-source')).toBe(true);
   });
 
   it('renders 24 catalog items per page without duplicating editorial resources', () => {
     renderWithProviders(<App />);
     const articles = screen.getAllByRole('article');
-    expect(articles).toHaveLength(33); // 9 editorial + 24 catalog
+    expect(articles).toHaveLength(EDITORIAL_IDS.length + Math.min(24, catalogItems));
     const labels = articles.map((article) => article.getAttribute('aria-labelledby'));
     expect(new Set(labels).size).toBe(labels.length);
-    expect(labels.filter((label) => EDITORIAL_IDS.some((id) => label === `resource-title-${id}`))).toHaveLength(9);
-    expect(screen.getByRole('button', { name: /página 9 de 9/i })).toBeInTheDocument();
+    expect(labels.filter((label) => EDITORIAL_IDS.some((id) => label === `resource-title-${id}`))).toHaveLength(EDITORIAL_IDS.length);
+    expect(screen.getByRole('button', { name: lastPageButton })).toBeInTheDocument();
   });
 
   it('translates the hero title and keeps the language in the URL', async () => {
