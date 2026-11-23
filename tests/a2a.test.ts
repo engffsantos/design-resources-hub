@@ -7,7 +7,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { handleA2ARequest } from '../api/a2a';
-import { catalogResources } from '../src/lib/catalog';
+import { catalogResources, computeStats } from '../src/lib/catalog';
 
 interface JsonRpcTestResponse {
   jsonrpc: '2.0';
@@ -92,14 +92,15 @@ describe('A2A JSON-RPC handler', () => {
     const data = dataOf(response) as { categories: unknown[]; tracks: unknown[]; unknownPricing: number };
     expect(data.categories).toHaveLength(15);
     expect(data.tracks).toHaveLength(3);
-    expect(data.unknownPricing).toBe(85);
-    expect(markdownOf(response)).toContain('85 recursos sem classificação de preço');
+    const unknown = computeStats().unknownPricing;
+    expect(data.unknownPricing).toBe(unknown);
+    expect(markdownOf(response)).toContain(`${unknown} recursos sem classificação de preço`);
   });
 
   it('filters category aliases without returning other categories', async () => {
     const response = await handleA2ARequest(rpc('filter_by_category: agent-templates')) as JsonRpcTestResponse;
     const data = dataOf(response) as Array<{ category: string }>;
-    expect(data).toHaveLength(40);
+    expect(data).toHaveLength(catalogResources.filter((r) => r.category === 'agent-templates').length);
     expect(data.every((r) => r.category === 'agent-templates')).toBe(true);
   });
 

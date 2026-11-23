@@ -1,23 +1,24 @@
 # AGENTS.md — design-resources-hub (live brand: Strata)
 
 ## Commands / verification
-- `npm run dev` → Vite on http://localhost:5173. `npm run build` runs the `prebuild` codegen first, then `tsc && vite build`. `npm run preview` serves `dist/`.
-- Fast check: `npx tsc --noEmit` (strict, passes). `npm run lint` currently **fails** (exit 2): ESLint 8 has no config file in this repo. There is no test script, no test files, and no CI workflow — verify with tsc + build + manual check.
-- Run codegen alone with `npx tsx scripts/generate-agent-layer.ts` (no need for a full build).
+- `npm run dev` → Vite at http://localhost:5173. `npm run build` = `prebuild` codegen → `tsc` → `vite build`; `npm run preview` serves `dist/`. Codegen alone: `npx tsx scripts/generate-agent-layer.ts`.
+- `npm run lint` (config `.eslintrc.cjs`) and `npm run typecheck` pass. `npm test` is Vitest watch mode; use `npm run test:run` for a one-shot run, `npx vitest run tests/catalog.test.ts -t "<name>"` for one file/test. Tests are jsdom + globals with `tests/setup.ts` and the `@/` alias.
+- **Baseline (2026-11-22): the suite is red — 8/53 tests fail in 5 files.** Count snapshots still assert 219 resources while canonical data now has 316 (15 categories, 3 tracks); several UI/A2A filter tests fail too. Don't assume your change caused these.
+- CI (`.github/workflows/ci.yml`): `npm ci → lint → test:run → typecheck → build` (with `SITE_URL` set) `→ git diff --check → rg` checks that ban `bg-dark-|border-dark-` in `src/` and `opacity-0.*group-hover` in `src/components/`. It currently fails at the test step.
 
-## Build-generated agent layer
-- `scripts/generate-agent-layer.ts` reads `src/data/resources.ts` and **overwrites tracked files**: `public/.well-known/agent.json`, `public/.well-known/agent-card.json`, `public/catalog.json`, `public/agents/index.html`, `public/llms.txt`, `public/llms-full.txt`, and injects `<noscript>` + JSON-LD into **root `index.html`** (replace between `AGENT-NOSCRIPT:START/END`). Expect a dirty git tree after builds; edit the data/generator, not the outputs. The script logs `public/index.html` but actually writes root `index.html`.
-- Generated URLs come from `VERCEL_PROJECT_PRODUCTION_URL` → `SITE_URL` → `design-resources-hub.vercel.app`. Set `SITE_URL` for local/preview runs to avoid production links in artifacts.
-- `enrichResource()` is duplicated in the generator and `api/a2a.ts`; category defaults must be changed in both. Counts in `llms.txt` and `agents/index.html` are dynamic — treat `src/data/resources.ts` as the source of truth, not generated copy.
-- `dist/` is gitignored build output; don't edit it directly.
+## Catalog & generated agent layer
+- `src/lib/catalog.ts` is the shared normalization layer imported by the UI, the generator and `api/a2a.ts` (`catalogResources`, `catalogCategories`, `searchCatalog`, `computeStats`, `TRACKS`, `EDITORIAL_IDS`). `src/data/resources.ts` is the raw data source of truth. No runtime data fetching in the UI.
+- `scripts/generate-agent-layer.ts` overwrites tracked files: `public/.well-known/agent.json`, `public/.well-known/agent-card.json`, `public/catalog.json`, `public/agents/index.html`, `public/llms.txt`, `public/llms-full.txt`, and rewrites root `index.html` between `AGENT-NOSCRIPT:START/END` and `AGENT-JSONLD:START/END` markers. Expect a dirty tree after builds; edit data/generator, not outputs. `dist/` is gitignored.
+- Generated URLs: `VERCEL_PROJECT_PRODUCTION_URL` → `SITE_URL` → `design-resources-hub.vercel.app`. Set `SITE_URL` locally to avoid production links. Artifact timestamps come from `SOURCE_DATE_EPOCH` or the last commit touching `src/data/resources.ts` (never wall clock) so builds are byte-identical.
+- Metadata policy: declared values are preserved; absent values stay unknown/null — never inferred from a category (enforced by catalog layer, generator and API). Category readiness in generated artifacts is derived from each resource's `agentConsumable`, not a hardcoded category list.
 
 ## Architecture / routing
-- React 18 SPA: `src/main.tsx` → `src/App.tsx`. `@/` alias → `src/` in both `vite.config.ts` and `tsconfig.json`. The catalog is static: `src/data/resources.ts` exports `resources`, `categories`, `Category`, `searchResources` and is imported directly by the UI (no fetch).
-- `api/a2a.ts` is a Vercel serverless function: POST-only JSON-RPC 2.0 (`message/send`), 4 read-only skills, `OPTIONS` → 204, CORS `*`. It dynamically imports `src/data/resources.ts` at runtime — not `public/catalog.json` — so packaging of that source file matters for deployment.
-- `vercel.json` SPA rewrite uses a negative lookahead exempting `/api`, `/.well-known`, `/agents`, `/llms.txt`, `/llms-full.txt`, `/catalog.json`, `/robots.txt`, `/assets`, `/favicon.svg`. Add any new static route here or it will be rewritten to `/index.html`. Vercel project is linked via `.vercel/project.json`.
+- React 18 SPA: `src/main.tsx` → `src/App.tsx`; `@/` → `src/` in vite, tsconfig and vitest. Search/filter/track state is shareable in the URL (`src/hooks/useCatalogUrlState.ts`).
+- `api/a2a.ts` is a Vercel serverless function: POST-only JSON-RPC 2.0 `message/send`, 4 read-only skills, `OPTIONS` → 204, CORS `*`. It imports the `src/lib/catalog.ts` source via `.js`-suffixed ESM paths at runtime — keep that source packaged for deployment.
+- `vercel.json` SPA rewrite uses a negative lookahead exempting `/api`, `/.well-known`, `/agents`, `/llms.txt`, `/llms-full.txt`, `/catalog.json`, `/robots.txt`, `/assets`, `/favicon.svg`. Add any new static route here or it will be rewritten to `/index.html`. Vercel project linked via `.vercel/project.json`.
 
 ## Conventions / gotchas
-- README is stale: it says "Design Resources Hub", 19 resources, 8 categories. Source/HTML use "Strata", 219 resources, 15 categories. Trust config and source.
-- Adding a category requires: `Category` union + `categories[]` in `src/data/resources.ts`, color map in `src/lib/utils.ts`, labels in `src/locales/pt-BR.ts`, plus the hardcoded `agentConsumableCats` / `visualRefCats` lists in the generator and enrichment defaults in both generator and API.
-- UI copy lives in `src/locales/pt-BR.ts` despite the English values in that file; some strings are still inline in components.
-- Dark mode toggles the `dark` class on `<html>` and persists to localStorage key `darkMode` (`src/components/Header.tsx`, `src/hooks/index.ts`). Tailwind uses `darkMode: 'class'`, but `tailwind.config.js` defines no `dark` color scale — classes like `dark:bg-dark-800/950` emit no CSS. Defined tokens are `background/foreground/card/muted/primary/...` and `*Light` variants.
+- README is stale ("Design Resources Hub", 19 resources, 8 categories), and count-snapshot tests are stale too. Trust `src/data/resources.ts` + `src/lib/catalog.ts`.
+- Adding a category: `Category` union + `categories[]` in `src/data/resources.ts`; color in `getCategoryColor()` (`src/lib/utils.ts`); `categoryIds` in a `TRACKS` entry (`src/lib/catalog.ts`); labels in both `ptBR` and `en` in `src/locales/index.ts` (`src/locales/pt-BR.ts` is a deprecated re-export). Add to `EDITORIAL_IDS` only if it belongs in the homepage shortlist.
+- UI copy lives in `src/locales/index.ts` via `useI18n()`; a few strings are still inline in components.
+- Theme via `src/context/ThemeContext.tsx`: `light|dark|system`, persisted under localStorage key `strata-theme`, toggles the `dark` class on `<html>`. Tailwind uses `darkMode: 'class'` but defines no `dark` color scale — `dark:bg-dark-800/950` emits no CSS. Use semantic tokens (`background/foreground/card/muted/primary/...` from `src/styles/globals.css`); CI bans the deprecated `bg-dark-`/`border-dark-` classes.
