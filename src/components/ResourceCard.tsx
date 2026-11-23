@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Bot, ExternalLink, Heart, Info, Star } from 'lucide-react';
 import { Card, CardContent, CardFooter } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
+import { ResourcePreview } from '@/components/ResourcePreview';
 import type { CatalogResource, Pricing } from '@/lib/catalog';
 import { cn, formatUrl, getCategoryColor } from '@/lib/utils';
 import { useI18n } from '@/context/I18nContext';
@@ -14,6 +15,7 @@ interface ResourceCardProps {
   resource: CatalogResource;
   index: number;
   disableStagger?: boolean;
+  featured?: boolean;
   isFavorite: boolean;
   onToggleFavorite: (id: string) => void;
   onOpenDetails: (resource: CatalogResource) => void;
@@ -35,7 +37,7 @@ function priceVariant(price: Pricing): 'success' | 'warning' | 'secondary' {
 }
 
 export function ResourceCard({
-  resource, index, disableStagger = false, isFavorite, onToggleFavorite, onOpenDetails,
+  resource, index, disableStagger = false, featured = false, isFavorite, onToggleFavorite, onOpenDetails,
 }: ResourceCardProps) {
   const prefersReducedMotion = useReducedMotion();
   const { t } = useI18n();
@@ -53,10 +55,11 @@ export function ResourceCard({
       className="h-full"
     >
       <Card className="flex h-full flex-col overflow-hidden border-border bg-card/80 backdrop-blur-sm transition-shadow hover:shadow-md">
-        <CardContent className="flex flex-1 flex-col p-5">
+        <ResourcePreview resource={resource} featured={featured} />
+        <CardContent className="flex flex-1 flex-col p-4 sm:p-5">
           <div className="mb-3 flex flex-wrap items-center gap-2">
             {resource.track && (
-              <Badge variant="secondary" className="text-[11px]">
+              <Badge variant="secondary" className="text-xs">
                 {categoryLabel(t, resource.track)}
               </Badge>
             )}
@@ -77,10 +80,10 @@ export function ResourceCard({
             )}
           </div>
 
-          <h3 id={titleId} className="text-lg font-semibold leading-snug text-foreground">
+          <h3 id={titleId} className={cn('font-semibold leading-snug text-foreground', featured ? 'text-xl' : 'text-lg')}>
             {resource.name}
           </h3>
-          <p className="mt-2 flex-1 text-sm text-muted-foreground">{resource.description}</p>
+          <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">{resource.description}</p>
 
           {resource.whenToUse && (
             <div className="mt-3">
@@ -94,12 +97,12 @@ export function ResourceCard({
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t.stack}</p>
               <ul className="mt-1 flex flex-wrap gap-1" aria-label={t.stack}>
                 {resource.stack.slice(0, 3).map((item) => (
-                  <li key={item} className="rounded bg-muted px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
+                  <li key={item} className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
                     {item}
                   </li>
                 ))}
                 {resource.stack.length > 3 && (
-                  <li className="rounded bg-muted px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
+                  <li className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs text-muted-foreground">
                     +{resource.stack.length - 3}
                   </li>
                 )}
@@ -143,7 +146,7 @@ export function ResourceCard({
               aria-pressed={isFavorite}
               aria-label={interpolate(isFavorite ? t.removeFromFavorites : t.addToFavorites, { name: resource.name })}
               className={cn(
-                'inline-flex h-8 w-8 items-center justify-center rounded-md border border-input bg-card transition-colors',
+                'inline-flex h-9 w-9 items-center justify-center rounded-md border border-input bg-card transition-colors',
                 isFavorite ? 'text-destructive' : 'text-muted-foreground hover:text-foreground',
               )}
             >
@@ -153,7 +156,7 @@ export function ResourceCard({
               type="button"
               onClick={() => onOpenDetails(resource)}
               aria-label={interpolate(t.openDetails, { name: resource.name })}
-              className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-input bg-card text-muted-foreground hover:text-foreground"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-input bg-card text-muted-foreground hover:text-foreground"
             >
               <Info className="h-4 w-4" aria-hidden="true" />
             </button>
@@ -162,7 +165,7 @@ export function ResourceCard({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={interpolate(t.visitResource, { name: resource.name })}
-              className="inline-flex h-8 items-center gap-1 rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              className="inline-flex h-9 items-center gap-1 rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
             >
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
               <span>{t.visit}</span>

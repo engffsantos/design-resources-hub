@@ -15,7 +15,7 @@ export function Pagination({ page, pageCount, onChange }: PaginationProps) {
   if (pageCount <= 1) return null;
 
   const pages = Array.from({ length: pageCount }, (_, index) => index + 1);
-  const buttonClass = 'inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-input bg-card px-3 text-sm hover:bg-accent hover:text-accent-foreground disabled:cursor-not-allowed disabled:opacity-50';
+  const buttonClass = 'inline-flex h-10 min-w-10 items-center justify-center rounded-md border border-input bg-card px-3 text-sm hover:bg-accent hover:text-accent-foreground disabled:cursor-not-allowed disabled:opacity-50';
 
   return (
     <nav aria-label={t.page} className="mt-8 flex flex-wrap items-center justify-center gap-2">

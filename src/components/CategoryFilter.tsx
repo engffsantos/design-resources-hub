@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  Bot, Box, Boxes, Cpu, GitBranch, HelpCircle, Layers, LayoutTemplate, MousePointer2,
+  Bot, Box, Boxes, Check, Cpu, GitBranch, HelpCircle, Layers, LayoutTemplate, MousePointer2,
   Move, Package, Palette, Shield, Sparkles, Type,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
@@ -63,15 +63,17 @@ export function CategoryFilter({ activeCategory, categories, onCategoryChange }:
               onClick={() => onCategoryChange(category)}
               aria-pressed={isActive}
               className={cn(
-                'inline-flex shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors',
+                'inline-flex shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-full px-4 py-2.5 text-sm font-medium transition-colors',
                 isActive
                   ? 'bg-primary text-primary-foreground shadow-sm'
                   : 'border border-border bg-card text-muted-foreground hover:bg-accent hover:text-accent-foreground',
               )}
             >
-              {Icon && <Icon aria-hidden="true" className="h-4 w-4" />}
+              {isActive
+                ? <Check className="h-4 w-4" aria-hidden="true" />
+                : Icon && <Icon aria-hidden="true" className="h-4 w-4" />}
               <span>{label}</span>
-              {info && <span className="text-xs opacity-70">({info.count})</span>}
+              {info && <span className="text-xs opacity-80">({info.count})</span>}
             </button>
           );
         })}
